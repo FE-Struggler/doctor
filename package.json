@@ -1,0 +1,34 @@
+{
+  "name": "doctor",
+  "version": "0.0.1",
+  "description": "",
+  "main": "dist/cjs/index.js",
+  "types": "dist/cjs/index.d.ts",
+  "bin": {
+    "doctor": "./bin/doctor.js"
+  },
+  "scripts": {
+    "dev": "father dev",
+    "build": "father build",
+    "build:deps": "father prebundle",
+    "prepublishOnly": "father doctor && npm run build"
+  },
+  "keywords": [],
+  "authors": [
+    "洋"
+  ],
+  "license": "MIT",
+  "files": [
+    "dist",
+    "bin"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "father": "^4.1.8"
+  },
+  "dependencies": {
+    "@umijs/core": "^4.0.71"
+  }
+}
