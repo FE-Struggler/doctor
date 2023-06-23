@@ -3,6 +3,6 @@ import { DoctorLevel } from "./src/types";
 
 export default defineConfig({
   tools: {
-    nodeVersion: DoctorLevel.WARN
-  }
+    nodeVersion: DoctorLevel.WARN,
+  },
 })

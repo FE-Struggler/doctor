@@ -1,14 +1,36 @@
 lockfileVersion: '6.0'
 
-dependencies:
-  '@umijs/core':
-    specifier: ^4.0.71
-    version: 4.0.71
+importers:
 
-devDependencies:
-  father:
-    specifier: ^4.1.8
-    version: 4.1.8(styled-components@5.3.11)(webpack@5.88.0)
+  .:
+    devDependencies:
+      father:
+        specifier: ^4.1.8
+        version: 4.1.8(styled-components@5.3.11)(webpack@5.88.0)
+
+  packages/doctor:
+    dependencies:
+      '@doctors/webtools':
+        specifier: workspace:^
+        version: link:../doctor-webtools
+      '@umijs/core':
+        specifier: ^4.0.71
+        version: 4.0.71
+      '@umijs/utils':
+        specifier: ^4.0.71
+        version: 4.0.71
+
+  packages/doctor-webtools:
+    dependencies:
+      '@doctors/core':
+        specifier: workspace:^
+        version: link:../doctor
+      '@umijs/core':
+        specifier: ^4.0.71
+        version: 4.0.71
+      '@umijs/utils':
+        specifier: ^4.0.71
+        version: 4.0.71
 
 packages:
 

@@ -1,16 +1,10 @@
 {
   "compilerOptions": {
     "strict": true,
-    "target": "es2019",
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "skipLibCheck": true,
     "declaration": true,
-    "esModuleInterop": true,
+    "skipLibCheck": true,
     "baseUrl": "./",
-    "outDir": "./dist",
-    "rootDir": "./src"
-  },
-  "include": ["src"]
+    "moduleDetection": "auto",
+    "esModuleInterop": true
+  }
 }

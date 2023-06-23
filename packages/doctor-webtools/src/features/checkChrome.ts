@@ -1,4 +1,4 @@
-import { IApi } from "src/types";
+import { IApi } from "@doctors/core";
 import { exec } from 'child_process'
 
 async function isChromeInstalled(): Promise<boolean> {
@@ -37,9 +37,8 @@ export default (api: IApi) => {
       return {
         label: 'isChromeInstalled',
         description: 'You should apply Chrome for web development',
-        type: 'error'
+        doctorLevel: 'success'
       }
     }
   })
-
 }

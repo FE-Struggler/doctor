@@ -1,7 +1,51 @@
 import path from 'path';
 import { deepmerge, resolve } from '@umijs/utils';
 import { IApi } from '../types';
-import { getSchemas } from './schema';
+import type { Root } from '@umijs/utils/compiled/@hapi/joi';
+
+interface Schema {
+  [ket: string]: any
+}
+
+function generateSchema(userSchemas: Object) {
+  const schema: Schema = {};
+  for (const [key, value] of Object.entries(userSchemas)) {
+    if (typeof value === 'object' && value !== null) {
+      schema[key] = (Joi: Root) => Joi.object().keys(generateSchema(value));
+    } else {
+      schema[key] = (Joi: Root) => Joi
+    }
+  }
+  return schema;
+}
+
+function getSchemas(userSchemas: Object): Record<string, (Joi: Root) => any> {
+  return {
+    ...generateSchema(userSchemas),
+  };
+}
+
+export function applyConfigFromSchema(api: IApi, userSchemas: Object) {
+
+  const schemas = getSchemas(userSchemas)
+  for (const key of Object.keys(schemas)) {
+    const config: Record<string, any> = {
+      schema: schemas[key] || ((joi: any) => joi.any()),
+    };
+    api.registerPlugins([
+      {
+        id: `virtual: config-${key}`,
+        key: key,
+        config,
+      },
+    ]);
+  }
+
+  // support extends config
+  api.modifyConfig((config) => parseExtendsConfig({ config, api }));
+};
+
+
 
 /**
  * parse extends option for config
@@ -39,7 +83,6 @@ function parseExtendsConfig(opts: {
         `Cannot extends config circularly for file: ${absExtendsPath}`,
       );
     }
-
     // load extends config
     const { config: extendsConfig, files: extendsFiles } =
       ConfigManager.getUserConfig({ configFiles: [absExtendsPath] });
@@ -63,27 +106,3 @@ function parseExtendsConfig(opts: {
 
   return config;
 }
-
-export default (api: IApi) => {
-  const configDefaults: Record<string, any> = {};
-
-  const schemas = getSchemas()
-  for (const key of Object.keys(schemas)) {
-    const config: Record<string, any> = {
-      schema: schemas[key] || ((joi: any) => joi.any()),
-    };
-    if (key in configDefaults) {
-      config.default = configDefaults[key];
-    }
-    api.registerPlugins([
-      {
-        id: `virtual: config-${key}`,
-        key: key,
-        config,
-      },
-    ]);
-  }
-
-  // support extends config
-  api.modifyConfig((config) => parseExtendsConfig({ config, api }));
-};
