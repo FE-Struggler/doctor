@@ -5,10 +5,17 @@
   "main": "index.js",
   "scripts": {
     "dev": "father dev",
-    "build:all": "pnpm run -r build"
+    "build:all": "pnpm run -r build",
+    "prepare": "husky install"
   },
   "devDependencies": {
-    "father": "^4.1.8"
+    "father": "^4.1.8",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.2",
+    "prettier": "2.8.8"
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
   },
   "keywords": [],
   "author": "",

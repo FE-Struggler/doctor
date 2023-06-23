@@ -5,4 +5,4 @@ export default defineConfig({
   tools: {
     nodeVersion: DoctorLevel.WARN,
   },
-})
+});

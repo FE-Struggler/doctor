@@ -1,10 +1,12 @@
 import { IApi } from "@doctors/core";
-import { exec } from 'child_process'
+import { exec } from "child_process";
 
 async function isChromeInstalled(): Promise<boolean> {
   try {
-    const stdout: string = await execCommand('/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome --version');
-    if (stdout.startsWith('Google Chrome')) {
+    const stdout: string = await execCommand(
+      "/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome --version"
+    );
+    if (stdout.startsWith("Google Chrome")) {
       return true;
     }
     return false;
@@ -24,7 +26,7 @@ function execCommand(command: string): Promise<string> {
       }
     });
 
-    child.on('close', () => {
+    child.on("close", () => {
       child.kill();
     });
   });
@@ -32,13 +34,13 @@ function execCommand(command: string): Promise<string> {
 
 export default (api: IApi) => {
   api.addDoctorWebToolsCheck(async () => {
-    const res = await isChromeInstalled()
+    const res = await isChromeInstalled();
     if (res) {
       return {
-        label: 'isChromeInstalled',
-        description: 'You should apply Chrome for web development',
-        doctorLevel: 'success'
-      }
+        label: "isChromeInstalled",
+        description: "You should apply Chrome for web development",
+        doctorLevel: "success",
+      };
     }
-  })
-}
+  });
+};

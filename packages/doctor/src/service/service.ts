@@ -1,8 +1,8 @@
-import { Service as CoreService } from '@umijs/core';
-import path from 'path';
-import * as process from 'process';
-import { DEFAULT_CONFIG_FILES, FRAMEWORK_NAME } from '../constants';
-import { getDoctorDependencies } from '../utils';
+import { Service as CoreService } from "@umijs/core";
+import path from "path";
+import * as process from "process";
+import { DEFAULT_CONFIG_FILES, FRAMEWORK_NAME } from "../constants";
+import { getDoctorDependencies } from "../utils";
 
 export class Service extends CoreService {
   constructor(opts?: any) {
@@ -19,16 +19,18 @@ export class Service extends CoreService {
       cwd,
       defaultConfigFiles: DEFAULT_CONFIG_FILES,
       frameworkName: FRAMEWORK_NAME,
-      presets: [...getDoctorDependencies().map(i => i.path + '/dist/index.js')],
+      presets: [
+        ...getDoctorDependencies().map((i) => i.path + "/dist/index.js"),
+      ],
     });
   }
 
   async run2(opts: { name: string; args?: any }) {
     let name = opts.name;
-    if (opts?.args.version || name === 'v') {
-      name = 'version';
-    } else if (opts?.args.help || !name || name === 'h') {
-      name = 'help';
+    if (opts?.args.version || name === "v") {
+      name = "version";
+    } else if (opts?.args.help || !name || name === "h") {
+      name = "help";
     }
 
     return await this.run({ ...opts, name });

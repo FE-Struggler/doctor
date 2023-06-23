@@ -1,19 +1,19 @@
-import path from 'path';
-import { deepmerge, resolve } from '@umijs/utils';
-import { IApi } from '../types';
-import type { Root } from '@umijs/utils/compiled/@hapi/joi';
+import path from "path";
+import { deepmerge, resolve } from "@umijs/utils";
+import { IApi } from "../types";
+import type { Root } from "@umijs/utils/compiled/@hapi/joi";
 
 interface Schema {
-  [ket: string]: any
+  [ket: string]: any;
 }
 
 function generateSchema(userSchemas: Object) {
   const schema: Schema = {};
   for (const [key, value] of Object.entries(userSchemas)) {
-    if (typeof value === 'object' && value !== null) {
+    if (typeof value === "object" && value !== null) {
       schema[key] = (Joi: Root) => Joi.object().keys(generateSchema(value));
     } else {
-      schema[key] = (Joi: Root) => Joi
+      schema[key] = (Joi: Root) => Joi;
     }
   }
   return schema;
@@ -26,8 +26,7 @@ function getSchemas(userSchemas: Object): Record<string, (Joi: Root) => any> {
 }
 
 export function applyConfigFromSchema(api: IApi, userSchemas: Object) {
-
-  const schemas = getSchemas(userSchemas)
+  const schemas = getSchemas(userSchemas);
   for (const key of Object.keys(schemas)) {
     const config: Record<string, any> = {
       schema: schemas[key] || ((joi: any) => joi.any()),
@@ -43,9 +42,7 @@ export function applyConfigFromSchema(api: IApi, userSchemas: Object) {
 
   // support extends config
   api.modifyConfig((config) => parseExtendsConfig({ config, api }));
-};
-
-
+}
 
 /**
  * parse extends option for config
@@ -62,7 +59,7 @@ function parseExtendsConfig(opts: {
   } = opts;
 
   if (config.extends) {
-    let absExtendsPath = '';
+    let absExtendsPath = "";
     const ConfigManager: any = api.service.configManager!.constructor;
 
     // try to resolve extends path
@@ -70,17 +67,17 @@ function parseExtendsConfig(opts: {
       try {
         absExtendsPath = resolve.sync(config.extends, {
           basedir: dir,
-          extensions: ['.js', '.ts'],
+          extensions: [".js", ".ts"],
         });
         return true;
-      } catch { }
+      } catch {}
     });
 
     if (!absExtendsPath) {
       throw new Error(`Cannot find extends config file: ${config.extends}`);
     } else if (api.service.configManager!.files.includes(absExtendsPath)) {
       throw new Error(
-        `Cannot extends config circularly for file: ${absExtendsPath}`,
+        `Cannot extends config circularly for file: ${absExtendsPath}`
       );
     }
     // load extends config

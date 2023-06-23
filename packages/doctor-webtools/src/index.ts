@@ -1,11 +1,11 @@
-import features from './features'
+import features from "./features";
 export default () => {
   return {
     plugins: [
       //commands
-      require.resolve('./commands/web-tools'),
+      require.resolve("./commands/web-tools"),
       //features
-      ...features
-    ]
-  }
-}
+      ...features,
+    ],
+  };
+};

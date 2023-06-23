@@ -1,4 +1,4 @@
-import type { IDoctorConfig } from './types';
+import type { IDoctorConfig } from "./types";
 
 type ConfigType = IDoctorConfig;
 
