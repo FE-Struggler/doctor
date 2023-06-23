@@ -1,4 +1,4 @@
-import { IApi, generatePreset } from "@doctors/core";
+import { IApi, generatePreset } from "packages/core/dist";
 
 export default (api: IApi) => {
   generatePreset(api, "web-tools", {
