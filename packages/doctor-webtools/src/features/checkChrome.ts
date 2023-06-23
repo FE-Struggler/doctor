@@ -1,4 +1,4 @@
-import { IApi } from "packages/core/dist";
+import { IApi } from "@doctors/core";
 import { exec } from "child_process";
 
 async function isChromeInstalled(): Promise<boolean> {
