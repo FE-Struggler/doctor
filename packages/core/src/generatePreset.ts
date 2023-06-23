@@ -3,6 +3,7 @@ import { applyConfigFromSchema } from "./config";
 import { DoctorLevel, IApi } from "./types";
 import { applyTypeEffect } from "./utils";
 import { logger } from "@umijs/utils";
+import { chalk } from "@umijs/utils";
 export interface ruleResItem {
   label: string;
   description: string;
@@ -53,10 +54,14 @@ export default function (api: IApi, command: string, schema: Object) {
       })) as ruleResItem[];
       sort(webToolsRes)
         .filter(Boolean)
-        .forEach((i) => {
+        .forEach((i, index) => {
           switch (i.doctorLevel) {
             case "success":
-              logger.ready(`Doctor rules: ${i.label} --  ${i.description} `);
+              console.log(
+                `${chalk.green("pass🎉🎉")}  Doctor rules ${index}: ${
+                  i.label
+                }\n${chalk.green("Suggestion:")}  ${i.description} \n`
+              );
               break;
             case "warn":
               logger.warn(`Doctor rules: ${i.label} --  ${i.description} `);

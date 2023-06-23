@@ -14,8 +14,8 @@ export function getDoctorDependencies() {
   const dependencyNames = Object.keys(packageJson.dependencies);
 
   // 过滤出以 "doctor" 开头的依赖名称数组
-  const doctorDependencyNames = dependencyNames.filter((name) =>
-    name.startsWith("@doctors")
+  const doctorDependencyNames = dependencyNames.filter(
+    (name) => name.startsWith("@doctors") && name !== "@doctors/core"
   );
 
   // 构造以 "doctor" 开头的依赖信息数组
