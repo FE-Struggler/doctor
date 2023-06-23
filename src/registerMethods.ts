@@ -2,7 +2,7 @@ import { IApi } from 'umi';
 
 export default (api: IApi) => {
   [
-    'addDoctorStart',
+    'addDoctorWebToolsCheck',
   ].forEach((name) => {
     api.registerMethod({ name });
   });

@@ -1,4 +1,5 @@
 import { IApi } from 'umi';
+import webTools from './features/web-tools';
 
 export default (api: IApi) => {
   api.onStart(() => { });
@@ -7,9 +8,13 @@ export default (api: IApi) => {
       require.resolve('./registerMethods'),
 
       // commands
-      require.resolve('./commands/dev'),
+      require.resolve('./commands/web-tools'),
+
+      // config
+      require.resolve('./config'),
 
       // features
+      ...webTools
     ],
   };
 };
