@@ -3,6 +3,8 @@
 进入项目仓库<br>
 
 ```sh
+# 请使用Node 18及以上版本，这样会默认使用pnpm 8，
+# 从而能避免许多项目依赖结构问题
 pnpm i
 npm run build:all
 ```
