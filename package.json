@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "engines": {
-    "node": ">=18"
+    "pnpm": ">=8"
   },
   "scripts": {
     "dev": "father dev",
