@@ -1,14 +1,13 @@
 {
-  "name": "webtools-example",
+  "name": "npm-pkg-example",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "doctor:webtools": "doctor web-tools"
+    "doctor:npm-pkg": "doctor npm-pkg"
   },
   "dependencies": {
     "@doctors/core": "workspace:^",
-    "@doctors/webtools": "workspace:^",
     "@doctors/npmpkg": "workspace:^"
   },
   "keywords": [],

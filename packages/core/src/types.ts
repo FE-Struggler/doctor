@@ -12,7 +12,7 @@ export interface PluginMeta {
 export interface DoctorMeta {
   label: string;
   description: string;
-  doctorLevel: boolean;
+  doctorLevel: string;
 }
 
 export enum DoctorLevel {
@@ -22,7 +22,7 @@ export enum DoctorLevel {
   SUCCESS = "success",
 }
 export type IDoctorConfig = {
-  tools: {
-    nodeVersion: DoctorLevel;
+  tools?: {
+    nodeVersion?: DoctorLevel;
   };
 };
