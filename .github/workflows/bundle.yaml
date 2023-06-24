@@ -30,5 +30,11 @@ jobs:
       - name: Install dependencies and Build the product
         run: pnpm install --no-frozen-lockfile
 
+      - name: TypeCheck
+        run: npm run typecheck
+
+      - name: Test
+        run: npm run test
+
       - name: run bundle:all script
         run: npm run build:all

@@ -5,6 +5,12 @@
     "skipLibCheck": true,
     "baseUrl": "./",
     "moduleDetection": "auto",
-    "esModuleInterop": true
-  }
+    "esModuleInterop": true,
+    "strictPropertyInitialization": true,
+    "paths": {
+      "@doctors/webtools": ["./packages/doctor-webtools/src/"],
+      "@doctors/core": ["./packages/core/src/"]
+    }
+  },
+  "exclude": ["**/dist/**", "**/node_modules/**", "**/examples/**"]
 }
