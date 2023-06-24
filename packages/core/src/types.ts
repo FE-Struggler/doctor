@@ -17,6 +17,7 @@ export enum DoctorLevel {
   OFF = "off",
   WARN = "warn",
   ERROR = "error",
+  SUCCESS = "success",
 }
 export type IDoctorConfig = {
   tools: {

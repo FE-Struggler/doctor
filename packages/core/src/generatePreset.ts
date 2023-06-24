@@ -22,11 +22,15 @@ function sort(webToolsRes: ruleResItem[]) {
   return webToolsRes.sort((a, b) => {
     if (a.doctorLevel === b.doctorLevel) {
       return 0;
-    } else if (a.doctorLevel === "warn") {
+    } else if (a.doctorLevel === "success") {
       return -1;
-    } else if (b.doctorLevel === "warn") {
-      return 1;
-    } else if (a.doctorLevel === "error") {
+    } else if (a.doctorLevel === "warn" && b.doctorLevel !== "success") {
+      return -1;
+    } else if (
+      a.doctorLevel === "error" &&
+      b.doctorLevel !== "warn" &&
+      b.doctorLevel !== "success"
+    ) {
       return -1;
     } else {
       return 1;
@@ -53,30 +57,41 @@ export default function (
       })) as ruleResItem[];
 
       //----------------- checking ------------------
-      const webToolsRes = (await api.applyPlugins({
-        key: `addDoctor${transformString(command)}Check`,
-        type: ApplyPluginsType.add,
-        args: meta,
-      })) as ruleResItem[];
-      sort(webToolsRes)
-        .filter(Boolean)
-        .forEach((i, index) => {
-          switch (i.doctorLevel) {
-            case "success":
-              console.log(
-                `${chalk.green("pass🎉🎉")}  Doctor rules ${index}: ${
-                  i.label
-                }\n${chalk.green("Suggestion:")}  ${i.description} \n`
-              );
-              break;
-            case "warn":
-              logger.warn(`Doctor rules: ${i.label} --  ${i.description} `);
-              break;
-            default:
-              logger.error(`Doctor rules: ${i.label} --  ${i.description} `);
-              break;
-          }
-        });
+      const webToolsRes = (
+        await api.applyPlugins({
+          key: `addDoctor${transformString(command)}Check`,
+          type: ApplyPluginsType.add,
+          args: meta,
+        })
+      ).filter(Boolean) as ruleResItem[];
+
+      sort(webToolsRes.filter(Boolean)).forEach((i, index) => {
+        switch (i?.doctorLevel) {
+          case DoctorLevel.SUCCESS:
+            console.log(
+              `${chalk.green("pass🎉🎉")}  Doctor rules ${index}: ${
+                i.label
+              }\n${chalk.green("Suggestion:")}  ${i.description} \n`
+            );
+            break;
+          case DoctorLevel.WARN:
+            console.log(
+              `${chalk.yellowBright("warn")}  Doctor rules ${index}: ${
+                i.label
+              }\n${chalk.yellowBright("Suggestion:")}  ${i.description} \n`
+            );
+            break;
+          case DoctorLevel.ERROR:
+            console.log(
+              `${chalk.red("error!!")}  Doctor rules ${index}: ${
+                i.label
+              }\n${chalk.red("Suggestion:")}  ${i.description} \n`
+            );
+            break;
+          default:
+            break;
+        }
+      });
       if (webToolsRes.some((i) => i.doctorLevel === "error")) {
         logger.info(`${command} End`);
         (await api.applyPlugins({
