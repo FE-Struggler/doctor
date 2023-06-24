@@ -1,4 +1,6 @@
-export { IApi } from "umi";
+import type { IServicePluginAPI, PluginAPI } from "@umijs/core";
+
+export type IApi = PluginAPI & IServicePluginAPI;
 
 export interface PluginMeta {
   name: string;
