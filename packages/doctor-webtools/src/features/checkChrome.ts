@@ -10,17 +10,12 @@ if (os.platform() === "darwin") {
   console.log("当前操作系统是 Windows");
   str =
     'reg query "HKEY_CURRENT_USER\\Software\\Google\\Chrome\\BLBeacon" /v version';
-} else {
-  console.log("当前操作系统不是 macOS 也不是 Windows");
 }
 
 async function isChromeInstalled(): Promise<boolean> {
   try {
     const stdout: string = await execCommand(str);
-    if (stdout.startsWith("Google Chrome") || stdout.includes("version")) {
-      return true;
-    }
-    return false;
+    return stdout.startsWith("Google Chrome") || stdout.includes("version");
   } catch (error) {
     console.error(error);
     return false;
