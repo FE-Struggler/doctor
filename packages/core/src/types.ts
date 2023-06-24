@@ -27,5 +27,6 @@ export enum DoctorLevel {
 export type IDoctorConfig = {
   tools: {
     nodeVersion: DoctorLevel;
+    vscodePlugins?: string[];
   };
 };
