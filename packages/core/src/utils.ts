@@ -1,4 +1,4 @@
-import { IApi } from "./types";
+import { IApi, PluginMeta } from "./types";
 
 const fs = require("fs");
 const path = require("path");
@@ -26,12 +26,14 @@ export function getDoctorDependencies() {
   const doctorDependencies = doctorDependencyNames.map((name) => {
     const modulePath = path.join(rootPath, "node_modules", name);
     const modulePackageJson = require(path.join(modulePath, "package.json"));
+    const hasCommands = fs.existsSync(path.join(modulePath, "commands"));
     return {
       name,
       version: modulePackageJson.version,
       path: modulePath,
+      hasCommands,
     };
-  });
+  }) as PluginMeta[];
 
   return doctorDependencies;
 }
