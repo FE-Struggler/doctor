@@ -1,4 +1,5 @@
 import { IApi as UmiIApi } from "umi";
+import type { Awaitable } from "@doctors/shared";
 
 export interface PluginMeta {
   name: string;
@@ -10,12 +11,14 @@ export interface PluginMeta {
 export interface DoctorMeta {
   label: string;
   description: string;
-  doctorLevel: boolean;
+  doctorLevel: string;
 }
 
 export type IApi = UmiIApi & {
   addDoctorWebToolsCheck: (
-    fn: (doctorInfos: { [key: string]: string }) => DoctorMeta
+    fn: (doctorInfos: {
+      [key: string]: string;
+    }) => Awaitable<DoctorMeta | undefined>
   ) => void;
 };
 

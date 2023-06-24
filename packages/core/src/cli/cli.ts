@@ -7,6 +7,7 @@ import {
   setNoDeprecation,
   setNodeTitle,
 } from "./node";
+import * as process from "process";
 
 interface IOpts {
   args?: yParser.Arguments;

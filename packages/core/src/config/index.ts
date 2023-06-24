@@ -60,7 +60,7 @@ function parseExtendsConfig(opts: {
 
   if (config.extends) {
     let absExtendsPath = "";
-    const ConfigManager: any = api.service.configManager!.constructor;
+    const configManager = api.service.configManager!.constructor as any;
 
     // try to resolve extends path
     resolvePaths.some((dir) => {
@@ -82,9 +82,9 @@ function parseExtendsConfig(opts: {
     }
     // load extends config
     const { config: extendsConfig, files: extendsFiles } =
-      ConfigManager.getUserConfig({ configFiles: [absExtendsPath] });
+      configManager.getUserConfig({ configFiles: [absExtendsPath] });
 
-    ConfigManager.validateConfig({
+    configManager.validateConfig({
       config: extendsConfig,
       schemas: api.service.configSchemas,
     });

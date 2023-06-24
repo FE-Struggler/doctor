@@ -1,5 +1,5 @@
 {
-  "name": "@doctors/core",
+  "name": "@doctors/shared",
   "version": "0.0.3",
   "description": "",
   "main": "./dist/index.js",
@@ -26,10 +26,5 @@
   ],
   "publishConfig": {
     "access": "public"
-  },
-  "dependencies": {
-    "@umijs/core": "^4.0.71",
-    "@umijs/utils": "^4.0.71",
-    "umi": "^4.0.71"
   }
 }

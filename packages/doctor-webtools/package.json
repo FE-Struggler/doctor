@@ -4,10 +4,10 @@
   "description": "",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "type": "module",
   "bin": {
     "doctor": "./bin/doctor.js"
   },
-  "type": "module",
   "scripts": {
     "dev": "father dev",
     "build": "father build",

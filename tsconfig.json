@@ -1,15 +1,24 @@
 {
   "compilerOptions": {
+    "target": "es2018",
+    "module": "esnext",
+    "lib": ["esnext"],
+    "moduleResolution": "node",
     "strict": true,
-    "declaration": true,
+    "strictNullChecks": true,
+    "resolveJsonModule": true,
+    "skipDefaultLibCheck": true,
     "skipLibCheck": true,
+    "declaration": true,
     "baseUrl": "./",
     "moduleDetection": "auto",
     "esModuleInterop": true,
     "strictPropertyInitialization": true,
+    "noImplicitAny": false,
     "paths": {
+      "@doctors/core": ["./packages/core/src/"],
       "@doctors/webtools": ["./packages/doctor-webtools/src/"],
-      "@doctors/core": ["./packages/core/src/"]
+      "@doctors/shared": ["./packages/shared/src/"]
     }
   },
   "exclude": ["**/dist/**", "**/node_modules/**", "**/examples/**"]
