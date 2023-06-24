@@ -21,8 +21,9 @@ export enum DoctorLevel {
   ERROR = "error",
   SUCCESS = "success",
 }
-export type IDoctorConfig = {
-  tools?: {
-    nodeVersion?: DoctorLevel;
+
+export type Nullify<T> = {
+  [K in keyof T]: {
+    [P in keyof T[K]]: null;
   };
 };

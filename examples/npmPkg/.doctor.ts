@@ -1,3 +1,3 @@
-import { defineConfig, DoctorLevel } from "@doctors/core";
+import { defineConfig } from "@doctors/npmpkg";
 
 export default defineConfig({});

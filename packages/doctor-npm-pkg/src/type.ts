@@ -10,3 +10,5 @@ export type IApi = DoctorApi & {
 
   addDoctorNpmPkgCheckEnd: (fn: () => void) => void;
 };
+
+export interface ConfigSchema {}

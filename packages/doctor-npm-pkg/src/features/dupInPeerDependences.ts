@@ -1,4 +1,4 @@
-import type { IApi } from "../types";
+import type { IApi } from "../type";
 import type { DoctorMeta } from "@doctors/core";
 
 // Project dependencies and peerDependencies repeat Times warnings
