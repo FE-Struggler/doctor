@@ -13,15 +13,17 @@ npm run build:all
 
 ```sh
 cd examples/webtools
-doctor web-tools
+npm run doctor:webtools
 ```
 
 如果想要 编写新的 `feature`<br>
-新开启一个终端
+新开启一个终端 <br>
+
+因为 monorepo 的缘故 无需手动 `link`,修改源码后 `examples` 中即可查看效果
 
 ```sh
 cd packages/doctor-webtools
 npm run dev
 
-doctor web-tools //记得回到 examples/webtools 中
+npm run doctor:webtools //记得回到 examples/webtools 中
 ```
