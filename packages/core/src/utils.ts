@@ -13,9 +13,13 @@ export function getDoctorDependencies() {
   // 获取所有依赖的名称数组
   const dependencyNames = Object.keys(packageJson.dependencies);
 
-  // 过滤出以 "doctor" 开头的依赖名称数组
+  // 过滤出以 "@doctors/doctors" 开头的依赖名称数组
+  const validPresetNamePrefix = ["@doctors", "doctors"];
+
   const doctorDependencyNames = dependencyNames.filter(
-    (name) => name.startsWith("@doctors") && name !== "@doctors/core"
+    (name) =>
+      validPresetNamePrefix.some((i) => name.startsWith(i)) &&
+      name !== "@doctors/core"
   );
 
   // 构造以 "doctor" 开头的依赖信息数组
