@@ -1,5 +1,9 @@
 lockfileVersion: "6.0"
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 importers:
   .:
     devDependencies:
@@ -15,6 +19,18 @@ importers:
       prettier:
         specifier: 2.8.8
         version: 2.8.8
+
+  examples/userPreset:
+    dependencies:
+      "@doctors/core":
+        specifier: workspace:^
+        version: link:../../packages/core
+      "@doctors/webtools":
+        specifier: workspace:^
+        version: link:../../packages/doctor-webtools
+      doctors-yang-author:
+        specifier: latest
+        version: 0.0.1
 
   examples/webtools:
     dependencies:
@@ -487,6 +503,35 @@ packages:
     dependencies:
       postcss-selector-parser: 6.0.13
     dev: true
+
+  /@doctors/core@0.0.3:
+    resolution:
+      {
+        integrity: sha512-NdkgUVd8AYWdMcSfoBa/d0j0LxYj7xyCpg7S6RcCAg39LtSEi2AetH6akzIdf2Qkyz6qVCu+Sb3IeFmbdkTU4w==,
+      }
+    hasBin: true
+    dependencies:
+      "@umijs/core": 4.0.71
+      "@umijs/utils": 4.0.71
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
+  /@doctors/webtools@0.0.3(@doctors/core@0.0.3):
+    resolution:
+      {
+        integrity: sha512-TyQZvIIjwXzLM41rQt4JgTiRtfG+vV2UUNjag1ZbrZ7WBFpv9LFdNgk9Zyvgsh6zan9yxaEblI37l1dEmniJuA==,
+      }
+    hasBin: true
+    peerDependencies:
+      "@doctors/core": ^0.0.3
+    dependencies:
+      "@doctors/core": 0.0.3
+      "@umijs/core": 4.0.71
+      "@umijs/utils": 4.0.71
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
 
   /@emotion/is-prop-valid@1.2.1:
     resolution:
@@ -2690,6 +2735,18 @@ packages:
       miller-rabin: 4.0.1
       randombytes: 2.1.0
     dev: true
+
+  /doctors-yang-author@0.0.1:
+    resolution:
+      {
+        integrity: sha512-Tmjb8IJaMF1CWYJXubI7JaJf5tuBNUoIlOWmdGx84xEMMyv3DnJY8HltATaOC5O3Yoqc2LqdHmquxTmfFb7BWw==,
+      }
+    dependencies:
+      "@doctors/core": 0.0.3
+      "@doctors/webtools": 0.0.3(@doctors/core@0.0.3)
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
 
   /dom-serializer@1.4.1:
     resolution:
