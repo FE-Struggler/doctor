@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "@umijs/core": "^4.0.71",
-    "@umijs/utils": "^4.0.71"
+    "@umijs/utils": "^4.0.71",
+    "v8-compile-cache": "2.3.0"
   }
 }
