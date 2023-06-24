@@ -1,6 +1,6 @@
-import { IApi } from "@doctors/core";
 import { DoctorLevel } from "@doctors/core";
 import { chalk } from "@umijs/utils";
+import { IApi } from "../type";
 
 export default (api: IApi) => {
   api.addDoctorWebToolsCheck(() => {

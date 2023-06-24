@@ -1,4 +1,6 @@
 import features from "./features";
+export * from "./type";
+
 export default () => {
   return {
     plugins: [

@@ -34,7 +34,12 @@ function sort(webToolsRes: ruleResItem[]) {
   });
 }
 
-export default function (api: IApi, command: string, schema: Object) {
+export default function (
+  api: IApi,
+  command: string,
+  schema: Object,
+  meta: Object
+) {
   applyTypeEffect(api, transformString(command));
   applyConfigFromSchema(api, schema);
   api.registerCommand({
@@ -51,6 +56,7 @@ export default function (api: IApi, command: string, schema: Object) {
       const webToolsRes = (await api.applyPlugins({
         key: `addDoctor${transformString(command)}Check`,
         type: ApplyPluginsType.add,
+        args: meta,
       })) as ruleResItem[];
       sort(webToolsRes)
         .filter(Boolean)

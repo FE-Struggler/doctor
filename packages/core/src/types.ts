@@ -1,4 +1,4 @@
-import { IApi as UmiIApi } from "umi";
+export { IApi } from "umi";
 
 export interface PluginMeta {
   name: string;
@@ -12,12 +12,6 @@ export interface DoctorMeta {
   description: string;
   doctorLevel: boolean;
 }
-
-export type IApi = UmiIApi & {
-  addDoctorWebToolsCheck: (
-    fn: (doctorInfos: { [key: string]: string }) => DoctorMeta
-  ) => void;
-};
 
 export enum DoctorLevel {
   OFF = "off",
