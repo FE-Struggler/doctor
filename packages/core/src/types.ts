@@ -11,7 +11,7 @@ export interface PluginMeta {
 export interface DoctorMeta {
   label: string;
   description: string;
-  doctorLevel: string;
+  doctorLevel: DoctorLevel;
 }
 
 export type IApi = UmiIApi & {
@@ -26,7 +26,9 @@ export enum DoctorLevel {
   OFF = "off",
   WARN = "warn",
   ERROR = "error",
+  SUCCESS = "success",
 }
+
 export type IDoctorConfig = {
   tools: {
     nodeVersion: DoctorLevel;

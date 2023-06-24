@@ -1,7 +1,6 @@
 import { IApi } from "@doctors/core";
 import { DoctorLevel } from "@doctors/core";
 import { chalk } from "@umijs/utils";
-import * as process from "node:process";
 
 export default (api: IApi) => {
   api.addDoctorWebToolsCheck(() => {
@@ -14,7 +13,7 @@ export default (api: IApi) => {
         description: `Node Version can't bigger than 12.x  ${chalk.green(
           "Now:"
         )} ${chalk.green(process.version)}`,
-        doctorLevel: "success",
+        doctorLevel: DoctorLevel.SUCCESS,
       };
     }
   });

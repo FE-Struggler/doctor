@@ -1,5 +1,6 @@
-import { DoctorMeta, IApi } from "@doctors/core";
+import type { IApi } from "@doctors/core";
 import { exec } from "child_process";
+import { DoctorLevel } from "@doctors/core";
 
 async function isChromeInstalled(): Promise<boolean> {
   try {
@@ -37,8 +38,8 @@ export default (api: IApi) => {
       return {
         label: "isChromeInstalled",
         description: "You should apply Chrome for web development",
-        doctorLevel: "success",
-      } as DoctorMeta;
+        doctorLevel: DoctorLevel.OFF,
+      };
     }
   });
 };
