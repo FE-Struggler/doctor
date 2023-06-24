@@ -38,7 +38,7 @@ export default (api: IApi) => {
       return {
         label: "isChromeInstalled",
         description: "You should apply Chrome for web development",
-        doctorLevel: DoctorLevel.OFF,
+        doctorLevel: DoctorLevel.SUCCESS,
       };
     }
   });
