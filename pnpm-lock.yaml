@@ -30,7 +30,7 @@ importers:
         version: link:../../packages/doctor-webtools
       doctors-yang-author:
         specifier: latest
-        version: 0.0.1
+        version: 0.0.2(@doctors/core@packages+core)(@doctors/webtools@packages+doctor-webtools)
 
   examples/webtools:
     dependencies:
@@ -49,6 +49,9 @@ importers:
       "@umijs/utils":
         specifier: ^4.0.71
         version: 4.0.71
+      v8-compile-cache:
+        specifier: 2.3.0
+        version: 2.3.0
 
   packages/doctor-webtools:
     dependencies:
@@ -503,35 +506,6 @@ packages:
     dependencies:
       postcss-selector-parser: 6.0.13
     dev: true
-
-  /@doctors/core@0.0.3:
-    resolution:
-      {
-        integrity: sha512-NdkgUVd8AYWdMcSfoBa/d0j0LxYj7xyCpg7S6RcCAg39LtSEi2AetH6akzIdf2Qkyz6qVCu+Sb3IeFmbdkTU4w==,
-      }
-    hasBin: true
-    dependencies:
-      "@umijs/core": 4.0.71
-      "@umijs/utils": 4.0.71
-    transitivePeerDependencies:
-      - supports-color
-    dev: false
-
-  /@doctors/webtools@0.0.3(@doctors/core@0.0.3):
-    resolution:
-      {
-        integrity: sha512-TyQZvIIjwXzLM41rQt4JgTiRtfG+vV2UUNjag1ZbrZ7WBFpv9LFdNgk9Zyvgsh6zan9yxaEblI37l1dEmniJuA==,
-      }
-    hasBin: true
-    peerDependencies:
-      "@doctors/core": ^0.0.3
-    dependencies:
-      "@doctors/core": 0.0.3
-      "@umijs/core": 4.0.71
-      "@umijs/utils": 4.0.71
-    transitivePeerDependencies:
-      - supports-color
-    dev: false
 
   /@emotion/is-prop-valid@1.2.1:
     resolution:
@@ -2736,16 +2710,17 @@ packages:
       randombytes: 2.1.0
     dev: true
 
-  /doctors-yang-author@0.0.1:
+  /doctors-yang-author@0.0.2(@doctors/core@packages+core)(@doctors/webtools@packages+doctor-webtools):
     resolution:
       {
-        integrity: sha512-Tmjb8IJaMF1CWYJXubI7JaJf5tuBNUoIlOWmdGx84xEMMyv3DnJY8HltATaOC5O3Yoqc2LqdHmquxTmfFb7BWw==,
+        integrity: sha512-uqSiQQ9PEu+ZqrVR4JG4Y4KhUJNrTUeKNYw1QPwa0Ib4ZX8WtHOwpK7pa/8FsHIIUT8YOg/wEQoVM6HusIQmqg==,
       }
+    peerDependencies:
+      "@doctors/core": ^0.0.3
+      "@doctors/webtools": ^0.0.3
     dependencies:
-      "@doctors/core": 0.0.3
-      "@doctors/webtools": 0.0.3(@doctors/core@0.0.3)
-    transitivePeerDependencies:
-      - supports-color
+      "@doctors/core": link:packages/core
+      "@doctors/webtools": link:packages/doctor-webtools
     dev: false
 
   /dom-serializer@1.4.1:
@@ -6738,7 +6713,6 @@ packages:
       {
         integrity: sha512-l8lCEmLcLYZh4nbunNZvQCJc5pv7+RCwa8q/LdUx8u7lsWvPDKmpodJAJNwkAhJC//dFY48KuIEmjtd4RViDrA==,
       }
-    dev: true
 
   /validator@13.9.0:
     resolution:
