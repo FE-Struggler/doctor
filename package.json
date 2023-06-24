@@ -11,6 +11,7 @@
     "test": "vitest"
   },
   "devDependencies": {
+    "@types/node": "^20.3.1",
     "@types/prettier": "^2.7.3",
     "bumpp": "^9.1.1",
     "father": "^4.1.8",
