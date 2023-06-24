@@ -1,5 +1,6 @@
 import features from "./features";
 export * from "./type";
+import defineConfig from "./defineConfig";
 
 export default () => {
   return {
@@ -11,3 +12,5 @@ export default () => {
     ],
   };
 };
+
+export { defineConfig };

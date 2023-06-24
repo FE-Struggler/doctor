@@ -1,4 +1,5 @@
-import { defineConfig, DoctorLevel } from "@doctors/core";
+import { DoctorLevel } from "@doctors/core";
+import { defineConfig } from "@doctors/webtools";
 
 export default defineConfig({
   tools: {
