@@ -1,7 +1,7 @@
 import type { IDoctorConfig } from "./types";
 
-type ConfigType = IDoctorConfig;
+type TConfigType = IDoctorConfig;
 
-export function defineConfig(config: ConfigType): ConfigType {
+export function defineConfig(config: TConfigType): TConfigType {
   return config;
 }
