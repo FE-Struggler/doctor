@@ -1,12 +1,23 @@
 import { exec } from "child_process";
 import { IApi } from "../type";
+const os = require("os");
+let str: string = "";
+if (os.platform() === "darwin") {
+  console.log("当前操作系统是 macOS");
+  str =
+    "/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome --version";
+} else if (os.platform() === "win32") {
+  console.log("当前操作系统是 Windows");
+  str =
+    'reg query "HKEY_CURRENT_USER\\Software\\Google\\Chrome\\BLBeacon" /v version';
+} else {
+  console.log("当前操作系统不是 macOS 也不是 Windows");
+}
 
 async function isChromeInstalled(): Promise<boolean> {
   try {
-    const stdout: string = await execCommand(
-      "/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome --version"
-    );
-    if (stdout.startsWith("Google Chrome")) {
+    const stdout: string = await execCommand(str);
+    if (stdout.startsWith("Google Chrome") || stdout.includes("version")) {
       return true;
     }
     return false;
