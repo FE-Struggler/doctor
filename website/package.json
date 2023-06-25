@@ -1,0 +1,13 @@
+{
+  "scripts": {
+    "start": "dumi dev",
+    "build": "dumi build",
+    "build:analyze": "ANALYZE=1 dumi build",
+    "preview": "dumi preview",
+    "setup": "dumi setup"
+  },
+  "devDependencies": {
+    "dumi": "^2.2.1",
+    "dumi-theme-antd-style": "^0.27.4"
+  }
+}
