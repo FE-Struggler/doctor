@@ -1,0 +1,15 @@
+{
+  "scripts": {
+    "start": "dumi dev",
+    "build": "dumi build",
+    "build:analyze": "ANALYZE=1 dumi build",
+    "postinstall": "npm run setup",
+    "preview": "dumi preview",
+    "deploy": "gh-pages -d build",
+    "setup": "dumi setup"
+  },
+  "devDependencies": {
+    "dumi": "^2.2.1",
+    "dumi-theme-antd-style": "^0.27.4"
+  }
+}
