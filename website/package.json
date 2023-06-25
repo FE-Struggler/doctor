@@ -3,9 +3,7 @@
     "start": "dumi dev",
     "build": "dumi build",
     "build:analyze": "ANALYZE=1 dumi build",
-    "postinstall": "npm run setup",
     "preview": "dumi preview",
-    "deploy": "gh-pages -d build",
     "setup": "dumi setup"
   },
   "devDependencies": {
