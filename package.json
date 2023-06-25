@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "pnpm:devPreinstall": "node ./pnpm-check.js",
+    "preinstall": "npx only-allow pnpm",
+    "pnpm:devPreinstall": "node ./scripts/preinstall.js",
     "dev": "father dev",
     "build:all": "pnpm run -r build",
     "prepare": "husky install"
