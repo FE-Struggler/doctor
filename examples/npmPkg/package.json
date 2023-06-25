@@ -1,0 +1,20 @@
+{
+  "name": "npm-pkg-example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "doctor:npm-pkg": "doctor npm-pkg"
+  },
+  "dependencies": {
+    "@doctors/core": "workspace:^",
+    "@doctors/npmpkg": "workspace:^"
+  },
+  "peerDependencies": {
+    "@doctors/core": "workspace:^",
+    "@doctors/npmpkg": "workspace:^"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
