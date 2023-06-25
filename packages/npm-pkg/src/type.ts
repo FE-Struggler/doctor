@@ -1,4 +1,5 @@
 import type { IApi as DoctorApi, DoctorMeta } from "@doctors/core";
+import { DoctorLevel } from "@doctor/core";
 
 // 元数据
 interface Meta {}
@@ -12,7 +13,10 @@ export type IApi = DoctorApi & {
 };
 
 export interface ConfigSchema {
-  pkg?: {
-    exclude?: string[];
+  npmPkg?: {
+    peerDepAndDepRepeat?: {
+      level?: DoctorLevel;
+      exclude?: string[];
+    };
   };
 }

@@ -5,7 +5,7 @@ import type { IApi as DoctorApi, DoctorMeta, DoctorLevel } from "@doctors/core";
  * 用每一个 Preset 来单独维护 Schema 以便获得更全面的类型提示
  */
 export interface ConfigSchema {
-  tools: {
+  webTools: {
     nodeVersion: DoctorLevel;
   };
 }

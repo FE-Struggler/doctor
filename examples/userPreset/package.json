@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "doctor:web-tools": "doctor web-tools"
+    "doctor:web-tools": "doctor web-tools",
+    "test": "npm run doctor:web-tools"
   },
   "dependencies": {
     "@doctors/core": "workspace:^",

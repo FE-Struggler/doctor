@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "father dev",
     "build:all": "pnpm run -r build",
+    "test:all": "pnpm run -r test",
     "prepare": "husky install"
   },
   "devDependencies": {

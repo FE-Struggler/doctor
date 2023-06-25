@@ -1,16 +1,22 @@
 import { IApi, generatePreset } from "@doctors/core";
-import { ConfigSchema } from "../type";
 import { Nullify } from "@doctors/core";
+import { ConfigSchema } from "../type";
+import { PRESET_NAME } from "../constants";
+
+const schema: Nullify<ConfigSchema> = {
+  webTools: {
+    nodeVersion: null,
+  },
+};
+
+// meta 元数据 将会作为所有 feature 插件的实参传入 供使用
+const meta = {};
 
 export default (api: IApi) => {
-  const COMMAND_NAME = "web-tools";
-
-  const schema: Nullify<ConfigSchema> = {
-    tools: {
-      nodeVersion: null,
-    },
-  };
-  const meta = {};
-
-  generatePreset(api, COMMAND_NAME, schema, meta);
+  generatePreset({
+    api,
+    command: PRESET_NAME,
+    schema,
+    meta,
+  });
 };

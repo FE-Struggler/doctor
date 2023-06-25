@@ -29,5 +29,8 @@ jobs:
       - name: Install dependencies and Build the product
         run: pnpm install --no-frozen-lockfile
 
-      - name: run bundle:all script
+      - name: Bundle for all packages
         run: npm run build:all
+
+      - name: Tests for all examples
+        run: npm run test:all
