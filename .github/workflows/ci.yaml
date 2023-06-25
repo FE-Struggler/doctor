@@ -28,7 +28,7 @@ jobs:
         run: npm i -g @antfu/ni
 
       - name: Install
-        run: nci
+        run: pnpm i
 
       - name: Typecheck
         run: nr typecheck
@@ -60,8 +60,8 @@ jobs:
       - name: Install
         run: nci
 
-      - name: Build
-        run: nr build
+      - name: Build All
+        run: nr build:all
 
       - name: Test
         run: nr test
