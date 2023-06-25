@@ -8,11 +8,11 @@
   },
   "dependencies": {
     "@doctors/core": "workspace:^",
-    "@doctors/npmpkg": "workspace:^"
+    "@doctors/npm-pkg": "workspace:^"
   },
   "peerDependencies": {
     "@doctors/core": "workspace:^",
-    "@doctors/npmpkg": "workspace:^"
+    "@doctors/npm-pkg": "workspace:^"
   },
   "keywords": [],
   "author": "",

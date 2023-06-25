@@ -1,4 +1,4 @@
-import { defineConfig } from "@doctors/npmpkg";
+import { defineConfig } from "@doctors/npm-pkg";
 
 export default defineConfig({
   pkg: {
