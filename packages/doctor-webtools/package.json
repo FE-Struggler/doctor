@@ -5,9 +5,6 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "type": "commonjs",
-  "bin": {
-    "doctor": "../core/bin/doctor.js"
-  },
   "scripts": {
     "dev": "father dev",
     "build": "father build",

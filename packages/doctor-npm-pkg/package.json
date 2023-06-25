@@ -4,9 +4,6 @@
   "description": "",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "bin": {
-    "doctor": "./bin/doctor.js"
-  },
   "scripts": {
     "dev": "father dev",
     "build": "father build",

@@ -2,6 +2,7 @@
   "name": "doctors-all",
   "version": "1.0.0",
   "private": true,
+  "packageManager": "pnpm@8.6.0",
   "scripts": {
     "dev": "father dev",
     "build:all": "pnpm run -r build",
