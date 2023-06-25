@@ -17,14 +17,17 @@ function sort(webToolsRes: RuleResItem[]) {
   return webToolsRes.sort((a, b) => {
     if (a.doctorLevel === b.doctorLevel) {
       return 0;
-    } else if (a.doctorLevel === "success") {
-      return -1;
-    } else if (a.doctorLevel === "warn" && b.doctorLevel !== "success") {
+    } else if (a.doctorLevel === DoctorLevel.SUCCESS) {
       return -1;
     } else if (
-      a.doctorLevel === "error" &&
-      b.doctorLevel !== "warn" &&
-      b.doctorLevel !== "success"
+      a.doctorLevel === DoctorLevel.WARN &&
+      b.doctorLevel !== DoctorLevel.SUCCESS
+    ) {
+      return -1;
+    } else if (
+      a.doctorLevel === DoctorLevel.ERROR &&
+      b.doctorLevel !== DoctorLevel.WARN &&
+      b.doctorLevel !== DoctorLevel.SUCCESS
     ) {
       return -1;
     } else {
@@ -46,10 +49,10 @@ export default function generatePreset(
     description: "start incremental build in watch mode",
     async fn() {
       //----------------- check before ------------------
-      (await api.applyPlugins({
-        key: `addDoctor ${transformString(command)} CheckBefore`,
+      await api.applyPlugins({
+        key: `addDoctor${transformString(command)}CheckBefore`,
         type: ApplyPluginsType.add,
-      })) as RuleResItem[];
+      });
 
       //----------------- checking ------------------
       const webToolsRes = (
@@ -58,7 +61,7 @@ export default function generatePreset(
           type: ApplyPluginsType.add,
           args: meta,
         })
-      ).filter(Boolean) as RuleResItem[];
+      ).filter(Boolean);
 
       sort(webToolsRes.filter(Boolean)).forEach((i, index) => {
         switch (i?.doctorLevel) {
@@ -87,19 +90,19 @@ export default function generatePreset(
             break;
         }
       });
-      if (webToolsRes.some((i) => i.doctorLevel === "error")) {
+      if (webToolsRes.some((i) => i.doctorLevel === DoctorLevel.ERROR)) {
         logger.info(`${command} End`);
-        (await api.applyPlugins({
-          key: `addDoctor ${transformString(command)} CheckEnd`,
+        await api.applyPlugins({
+          key: `addDoctor${transformString(command)}CheckEnd`,
           type: ApplyPluginsType.add,
-        })) as RuleResItem[];
-        await process.exit(1);
+        });
+        process.exit(1);
       }
       //----------------- check end ------------------
-      (await api.applyPlugins({
-        key: `addDoctor ${transformString(command)} CheckEnd`,
+      await api.applyPlugins({
+        key: `addDoctor${transformString(command)}CheckEnd`,
         type: ApplyPluginsType.add,
-      })) as RuleResItem[];
+      });
     },
   });
 }
