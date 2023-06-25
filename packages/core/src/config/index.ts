@@ -54,6 +54,7 @@ function parseExtendsConfig(opts: {
   api: IApi;
 }) {
   let { config } = opts;
+
   const {
     api,
     resolvePaths = api.service.configManager!.files.map((f) => path.dirname(f)),

@@ -1,6 +1,5 @@
 import { ConfigSchema } from "./type";
 
-const defineConfig = (config: ConfigSchema) => {
+export default function defineConfig(config: ConfigSchema) {
   return config;
-};
-export default defineConfig;
+}

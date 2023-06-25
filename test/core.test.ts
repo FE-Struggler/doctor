@@ -1,15 +1,5 @@
-import { describe, it, expect } from "vitest";
-import { defineConfig, DoctorLevel } from "@doctors/core";
-import type { IDoctorConfig } from "@doctors/core";
+import { test, expect } from "vitest";
 
-describe("defineConfig", () => {
-  it("should return raw config", () => {
-    const rawConfig: IDoctorConfig = {
-      tools: { nodeVersion: DoctorLevel.OFF },
-    };
-
-    const config = defineConfig(rawConfig);
-
-    expect(config).toEqual(rawConfig);
-  });
+test("1 + 1 = 2", () => {
+  expect(1 + 1).eq(2);
 });

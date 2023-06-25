@@ -4,9 +4,9 @@
   "description": "",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "type": "module",
+  "type": "commonjs",
   "bin": {
-    "doctor": "./bin/doctor.js"
+    "doctor": "../core/bin/doctor.js"
   },
   "scripts": {
     "dev": "father dev",

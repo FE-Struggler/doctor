@@ -1,18 +1,13 @@
 import { exec } from "child_process";
 import { IApi } from "../type";
-const os = require("os");
-let str: string = "";
-if (os.platform() === "darwin") {
-  str =
-    "/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome --version";
-} else if (os.platform() === "win32") {
-  str =
-    'reg query "HKEY_CURRENT_USER\\Software\\Google\\Chrome\\BLBeacon" /v version';
-}
+import { DoctorLevel } from "@doctors/core";
+import { getCheckChromeCommandByOS } from "../utils";
+
+const command = getCheckChromeCommandByOS();
 
 async function isChromeInstalled(): Promise<boolean> {
   try {
-    const stdout: string = await execCommand(str);
+    const stdout: string = await execCommand(command as string);
     return stdout.startsWith("Google Chrome") || stdout.includes("version");
   } catch (error) {
     console.error(error);

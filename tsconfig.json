@@ -15,6 +15,7 @@
     "esModuleInterop": true,
     "strictPropertyInitialization": true,
     "noImplicitAny": false,
+    "jsx": "preserve",
     "paths": {
       "@doctors/core": ["./packages/core/src/"],
       "@doctors/webtools": ["./packages/doctor-webtools/src/"],

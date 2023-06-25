@@ -25,6 +25,5 @@ export enum DoctorLevel {
 export type Nullify<T> = {
   [K in keyof T]: {
     [P in keyof T[K]]: null;
-
   };
 };

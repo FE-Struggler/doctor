@@ -4,6 +4,7 @@ import { DoctorLevel, IApi } from "./types";
 import { applyTypeEffect } from "./utils";
 import { logger } from "@umijs/utils";
 import { chalk } from "@umijs/utils";
+
 export interface ruleResItem {
   label: string;
   description: string;
@@ -38,7 +39,7 @@ function sort(webToolsRes: ruleResItem[]) {
   });
 }
 
-export default function (
+export default function generatePreset(
   api: IApi,
   command: string,
   schema: Object,
@@ -51,15 +52,15 @@ export default function (
     description: "start incremental build in watch mode",
     async fn() {
       //----------------- check before ------------------
-      (await api.applyPlugins({
-        key: `addDoctor${transformString(command)}CheckBefore`,
+      await api.applyPlugins({
+        key: `addDoctor ${transformString(command)} CheckBefore`,
         type: ApplyPluginsType.add,
-      })) as ruleResItem[];
+      });
 
       //----------------- checking ------------------
       const webToolsRes = (
         await api.applyPlugins({
-          key: `addDoctor${transformString(command)}Check`,
+          key: `addDoctor ${transformString(command)} Check`,
           type: ApplyPluginsType.add,
           args: meta,
         })
@@ -95,14 +96,14 @@ export default function (
       if (webToolsRes.some((i) => i.doctorLevel === "error")) {
         logger.info(`${command} End`);
         (await api.applyPlugins({
-          key: `addDoctor${transformString(command)}CheckEnd`,
+          key: `addDoctor ${transformString(command)} CheckEnd`,
           type: ApplyPluginsType.add,
         })) as ruleResItem[];
-        process.exit(1);
+        await process.exit(1);
       }
       //----------------- check end ------------------
       (await api.applyPlugins({
-        key: `addDoctor${transformString(command)}CheckEnd`,
+        key: `addDoctor ${transformString(command)} CheckEnd`,
         type: ApplyPluginsType.add,
       })) as ruleResItem[];
     },

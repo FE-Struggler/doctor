@@ -5,11 +5,14 @@ import { chalkByDoctorLevel } from "../utils";
 export default (api: IApi) => {
   api.addDoctorWebToolsCheck(() => {
     const nodeVersion = parseInt(process.version.slice(1));
-    const ruleLevel = api.userConfig.tools?.nodeVersion || DoctorLevel.WARN;
+
+    const ruleLevel = (api.userConfig.tools?.nodeVersion ||
+      DoctorLevel.WARN) as DoctorLevel;
+
     if (ruleLevel === DoctorLevel.OFF) return;
 
     const isNodeVersionFine = nodeVersion > 12;
-    const doctorLevel = isNodeVersionFine ? "success" : ruleLevel;
+    const doctorLevel = isNodeVersionFine ? DoctorLevel.SUCCESS : ruleLevel;
 
     return {
       label: "Node Version",
