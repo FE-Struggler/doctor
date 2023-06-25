@@ -12,7 +12,6 @@ export class Service extends CoreService {
     if (appRoot) {
       cwd = path.isAbsolute(appRoot) ? appRoot : path.join(cwd, appRoot);
     }
-
     super({
       ...opts,
       env: process.env.NODE_ENV,
