@@ -1,13 +1,57 @@
 lockfileVersion: 5.4
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 importers:
   examples/webtools:
     specifiers:
       "@doctors/core": workspace:^
       "@doctors/webtools": workspace:^
     dependencies:
-      "@doctors/core": link:../../packages/core
-      "@doctors/webtools": link:../../packages/doctor-webtools
+      "@doctors/core":
+        specifier: workspace:^
+        version: link:../../packages/core
+      "@doctors/webtools":
+        specifier: workspace:^
+        version: link:../../packages/doctor-webtools
+
+  packages/core:
+    dependencies:
+      "@umijs/core":
+        specifier: ^4.0.71
+        version: 4.0.71
+      "@umijs/utils":
+        specifier: ^4.0.71
+        version: 4.0.71
+      v8-compile-cache:
+        specifier: 2.3.0
+        version: 2.3.0
+
+  packages/doctor-npm-pkg:
+    dependencies:
+      "@doctors/core":
+        specifier: workspace:^
+        version: link:../core
+      "@umijs/core":
+        specifier: ^4.0.71
+        version: 4.0.71
+      "@umijs/utils":
+        specifier: ^4.0.71
+        version: 4.0.71
+
+  packages/doctor-webtools:
+    dependencies:
+      "@doctors/core":
+        specifier: workspace:^
+        version: link:../core
+      "@umijs/core":
+        specifier: ^4.0.71
+        version: 4.0.71
+      "@umijs/utils":
+        specifier: ^4.0.71
+        version: 4.0.71
 
   website:
     specifiers:

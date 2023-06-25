@@ -1,7 +1,7 @@
 {
   "scripts": {
     "start": "dumi dev",
-    "build": "dumi build",
+    "site:build": "dumi build",
     "build:analyze": "ANALYZE=1 dumi build",
     "preview": "dumi preview",
     "setup": "dumi setup"
