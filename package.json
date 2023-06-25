@@ -3,10 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "engines": {
-    "pnpm": ">=8"
-  },
   "scripts": {
+    "pnpm:devPreinstall": "node ./pnpm-check.js",
     "dev": "father dev",
     "build:all": "pnpm run -r build",
     "prepare": "husky install"
