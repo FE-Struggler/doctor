@@ -1,5 +1,9 @@
 lockfileVersion: "6.0"
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 importers:
   .:
     devDependencies:
@@ -42,9 +46,6 @@ importers:
       "@doctors/core":
         specifier: workspace:^
         version: link:../../packages/core
-      "@doctors/npmpkg":
-        specifier: workspace:^
-        version: link:../../packages/doctor-npm-pkg
       "@doctors/webtools":
         specifier: workspace:^
         version: link:../../packages/doctor-webtools
