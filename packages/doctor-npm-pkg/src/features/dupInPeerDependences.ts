@@ -5,9 +5,13 @@ import type { DoctorMeta } from "@doctors/core";
 export default (api: IApi) => {
   api.addDoctorNpmPkgCheck(() => {
     const warns: DoctorMeta[] = [];
+
     if (api.pkg.peerDependencies && api.pkg.dependencies) {
       Object.keys(api.pkg.peerDependencies).forEach((pkg) => {
-        if (api.pkg.dependencies![pkg]) {
+        if (
+          api.pkg.dependencies![pkg] &&
+          !api.userConfig?.pkg?.exclude?.includes(pkg)
+        ) {
           warns.push({
             label: "dupInPeerDependences",
             description: `The package ${pkg} is both a peerDependency and a dependency,Please remove one from the package.json file base on project requirements`,

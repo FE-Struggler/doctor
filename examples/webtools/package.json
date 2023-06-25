@@ -8,8 +8,7 @@
   },
   "dependencies": {
     "@doctors/core": "workspace:^",
-    "@doctors/webtools": "workspace:^",
-    "@doctors/npmpkg": "workspace:^"
+    "@doctors/webtools": "workspace:^"
   },
   "keywords": [],
   "author": "",

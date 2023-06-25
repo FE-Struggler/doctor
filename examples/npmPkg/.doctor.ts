@@ -1,3 +1,7 @@
 import { defineConfig } from "@doctors/npmpkg";
 
-export default defineConfig({});
+export default defineConfig({
+  pkg: {
+    exclude: ["@doctors/core"],
+  },
+});
