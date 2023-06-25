@@ -20,6 +20,12 @@ importers:
         specifier: 2.8.8
         version: 2.8.8
 
+  examples/create-doctor:
+    dependencies:
+      "@doctor/create":
+        specifier: workspace:^
+        version: link:../../packages/create-doctor
+
   examples/npmPkg:
     dependencies:
       "@doctors/core":
@@ -61,6 +67,12 @@ importers:
       v8-compile-cache:
         specifier: 2.3.0
         version: 2.3.0
+
+  packages/create-doctor:
+    dependencies:
+      "@umijs/utils":
+        specifier: ^4.0.71
+        version: 4.0.71
 
   packages/doctor-npm-pkg:
     dependencies:
