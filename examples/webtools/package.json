@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "type": "commonjs",
+  "private": true,
   "scripts": {
     "doctor:webtools": "doctor web-tools"
   },

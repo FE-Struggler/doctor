@@ -1,8 +1,9 @@
 {
-  "name": "userPreset",
+  "name": "user-preset",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "private": true,
   "scripts": {
     "doctor:webtools": "doctor web-tools"
   },

@@ -5,5 +5,5 @@ dist
 .vscode
 .dumi
 server
-
+.pnpm-debug.log
 
