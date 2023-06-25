@@ -22,9 +22,12 @@
     "vitest": "^0.32.2"
   },
   "lint-staged": {
-    "**/*": "prettier --write --ignore-unknown"
+    "*.{js,jsx,ts,tsx,md,mdx}": [
+      "tsc --noEmit",
+      "prettier --write --ignore-unknown"
+    ]
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "MIT"
 }
