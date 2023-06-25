@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "@doctors/core": "workspace:^",
-    "@doctors/webtools": "workspace:^"
+    "@doctors/web-tools": "workspace:^"
   },
   "keywords": [],
   "author": "",

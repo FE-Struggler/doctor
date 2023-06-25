@@ -4,11 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "doctor:webtools": "doctor web-tools"
+    "doctor:web-tools": "doctor web-tools"
   },
   "dependencies": {
     "@doctors/core": "workspace:^",
-    "@doctors/webtools": "workspace:^",
+    "@doctors/web-tools": "workspace:^",
     "doctors-yang-author": "latest"
   },
   "keywords": [],
