@@ -12,7 +12,7 @@ export interface PluginMeta {
 export interface DoctorMeta {
   label: string;
   description: string;
-  doctorLevel: boolean;
+  doctorLevel: DoctorLevel;
 }
 
 export enum DoctorLevel {
