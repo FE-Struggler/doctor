@@ -1,15 +1,9 @@
 import { ApplyPluginsType } from "@umijs/core/dist/types";
 import { applyConfigFromSchema } from "./config";
-import { DoctorLevel, IApi } from "./types";
+import { DoctorLevel, IApi, RuleResItem } from "./types";
 import { applyTypeEffect } from "./utils";
 import { logger } from "@umijs/utils";
 import { chalk } from "@umijs/utils";
-
-export interface ruleResItem {
-  label: string;
-  description: string;
-  doctorLevel: DoctorLevel | "success";
-}
 
 function transformString(str: string) {
   const parts = str.split("-");
@@ -19,7 +13,7 @@ function transformString(str: string) {
   return capitalizedParts.join("");
 }
 
-function sort(webToolsRes: ruleResItem[]) {
+function sort(webToolsRes: RuleResItem[]) {
   return webToolsRes.sort((a, b) => {
     if (a.doctorLevel === b.doctorLevel) {
       return 0;
@@ -52,10 +46,10 @@ export default function generatePreset(
     description: "start incremental build in watch mode",
     async fn() {
       //----------------- check before ------------------
-      await api.applyPlugins({
+      (await api.applyPlugins({
         key: `addDoctor ${transformString(command)} CheckBefore`,
         type: ApplyPluginsType.add,
-      });
+      })) as RuleResItem[];
 
       //----------------- checking ------------------
       const webToolsRes = (
@@ -64,7 +58,7 @@ export default function generatePreset(
           type: ApplyPluginsType.add,
           args: meta,
         })
-      ).filter(Boolean) as ruleResItem[];
+      ).filter(Boolean) as RuleResItem[];
 
       sort(webToolsRes.filter(Boolean)).forEach((i, index) => {
         switch (i?.doctorLevel) {
@@ -98,14 +92,14 @@ export default function generatePreset(
         (await api.applyPlugins({
           key: `addDoctor ${transformString(command)} CheckEnd`,
           type: ApplyPluginsType.add,
-        })) as ruleResItem[];
+        })) as RuleResItem[];
         await process.exit(1);
       }
       //----------------- check end ------------------
       (await api.applyPlugins({
         key: `addDoctor ${transformString(command)} CheckEnd`,
         type: ApplyPluginsType.add,
-      })) as ruleResItem[];
+      })) as RuleResItem[];
     },
   });
 }
