@@ -27,28 +27,28 @@ importers:
         version: link:../../packages/core
       "@doctors/npmpkg":
         specifier: workspace:^
-        version: link:../../packages/doctor-npm-pkg
+        version: link:../../packages/npm-pkg
 
   examples/userPreset:
     dependencies:
       "@doctors/core":
         specifier: workspace:^
         version: link:../../packages/core
-      "@doctors/webtools":
+      "@doctors/web-tools":
         specifier: workspace:^
-        version: link:../../packages/doctor-webtools
+        version: link:../../packages/web-tools
       doctors-yang-author:
         specifier: latest
-        version: 0.0.2(@doctors/core@packages+core)(@doctors/webtools@packages+doctor-webtools)
+        version: 0.0.2(@doctors/core@packages+core)(@doctors/webtools@0.0.3)
 
   examples/webtools:
     dependencies:
       "@doctors/core":
         specifier: workspace:^
         version: link:../../packages/core
-      "@doctors/webtools":
+      "@doctors/web-tools":
         specifier: workspace:^
-        version: link:../../packages/doctor-webtools
+        version: link:../../packages/web-tools
 
   packages/core:
     dependencies:
@@ -62,7 +62,7 @@ importers:
         specifier: 2.3.0
         version: 2.3.0
 
-  packages/doctor-npm-pkg:
+  packages/npm-pkg:
     dependencies:
       "@doctors/core":
         specifier: workspace:^
@@ -74,7 +74,7 @@ importers:
         specifier: ^4.0.71
         version: 4.0.71
 
-  packages/doctor-webtools:
+  packages/web-tools:
     dependencies:
       "@doctors/core":
         specifier: workspace:^
@@ -888,6 +888,22 @@ packages:
       }
     engines: { node: ">=10" }
     dev: true
+
+  /@doctors/webtools@0.0.3(@doctors/core@packages+core):
+    resolution:
+      {
+        integrity: sha512-TyQZvIIjwXzLM41rQt4JgTiRtfG+vV2UUNjag1ZbrZ7WBFpv9LFdNgk9Zyvgsh6zan9yxaEblI37l1dEmniJuA==,
+      }
+    hasBin: true
+    peerDependencies:
+      "@doctors/core": ^0.0.3
+    dependencies:
+      "@doctors/core": link:packages/core
+      "@umijs/core": 4.0.71
+      "@umijs/utils": 4.0.71
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
 
   /@emotion/babel-plugin@11.11.0:
     resolution:
@@ -6174,7 +6190,7 @@ packages:
       }
     dev: true
 
-  /doctors-yang-author@0.0.2(@doctors/core@packages+core)(@doctors/webtools@packages+doctor-webtools):
+  /doctors-yang-author@0.0.2(@doctors/core@packages+core)(@doctors/webtools@0.0.3):
     resolution:
       {
         integrity: sha512-uqSiQQ9PEu+ZqrVR4JG4Y4KhUJNrTUeKNYw1QPwa0Ib4ZX8WtHOwpK7pa/8FsHIIUT8YOg/wEQoVM6HusIQmqg==,
@@ -6184,7 +6200,7 @@ packages:
       "@doctors/webtools": ^0.0.3
     dependencies:
       "@doctors/core": link:packages/core
-      "@doctors/webtools": link:packages/doctor-webtools
+      "@doctors/webtools": 0.0.3(@doctors/core@packages+core)
     dev: false
 
   /doctrine@2.1.0:

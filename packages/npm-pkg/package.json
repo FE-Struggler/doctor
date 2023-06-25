@@ -1,12 +1,9 @@
 {
-  "name": "@doctors/webtools",
-  "version": "0.0.3",
+  "name": "@doctors/npm-pkg",
+  "version": "0.0.4",
   "description": "",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "bin": {
-    "doctor": "./bin/doctor.js"
-  },
   "scripts": {
     "dev": "father dev",
     "build": "father build",
