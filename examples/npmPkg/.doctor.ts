@@ -1,7 +1,10 @@
 import { defineConfig } from "@doctors/npm-pkg";
 
 export default defineConfig({
-  pkg: {
-    exclude: ["@doctors/core"],
+  npmPkg: {
+    peerDepAndDepRepeat: {
+      level: "warn",
+      exclude: ["@doctors/core"],
+    },
   },
 });

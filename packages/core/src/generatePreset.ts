@@ -2,7 +2,6 @@ import { ApplyPluginsType } from "@umijs/core/dist/types";
 import { applyConfigFromSchema } from "./config";
 import { DoctorLevel, IApi } from "./types";
 import { applyTypeEffect } from "./utils";
-import { logger } from "@umijs/utils";
 import { chalk } from "@umijs/utils";
 export interface ruleResItem {
   label: string;
@@ -41,14 +40,20 @@ function sort(webToolsRes: ruleResItem[]) {
   });
 }
 
-export default function (
-  api: IApi,
-  command: string,
-  schema: Object,
-  meta: Object
-) {
+interface GeneratePresetProps {
+  api: IApi;
+  command: string;
+  schema?: Object;
+  meta?: Object;
+}
+export default function ({ api, schema, command, meta }: GeneratePresetProps) {
+  api.describe({
+    key: `doctor-generate-preset-fn-${command}`,
+  });
   applyTypeEffect(api, transformString(command));
-  applyConfigFromSchema(api, schema);
+  if (schema) {
+    applyConfigFromSchema(api, schema);
+  }
   api.registerCommand({
     name: command,
     description: "start incremental build in watch mode",
@@ -96,7 +101,6 @@ export default function (
         }
       });
       if (webToolsRes.some((i) => i.doctorLevel === DoctorLevel.ERROR)) {
-        logger.info(`${command} End`);
         await api.applyPlugins({
           key: `addDoctor${transformString(command)}CheckEnd`,
           type: ApplyPluginsType.add,

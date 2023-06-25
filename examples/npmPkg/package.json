@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "doctor:npm-pkg": "doctor npm-pkg"
+    "doctor:npm-pkg": "doctor npm-pkg",
+    "test": "npm run doctor:npm-pkg"
   },
   "dependencies": {
     "@doctors/core": "workspace:^",
