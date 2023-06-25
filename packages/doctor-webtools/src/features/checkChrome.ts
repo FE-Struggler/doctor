@@ -3,11 +3,9 @@ import { IApi } from "../type";
 const os = require("os");
 let str: string = "";
 if (os.platform() === "darwin") {
-  console.log("当前操作系统是 macOS");
   str =
     "/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome --version";
 } else if (os.platform() === "win32") {
-  console.log("当前操作系统是 Windows");
   str =
     'reg query "HKEY_CURRENT_USER\\Software\\Google\\Chrome\\BLBeacon" /v version';
 }
