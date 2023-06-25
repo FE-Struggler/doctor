@@ -1,5 +1,6 @@
-import { IApi as UmiIApi } from "umi";
-import type { Awaitable } from "@doctors/shared";
+import type { IServicePluginAPI, PluginAPI } from "@umijs/core";
+
+export type IApi = PluginAPI & IServicePluginAPI;
 
 export interface PluginMeta {
   name: string;
@@ -14,14 +15,6 @@ export interface DoctorMeta {
   doctorLevel: DoctorLevel;
 }
 
-export type IApi = UmiIApi & {
-  addDoctorWebToolsCheck: (
-    fn: (doctorInfos: {
-      [key: string]: string;
-    }) => Awaitable<DoctorMeta | undefined>
-  ) => void;
-};
-
 export enum DoctorLevel {
   OFF = "off",
   WARN = "warn",
@@ -29,8 +22,9 @@ export enum DoctorLevel {
   SUCCESS = "success",
 }
 
-export type IDoctorConfig = {
-  tools: {
-    nodeVersion: DoctorLevel;
+export type Nullify<T> = {
+  [K in keyof T]: {
+    [P in keyof T[K]]: null;
+
   };
 };

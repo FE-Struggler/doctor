@@ -1,13 +1,19 @@
-import type { IApi } from "@doctors/core";
 import { exec } from "child_process";
-import { DoctorLevel } from "@doctors/core";
+import { IApi } from "../type";
+const os = require("os");
+let str: string = "";
+if (os.platform() === "darwin") {
+  str =
+    "/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome --version";
+} else if (os.platform() === "win32") {
+  str =
+    'reg query "HKEY_CURRENT_USER\\Software\\Google\\Chrome\\BLBeacon" /v version';
+}
 
 async function isChromeInstalled(): Promise<boolean> {
   try {
-    const stdout: string = await execCommand(
-      "/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome --version"
-    );
-    return stdout.startsWith("Google Chrome");
+    const stdout: string = await execCommand(str);
+    return stdout.startsWith("Google Chrome") || stdout.includes("version");
   } catch (error) {
     console.error(error);
     return false;
