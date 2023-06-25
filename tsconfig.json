@@ -19,7 +19,8 @@
     "paths": {
       "@doctors/core": ["./packages/core/src/"],
       "@doctors/webtools": ["./packages/doctor-webtools/src/"],
-      "@doctors/shared": ["./packages/shared/src/"]
+      "@doctors/shared": ["./packages/shared/src/"],
+      "@doctors/npmpkg": ["./packages/doctor-npm-pkg/src/"]
     }
   },
   "exclude": ["**/dist/**", "**/node_modules/**", "**/examples/**"]

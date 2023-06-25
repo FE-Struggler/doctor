@@ -1,5 +1,6 @@
 import type { IApi } from "../type";
 import type { DoctorMeta } from "@doctors/core";
+import { DoctorLevel } from "@doctors/core";
 
 // Project dependencies and peerDependencies repeat Times warnings
 export default (api: IApi) => {
@@ -15,7 +16,7 @@ export default (api: IApi) => {
           warns.push({
             label: "dupInPeerDependences",
             description: `The package ${pkg} is both a peerDependency and a dependency,Please remove one from the package.json file base on project requirements`,
-            doctorLevel: "warn",
+            doctorLevel: DoctorLevel.WARN,
           });
         }
       });
