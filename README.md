@@ -3,6 +3,7 @@
 进入项目仓库<br>
 
 ```sh
+# 请使用pnpm 8进行安装，避免依赖结构问题导致后续命令无法执行
 pnpm i
 npm run build:all
 ```

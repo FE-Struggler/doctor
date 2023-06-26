@@ -1,23 +1,40 @@
 {
   "name": "doctors-all",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "version": "0.0.10",
+  "private": true,
+  "packageManager": "pnpm@8.0.0",
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
+    "pnpm:devPreinstall": "node ./scripts/preinstall.js",
     "dev": "father dev",
     "build:all": "pnpm run -r build",
-    "prepare": "husky install"
+    "test:all": "pnpm run -r test",
+    "prepare": "husky install",
+    "release": "bumpp -r",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest"
   },
   "devDependencies": {
+    "@types/node": "^20.3.1",
+    "@types/prettier": "^2.7.3",
+    "@doctors/core": "workspace:*",
+    "@doctors/utils": "workspace:*",
+    "@doctors/npm-pkg": "workspace:*",
+    "@doctors/web-tools": "workspace:*",
+    "bumpp": "^9.1.1",
     "father": "^4.1.8",
     "husky": "^8.0.3",
     "lint-staged": "^13.2.2",
-    "prettier": "2.8.8"
+    "prettier": "2.8.8",
+    "typescript": "^5.1.3",
+    "vitest": "^0.32.2"
   },
   "lint-staged": {
-    "**/*": "prettier --write --ignore-unknown"
+    "*.{ts,tsx,md,mdx}": [
+      "prettier --write --ignore-unknown"
+    ]
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "MIT"
 }

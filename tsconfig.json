@@ -1,10 +1,29 @@
 {
   "compilerOptions": {
+    "target": "es2018",
+    "module": "esnext",
+    "lib": ["esnext"],
+    "moduleResolution": "node",
     "strict": true,
-    "declaration": true,
+    "strictNullChecks": true,
+    "resolveJsonModule": true,
+    "skipDefaultLibCheck": true,
     "skipLibCheck": true,
+    "declaration": true,
     "baseUrl": "./",
     "moduleDetection": "auto",
-    "esModuleInterop": true
-  }
+    "esModuleInterop": true,
+    "strictPropertyInitialization": true,
+    "noImplicitAny": false,
+    "jsx": "preserve",
+    "allowJs": true,
+    "checkJs": true,
+    "paths": {
+      "@doctors/core": ["./packages/core/src/"],
+      "@doctors/webtools": ["./packages/web-tools/src/"],
+      "@doctors/npm-pkg": ["./packages/npm-pkg/src/"],
+      "@doctors/utils": ["./packages/utils/src/"]
+    }
+  },
+  "exclude": ["**/dist/**", "**/node_modules/**", "**/examples/**"]
 }
