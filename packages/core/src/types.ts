@@ -24,9 +24,15 @@ export enum DoctorLevel {
   WARN = "warn",
   ERROR = "error",
 }
+
 export type IDoctorConfig = {
   tools: {
     nodeVersion: DoctorLevel;
-    vscodePlugins?: string[];
+    vscode?: {
+      morePlugins?: (
+        | string
+        | { name: string; desc: string; version?: string }
+      )[];
+    };
   };
 };

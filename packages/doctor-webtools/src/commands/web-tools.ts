@@ -4,7 +4,7 @@ export default (api: IApi) => {
   generatePreset(api, "web-tools", {
     tools: {
       nodeVersion: null,
-      vscodePlugins: null,
+      vscode: null,
     },
   });
 };
