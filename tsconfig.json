@@ -21,7 +21,7 @@
     "paths": {
       "@doctors/core": ["./packages/core/src/"],
       "@doctors/webtools": ["./packages/web-tools/src/"],
-      "@doctors/npmpkg": ["./packages/npm-pkg/src/"],
+      "@doctors/npm-pkg": ["./packages/npm-pkg/src/"],
       "@doctors/utils": ["./packages/utils/src/"]
     }
   },
