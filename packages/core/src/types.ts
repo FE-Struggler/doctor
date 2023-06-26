@@ -1,4 +1,6 @@
-import { IApi as UmiIApi } from "umi";
+import type { IServicePluginAPI, PluginAPI } from "@umijs/core";
+
+export type IApi = PluginAPI & IServicePluginAPI;
 
 export interface PluginMeta {
   name: string;
@@ -10,29 +12,36 @@ export interface PluginMeta {
 export interface DoctorMeta {
   label: string;
   description: string;
-  doctorLevel: boolean;
+  doctorLevel: DoctorLevel;
 }
-
-export type IApi = UmiIApi & {
-  addDoctorWebToolsCheck: (
-    fn: (doctorInfos: { [key: string]: string }) => DoctorMeta
-  ) => void;
-};
 
 export enum DoctorLevel {
   OFF = "off",
   WARN = "warn",
   ERROR = "error",
+  SUCCESS = "success",
 }
 
-export type IDoctorConfig = {
-  tools: {
-    nodeVersion: DoctorLevel;
-    vscode?: {
-      morePlugins?: (
-        | string
-        | { name: string; desc: string; version?: string }
-      )[];
-    };
+// <<<<<<< HEAD
+// export type IDoctorConfig = {
+//   tools: {
+//     nodeVersion: DoctorLevel;
+//     vscode?: {
+//       morePlugins?: (
+//         | string
+//         | { name: string; desc: string; version?: string }
+//       )[];
+//     };
+// =======
+export type Nullify<T> = {
+  [K in keyof T]: {
+    [P in keyof T[K]]: null;
+    // >>>>>>> master
   };
 };
+
+export interface RuleResItem {
+  label: string;
+  description: string;
+  doctorLevel: DoctorLevel | "success";
+}

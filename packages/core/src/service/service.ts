@@ -1,6 +1,6 @@
 import { Service as CoreService } from "@umijs/core";
 import path from "path";
-import * as process from "process";
+import * as process from "node:process";
 import { DEFAULT_CONFIG_FILES, FRAMEWORK_NAME } from "../constants";
 import { getDoctorDependencies } from "../utils";
 
@@ -12,7 +12,6 @@ export class Service extends CoreService {
     if (appRoot) {
       cwd = path.isAbsolute(appRoot) ? appRoot : path.join(cwd, appRoot);
     }
-
     super({
       ...opts,
       env: process.env.NODE_ENV,

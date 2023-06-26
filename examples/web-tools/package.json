@@ -1,0 +1,19 @@
+{
+  "name": "webtools-example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "commonjs",
+  "private": true,
+  "scripts": {
+    "doctor:webtools": "doctor web-tools",
+    "test": "npm run doctor:webtools"
+  },
+  "dependencies": {
+    "@doctors/core": "workspace:^",
+    "@doctors/web-tools": "workspace:^"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

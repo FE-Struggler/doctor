@@ -1,3 +1,9 @@
 node_modules
 dist
 .DS_Store
+.idea
+.vscode
+.dumi
+server
+.pnpm-debug.log
+pnpm-lock.yaml
