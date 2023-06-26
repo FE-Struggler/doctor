@@ -1,4 +1,5 @@
 {
+  "private": true,
   "scripts": {
     "start": "dumi dev",
     "site:build": "dumi build",
