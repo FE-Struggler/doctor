@@ -1,6 +1,7 @@
-import { IApi } from "@doctors/core";
+import { DoctorLevel } from "@doctors/core";
+import { IApi } from "../type";
 import { exec } from "child_process";
-import { chalk } from "@umijs/utils";
+import { chalkByDoctorLevel } from "@doctors/utils";
 
 /*  VSCode plugins type */
 export type VSCodePluginsConfig = (
@@ -43,12 +44,12 @@ async function filterPluginsConfig(
     plugins.forEach((item) => {
       if (typeof item === "string" && !localPluginsMap.has(item)) {
         const name = item;
-        failedRecords.push(`Miss Plugin: You should install ${name} plugin`);
+        failedRecords.push(`${name} plugin: You should install ${name} plugin`);
       } else if (typeof item === "object" && item !== null) {
         const { name, desc, version: targetVersion } = item;
         if (!localPluginsMap.has(name)) {
           failedRecords.push(
-            `Miss Plugin: You should install ${name}@${targetVersion} plugin`
+            `${name} plugin: You should install ${name}@${targetVersion} plugin`
           );
         } else {
           // check version
@@ -56,11 +57,14 @@ async function filterPluginsConfig(
             const localVersion = localPluginsMap.get(name) as string;
             if (compareVersion(localVersion, targetVersion) < 0) {
               failedRecords.push(
-                `Low Version: You should update the ${name} plugin to version v${targetVersion} and above.  Now: v${localVersion}`
+                `${name} plugin: You should update the ${name} plugin to version v${targetVersion} and above  ${chalkByDoctorLevel(
+                  DoctorLevel.ERROR,
+                  "Now: v" + localVersion
+                )}`
               );
             }
           }
-          successRecords.push(`Pass ${name} Plugin: ${desc}`);
+          successRecords.push(`Installed ${name} plugin: ${desc}`);
         }
       }
     });
@@ -118,7 +122,7 @@ export default (api: IApi) => {
   api.addDoctorWebToolsCheck(async () => {
     const vscodePlugins: VSCodePluginsConfig = [
       ...BASIC_VSCODE_PLUGINS,
-      ...(api.userConfig.tools?.vscode?.morePlugins || []),
+      ...(api.userConfig.webTools?.vscode?.morePlugins || []),
     ];
 
     const [failedRecords, successRecords] = await filterPluginsConfig(
@@ -133,7 +137,7 @@ export default (api: IApi) => {
       return {
         label: FEATURE_NAME,
         description,
-        doctorLevel: "success",
+        doctorLevel: DoctorLevel.SUCCESS,
       };
     } else {
       return {
@@ -141,7 +145,7 @@ export default (api: IApi) => {
         description: `${OUTPUT_DEMARCATORS}${failedRecords.join(
           OUTPUT_DEMARCATORS
         )}\n`,
-        doctorLevel: "error",
+        doctorLevel: DoctorLevel.ERROR,
       };
     }
   });
