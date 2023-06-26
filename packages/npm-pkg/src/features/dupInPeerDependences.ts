@@ -2,10 +2,11 @@ import type { ConfigSchema, IApi } from "../type";
 import { DoctorLevel, DoctorMeta } from "@doctors/core";
 
 // Project dependencies and peerDependencies repeat Times warnings
-export default (api: IApi) => {
+export default function dupInPeerDependences(api: IApi) {
   api.addDoctorNpmPkgCheck(() => {
     const userConfig = api.userConfig as ConfigSchema;
     const warns: DoctorMeta[] = [];
+
     if (api.pkg.peerDependencies && api.pkg.dependencies) {
       Object.keys(api.pkg.peerDependencies).forEach((pkg) => {
         if (
@@ -25,4 +26,4 @@ export default (api: IApi) => {
 
     return warns;
   });
-};
+}
