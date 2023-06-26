@@ -13,17 +13,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
         with:
-          fetch-depth: 0
+          version: 8.0
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v2
-
-      - name: Set node
+      - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
-          node-version: 18.x
-          cache: pnpm
+          node-version: ${{ matrix.node-version }}
 
       - run: npx changelogithub
         env:
