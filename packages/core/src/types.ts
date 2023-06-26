@@ -27,3 +27,9 @@ export type Nullify<T> = {
     [P in keyof T[K]]: null;
   };
 };
+
+export interface RuleResItem {
+  label: string;
+  description: string;
+  doctorLevel: DoctorLevel | "success";
+}

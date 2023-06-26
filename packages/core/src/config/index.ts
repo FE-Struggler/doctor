@@ -2,6 +2,7 @@ import path from "path";
 import { deepmerge, resolve } from "@umijs/utils";
 import { IApi } from "../types";
 import type { Root } from "@umijs/utils/compiled/@hapi/joi";
+import { Config } from "@umijs/core";
 
 interface Schema {
   [ket: string]: any;
@@ -72,6 +73,7 @@ function parseExtendsConfig(opts: {
   api: IApi;
 }) {
   let { config } = opts;
+
   const {
     api,
     resolvePaths = api.service.configManager!.files.map((f) => path.dirname(f)),
@@ -79,7 +81,8 @@ function parseExtendsConfig(opts: {
 
   if (config.extends) {
     let absExtendsPath = "";
-    const ConfigManager: any = api.service.configManager!.constructor;
+    const configManager = api.service.configManager!
+      .constructor as typeof Config;
 
     // try to resolve extends path
     resolvePaths.some((dir) => {
@@ -101,9 +104,9 @@ function parseExtendsConfig(opts: {
     }
     // load extends config
     const { config: extendsConfig, files: extendsFiles } =
-      ConfigManager.getUserConfig({ configFiles: [absExtendsPath] });
+      configManager.getUserConfig({ configFiles: [absExtendsPath] });
 
-    ConfigManager.validateConfig({
+    configManager.validateConfig({
       config: extendsConfig,
       schemas: api.service.configSchemas,
     });

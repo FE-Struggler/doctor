@@ -1,19 +1,21 @@
-name: bundle
+name: CI
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - master
+
+  pull_request:
+    branches:
+      - master
 
 concurrency:
   group: ${{github.workflow}}-${{github.event_name}}-${{github.ref}}
   cancel-in-progress: true
 
 jobs:
-  bundle:
-    runs-on: macos-latest
-    if: "!contains(github.event.head_commit.message, '[skip ci]')"
-    strategy:
-      matrix:
-        node-version: [18]
-
+  ci:
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: pnpm/action-setup@v2
@@ -25,12 +27,15 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      # postInstall will build the product
-      - name: Install dependencies and Build the product
+      - name: Install
         run: pnpm install --no-frozen-lockfile
 
       - name: Bundle for all packages
         run: npm run build:all
 
+      - name: Typecheck
+        run: npm run typecheck
+
       - name: Tests for all examples
         run: npm run test:all
+        

@@ -1,13 +1,9 @@
 import { ApplyPluginsType } from "@umijs/core/dist/types";
 import { applyConfigFromSchema } from "./config";
-import { DoctorLevel, IApi } from "./types";
+import { DoctorLevel, IApi, RuleResItem } from "./types";
 import { applyTypeEffect } from "./utils";
+import { logger } from "@umijs/utils";
 import { chalk } from "@umijs/utils";
-export interface ruleResItem {
-  label: string;
-  description: string;
-  doctorLevel: DoctorLevel;
-}
 
 function transformString(str: string) {
   const parts = str.split("-");
@@ -17,7 +13,7 @@ function transformString(str: string) {
   return capitalizedParts.join("");
 }
 
-function sort(webToolsRes: ruleResItem[]) {
+function sort(webToolsRes: RuleResItem[]) {
   return webToolsRes.sort((a, b) => {
     if (a.doctorLevel === b.doctorLevel) {
       return 0;
@@ -46,14 +42,22 @@ interface GeneratePresetProps {
   schema?: Object;
   meta?: Object;
 }
-export default function ({ api, schema, command, meta }: GeneratePresetProps) {
+
+export default function generatePreset({
+  api,
+  schema,
+  command,
+  meta,
+}: GeneratePresetProps) {
   api.describe({
     key: `doctor-generate-preset-fn-${command}`,
   });
   applyTypeEffect(api, transformString(command));
+
   if (schema) {
     applyConfigFromSchema(api, schema);
   }
+
   api.registerCommand({
     name: command,
     description: "start incremental build in watch mode",
@@ -67,7 +71,7 @@ export default function ({ api, schema, command, meta }: GeneratePresetProps) {
       //----------------- checking ------------------
       const webToolsRes = (
         await api.applyPlugins({
-          key: `addDoctor${transformString(command)}Check`,
+          key: `addDoctor ${transformString(command)} Check`,
           type: ApplyPluginsType.add,
           args: meta,
         })
@@ -101,6 +105,7 @@ export default function ({ api, schema, command, meta }: GeneratePresetProps) {
         }
       });
       if (webToolsRes.some((i) => i.doctorLevel === DoctorLevel.ERROR)) {
+        logger.info(`${command} End`);
         await api.applyPlugins({
           key: `addDoctor${transformString(command)}CheckEnd`,
           type: ApplyPluginsType.add,
