@@ -1,6 +1,8 @@
 import { exec } from "child_process";
-import { IApi } from "../type";
 const os = require("os");
+import { IApi } from "../type";
+import { DoctorLevel } from "@doctors/core";
+
 let str: string = "";
 if (os.platform() === "darwin") {
   str =
@@ -43,7 +45,7 @@ export default (api: IApi) => {
       return {
         label: "isChromeInstalled",
         description: "You should apply Chrome for web development",
-        doctorLevel: "success",
+        doctorLevel: DoctorLevel.SUCCESS,
       };
     }
   });

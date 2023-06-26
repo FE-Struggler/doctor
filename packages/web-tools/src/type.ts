@@ -16,7 +16,10 @@ interface Meta {}
 export type IApi = DoctorApi & {
   addDoctorWebToolsCheckBefore: (fn: () => void) => void;
 
-  addDoctorWebToolsCheck: (fn: (meta: Meta) => DoctorMeta) => void;
+  addDoctorWebToolsCheck: {
+    (fn: (meta?: Meta) => DoctorMeta | undefined): void;
+    (fn: (meta?: Meta) => Promise<DoctorMeta | undefined>): void;
+  };
 
   addDoctorWebToolsCheckEnd: (fn: () => void) => void;
 };

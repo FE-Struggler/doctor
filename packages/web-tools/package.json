@@ -29,6 +29,7 @@
   "dependencies": {
     "@doctors/utils": "workspace:^",
     "@umijs/core": "^4.0.71",
-    "@umijs/utils": "^4.0.71"
+    "@umijs/utils": "^4.0.71",
+    "default-browser": "^4.0.0"
   }
 }
