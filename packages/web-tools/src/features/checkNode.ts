@@ -6,7 +6,7 @@ export default (api: IApi) => {
   api.addDoctorWebToolsCheck(() => {
     const nodeVersion = parseInt(process.version.slice(1));
 
-    const ruleLevel = (api.userConfig.tools?.nodeVersion ||
+    const ruleLevel = (api.userConfig.webTools?.nodeVersion ||
       DoctorLevel.WARN) as DoctorLevel;
 
     if (ruleLevel === DoctorLevel.OFF) return;
