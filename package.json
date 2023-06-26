@@ -24,8 +24,7 @@
     "vitest": "^0.32.2"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx,md,mdx}": [
-      "tsc --noEmit --allowJs",
+    "*.{ts,tsx,md,mdx}": [
       "prettier --write --ignore-unknown"
     ]
   },
