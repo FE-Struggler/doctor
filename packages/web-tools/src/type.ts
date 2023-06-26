@@ -7,6 +7,12 @@ import type { Awaitable } from "@doctors/utils";
 export interface ConfigSchema {
   webTools: {
     nodeVersion: DoctorLevel;
+    vscode: {
+      morePlugins: (
+        | string
+        | { name: string; desc: string; version?: string }
+      )[];
+    };
   };
 }
 
