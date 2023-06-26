@@ -4,3 +4,4 @@ dist
 .dumi
 server
 pnpm-lock.yaml
+.idea
