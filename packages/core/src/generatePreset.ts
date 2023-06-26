@@ -71,7 +71,7 @@ export default function generatePreset({
       //----------------- checking ------------------
       const webToolsRes = (
         await api.applyPlugins({
-          key: `addDoctor ${transformString(command)} Check`,
+          key: `addDoctor${transformString(command)}Check`,
           type: ApplyPluginsType.add,
           args: meta,
         })
