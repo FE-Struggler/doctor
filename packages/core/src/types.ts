@@ -22,21 +22,9 @@ export enum DoctorLevel {
   SUCCESS = "success",
 }
 
-// <<<<<<< HEAD
-// export type IDoctorConfig = {
-//   tools: {
-//     nodeVersion: DoctorLevel;
-//     vscode?: {
-//       morePlugins?: (
-//         | string
-//         | { name: string; desc: string; version?: string }
-//       )[];
-//     };
-// =======
 export type Nullify<T> = {
   [K in keyof T]: {
     [P in keyof T[K]]: null;
-    // >>>>>>> master
   };
 };
 
