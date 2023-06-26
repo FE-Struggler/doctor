@@ -10,7 +10,7 @@
     "build:deps": "father prebundle",
     "prepublishOnly": "father doctor && npm run build"
   },
-  "repository": "https://github.com/BoyYangzai/doctor",
+  "repository": "https://github.com/FE-Struggler/doctor",
   "keywords": [],
   "authors": [
     "洋"
