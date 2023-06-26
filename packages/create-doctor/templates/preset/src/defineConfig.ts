@@ -1,4 +1,4 @@
-import { ConfigSchema } from "./type";
+import { ConfigSchema } from "./type.ts";
 
 const defineConfig = (config: ConfigSchema) => {
   return config;

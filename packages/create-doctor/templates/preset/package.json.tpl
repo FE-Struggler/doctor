@@ -1,31 +1,37 @@
 {
-  "name": "{{{ name }}}",
+  "name": "{{{ packageName }}}",
   "version": "0.1.0",
   "description": "{{{ description }}}",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "bin": {
-    "doctor": "./bin/doctor.js"
-  },
   "scripts": {
     "dev": "father dev",
     "build": "father build",
     "build:deps": "father prebundle",
     "prepublishOnly": "father doctor && npm run build"
   },
+  "repository": "https://github.com/FE-Struggler/doctor",
   "keywords": [],
-  "authors": [{{#author}}
-    "{{{ author }}}"
-  {{/author}}],
+  "author": "{{{ author }}}",
   "license": "MIT",
   "files": [
     "./dist",
+    "./bin"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "peerDependencies": {
-    "@doctors/core": "latest"
+    "@doctors/core": "workspace:^"
   },
   "dependencies": {
+    "@doctors/utils": "workspace:^",
     "@umijs/core": "^4.0.71",
     "@umijs/utils": "^4.0.71"
+  },
+  "devDependencies": {
+    "father": "^4.1.8",
+    "@types/node": "^18.15.11",
+    "typescript": "^5.0.3"
   }
 }

@@ -1,5 +1,4 @@
-import { BaseGenerator, prompts, yParser } from "@umijs/utils";
-import { join } from "path";
+import { chalk, isLocalDev, yParser } from "@umijs/utils";
 
 const args = yParser(process.argv.slice(2), {
   alias: {
@@ -9,34 +8,19 @@ const args = yParser(process.argv.slice(2), {
   boolean: ["version"],
 });
 
-const cwd = process.cwd();
-const [name] = args._;
-const target = name ? join(cwd, name) : cwd;
-
-const questions: prompts.PromptObject[] = [
-  {
-    name: "name",
-    type: "text",
-    message: `Input NPM package name (eg: doctor-xxx)`,
-  },
-  {
-    name: "description",
-    type: "text",
-    message: `Input project description`,
-  },
-  {
-    name: "author",
-    type: "text",
-    message: `Input project author (Name <email@example.com>)`,
-  },
-];
-
-const generator = new BaseGenerator({
-  path: join(__dirname, `../templates`),
-  target,
-  questions,
-});
-
-(async function () {
-  await generator.run();
-})();
+if (args.version && !args._[0]) {
+  args._[0] = "version";
+  const local = isLocalDev() ? chalk.cyan("@local") : "";
+  const { name, version } = require("../package.json");
+  console.log(`${name} ${version}${local}`);
+} else {
+  require("./")
+    .default({
+      cwd: process.cwd(),
+      args,
+    })
+    .catch((err: Error) => {
+      console.error(`Create failed, ${err.message}`);
+      console.error(err);
+    });
+}
