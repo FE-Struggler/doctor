@@ -1,5 +1,5 @@
 {
-  "name": "@doctors/web-tools",
+  "name": "@doctors/utils",
   "version": "0.0.6",
   "description": "",
   "main": "./dist/index.js",
@@ -27,7 +27,6 @@
     "@doctors/core": "workspace:^"
   },
   "dependencies": {
-    "@doctors/utils": "workspace:^",
     "@umijs/core": "^4.0.71",
     "@umijs/utils": "^4.0.71"
   }

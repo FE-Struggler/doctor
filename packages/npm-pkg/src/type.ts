@@ -1,5 +1,5 @@
 import type { IApi as DoctorApi, DoctorMeta } from "@doctors/core";
-import { DoctorLevel } from "@doctor/core";
+import { DoctorLevel } from "@doctors/core";
 
 // 元数据
 interface Meta {}
