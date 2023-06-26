@@ -4,6 +4,8 @@
   "private": true,
   "packageManager": "pnpm@8.0.0",
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
+    "pnpm:devPreinstall": "node ./scripts/preinstall.js",
     "dev": "father dev",
     "build:all": "pnpm run -r build",
     "test:all": "pnpm run -r test",
