@@ -36,14 +36,28 @@ function sort(webToolsRes: RuleResItem[]) {
   });
 }
 
-export default function generatePreset(
-  api: IApi,
-  command: string,
-  schema: Object,
-  meta: Object
-) {
+interface GeneratePresetProps {
+  api: IApi;
+  command: string;
+  schema?: Object;
+  meta?: Object;
+}
+
+export default function generatePreset({
+  api,
+  schema,
+  command,
+  meta,
+}: GeneratePresetProps) {
+  api.describe({
+    key: `doctor-generate-preset-fn-${command}`,
+  });
   applyTypeEffect(api, transformString(command));
-  applyConfigFromSchema(api, schema);
+
+  if (schema) {
+    applyConfigFromSchema(api, schema);
+  }
+
   api.registerCommand({
     name: command,
     description: "start incremental build in watch mode",

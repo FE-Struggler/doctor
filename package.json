@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "father dev",
     "build:all": "pnpm run -r build",
+    "test:all": "pnpm run -r test",
     "prepare": "husky install",
     "release": "bumpp -r",
     "typecheck": "tsc --noEmit",
@@ -24,7 +25,7 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,md,mdx}": [
-      "tsc --noEmit",
+      "tsc --noEmit --allowJs",
       "prettier --write --ignore-unknown"
     ]
   },

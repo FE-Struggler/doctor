@@ -6,4 +6,4 @@ dist
 .dumi
 server
 .pnpm-debug.log
-
+pnpm-lock.yaml

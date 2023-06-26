@@ -1,0 +1,19 @@
+{
+  "name": "user-preset",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "doctor:web-tools": "doctor web-tools",
+    "test": "npm run doctor:web-tools"
+  },
+  "dependencies": {
+    "@doctors/core": "workspace:^",
+    "@doctors/web-tools": "workspace:^",
+    "doctors-yang-author": "latest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

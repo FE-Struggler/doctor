@@ -1,12 +1,9 @@
 {
-  "name": "@doctors/core",
+  "name": "@doctors/npm-pkg",
   "version": "0.0.6",
   "description": "",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "bin": {
-    "doctor": "./bin/doctor.js"
-  },
   "scripts": {
     "dev": "father dev",
     "build": "father build",
@@ -26,10 +23,11 @@
   "publishConfig": {
     "access": "public"
   },
+  "peerDependencies": {
+    "@doctors/core": "workspace:^"
+  },
   "dependencies": {
     "@umijs/core": "^4.0.71",
-    "@umijs/utils": "^4.0.71",
-    "umi": "^4.0.71",
-    "v8-compile-cache": "2.3.0"
+    "@umijs/utils": "^4.0.71"
   }
 }

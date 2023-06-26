@@ -1,0 +1,36 @@
+name: bundle
+
+on: [push, pull_request]
+
+concurrency:
+  group: ${{github.workflow}}-${{github.event_name}}-${{github.ref}}
+  cancel-in-progress: true
+
+jobs:
+  bundle:
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+    strategy:
+      matrix:
+        node-version: [18]
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8.0
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      # postInstall will build the product
+      - name: Install dependencies and Build the product
+        run: pnpm install --no-frozen-lockfile
+
+      - name: Bundle for all packages
+        run: npm run build:all
+
+      - name: Tests for all examples
+        run: npm run test:all

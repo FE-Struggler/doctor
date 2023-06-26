@@ -8,13 +8,32 @@ interface Schema {
   [ket: string]: any;
 }
 
-function generateSchema(userSchemas: Object) {
+function generateSchema(userSchemas: Object, root_Joi?: Root) {
   const schema: Schema = {};
   for (const [key, value] of Object.entries(userSchemas)) {
     if (typeof value === "object" && value !== null) {
-      schema[key] = (Joi: Root) => Joi.object().keys(generateSchema(value));
+      schema[key] = (Joi: Root) => {
+        if (!root_Joi) {
+          const root_Joi = Joi;
+          return Joi?.object(generateSchema(value, root_Joi));
+        } else {
+          return root_Joi?.object(generateSchema(value, root_Joi));
+        }
+        // if (!root_Joi) {
+        //   const root_Joi = Joi
+        //   return Joi?.object(generateSchema(value, root_Joi));
+        // } else {
+        //   return root_Joi?.object(generateSchema(value, root_Joi));
+        // }
+      };
     } else {
-      schema[key] = (Joi: Root) => Joi;
+      schema[key] = (Joi: Root) => {
+        if (!root_Joi) {
+          return Joi?.any();
+        } else {
+          return root_Joi?.any();
+        }
+      };
     }
   }
   return schema;
