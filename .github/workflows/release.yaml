@@ -24,4 +24,5 @@ jobs:
 
       - run: npx changelogithub
         env:
+          # 配置 GITHUB_TOKEN
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}

@@ -1,18 +1,45 @@
-name: bundle
+name: CI
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - master
 
-concurrency:
-  group: ${{github.workflow}}-${{github.event_name}}-${{github.ref}}
-  cancel-in-progress: true
+  pull_request:
+    branches:
+      - master
 
 jobs:
-  bundle:
+  typecheck:
     runs-on: ubuntu-latest
-    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8.0
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install
+        run: pnpm install --no-frozen-lockfile
+
+      - name: Bundle for all packages
+        run: npm run build:all
+
+      - name: Typecheck
+        run: npm run typecheck
+
+  test:
+    runs-on: ${{ matrix.os }}
+
     strategy:
       matrix:
-        node-version: [16, 18]
+        node: [16.x, 18.x]
+        os: [ubuntu-latest]
+      fail-fast: false
 
     steps:
       - uses: actions/checkout@v3
@@ -25,12 +52,11 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      # postInstall will build the product
-      - name: Install dependencies and Build the product
+      - name: Install
         run: pnpm install --no-frozen-lockfile
 
-      - name: Bundle for all packages
+      - name: Build All
         run: npm run build:all
 
-      - name: Tests for all examples
-        run: npm run test:all
+      - name: Test
+        run: npm run test
