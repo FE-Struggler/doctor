@@ -29,6 +29,7 @@ export default (api: IApi) => {
                 userConfig.npmPkg?.checkPkgFilesExist?.level ||
                 DoctorLevel.ERROR,
             });
+          } else {
           }
         }
       } else if (/^.*\*\.[a-zA-Z0-9]+$/.test(path)) {
@@ -49,6 +50,15 @@ export default (api: IApi) => {
             userConfig.npmPkg?.checkPkgFilesExist?.level || DoctorLevel.ERROR,
         });
       }
+    }
+
+    if (!warns.length) {
+      return {
+        label: "checkPkgFilesExist",
+        description:
+          "The output entity in the files field of the packages.json file is normal",
+        doctorLevel: DoctorLevel.SUCCESS,
+      };
     }
 
     return warns;

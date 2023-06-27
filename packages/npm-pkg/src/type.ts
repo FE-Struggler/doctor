@@ -7,7 +7,7 @@ interface Meta {}
 export type IApi = DoctorApi & {
   addDoctorNpmPkgCheckBefore: (fn: () => void) => void;
 
-  addDoctorNpmPkgCheck: (fn: (meta: Meta) => DoctorMeta[]) => void;
+  addDoctorNpmPkgCheck: (fn: (meta: Meta) => DoctorMeta[] | DoctorMeta) => void;
 
   addDoctorNpmPkgCheckEnd: (fn: () => void) => void;
 };

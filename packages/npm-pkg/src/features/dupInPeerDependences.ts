@@ -24,6 +24,15 @@ export default function dupInPeerDependences(api: IApi) {
       });
     }
 
+    if (!warns.length) {
+      return {
+        label: "dupInPeerDependences",
+        description:
+          "Package with duplicate peerDependences and dependences were not detected",
+        doctorLevel: DoctorLevel.SUCCESS,
+      };
+    }
+
     return warns;
   });
 }
