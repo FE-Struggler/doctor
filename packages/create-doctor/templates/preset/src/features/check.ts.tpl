@@ -1,4 +1,4 @@
-import type { IApi } from "../type.ts";
+import type { IApi } from "../type";
 import { DoctorLevel } from "@doctors/core";
 
 export default (api: IApi) => {

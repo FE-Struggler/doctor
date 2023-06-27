@@ -1,5 +1,5 @@
 {
-  "name": "@doctor/create",
+  "name": "create-doctor",
   "version": "0.0.1",
   "description": "the create CLI tool for doctor",
   "main": "index.js",
@@ -12,10 +12,10 @@
     "build:deps": "father prebundle",
     "prepublishOnly": "father doctor && npm run build"
   },
-  "repository": "https://github.com/BoyYangzai/doctor",
+  "repository": "https://github.com/FE-Struggler/doctor",
   "keywords": [],
   "authors": [
-    "洋"
+    "yixiaojiu"
   ],
   "license": "MIT",
   "files": [

@@ -4,16 +4,10 @@
 
 可创建预设，或在已有的基础上创建 feature
 
-安装
-
-```sh
-npm i @doctor/create -g
-```
-
 - 创建预设
 
 ```sh
-create-doctor web-tools
+npx create-doctor <preset-name>
 ```
 
 选择 preset，然后根据提示进行输入
@@ -23,7 +17,7 @@ create-doctor web-tools
 在项目根目录执行
 
 ```sh
-create-doctor
+npx create-doctor
 ```
 
 选择 feature，然后根据提示进行输入

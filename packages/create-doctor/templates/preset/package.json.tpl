@@ -22,10 +22,10 @@
     "access": "public"
   },
   "peerDependencies": {
-    "@doctors/core": "workspace:^"
+    "@doctors/core": "latest"
   },
   "dependencies": {
-    "@doctors/utils": "workspace:^",
+    "@doctors/utils": "latest",
     "@umijs/core": "^4.0.71",
     "@umijs/utils": "^4.0.71"
   },

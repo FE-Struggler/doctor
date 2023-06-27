@@ -1,4 +1,5 @@
 import ts, { createSourceFile, ScriptTarget, createPrinter } from "typescript";
+import { prompts } from "@umijs/utils";
 import { readFile, writeFile } from "fs/promises";
 
 export function isKebabCase(str: string) {
@@ -34,5 +35,15 @@ export async function generateCode(ast: ts.Node, path: string) {
   writeFile(path, newCode, {
     encoding: "utf-8",
     flag: "w",
+  });
+}
+
+export function promptsWithCancel(
+  questions: prompts.PromptObject | prompts.PromptObject[]
+) {
+  return prompts(questions, {
+    onCancel() {
+      process.exit(0);
+    },
   });
 }

@@ -1,10 +1,4 @@
-import {
-  prompts,
-  BaseGenerator,
-  yParser,
-  clackPrompts,
-  getGitInfo,
-} from "@umijs/utils";
+import { prompts, BaseGenerator, yParser, getGitInfo } from "@umijs/utils";
 import { join } from "path";
 import { rename } from "fs/promises";
 import { existsSync } from "fs";
@@ -14,6 +8,7 @@ import {
   kebabToCamelCase,
   generateCode,
   parseFile,
+  promptsWithCancel,
 } from "./utils";
 
 enum ETemplate {
@@ -51,20 +46,23 @@ export default async ({ cwd, args }: IGeneratorOpts) => {
   const { username, email } = await getGitInfo();
   const author = email && username ? `${username} <${email}>` : "";
 
-  template = (await clackPrompts.select({
-    message: "你是想新开发一整套预设？还是想在已有的预设上开发新 feature",
-    options: [
-      { label: "preset", value: "preset" },
-      {
-        label: "feature",
-        value: "feature",
-      },
-    ],
-    initialValue: "preset",
-  })) as ETemplate;
+  template = (
+    await promptsWithCancel({
+      name: "template",
+      type: "select",
+      message: "你是想新开发一整套预设？还是想在已有的预设上开发新 feature",
+      choices: [
+        { title: "preset", value: "preset" },
+        {
+          title: "feature",
+          value: "feature",
+        },
+      ],
+    })
+  ).template as ETemplate;
 
   if (template === ETemplate.preset) {
-    const commandAnswer = await prompts({
+    const commandAnswer = await promptsWithCancel({
       name: "command",
       type: "text",
       message: "请输入 doctor 命令（例如：web-tools）",
@@ -72,7 +70,7 @@ export default async ({ cwd, args }: IGeneratorOpts) => {
     command = commandAnswer.command;
     commandCamelCased = isKebabCase(command) ? kebabToCamelCase(command) : "";
   } else {
-    const ckeckAnswer = await prompts({
+    const ckeckAnswer = await promptsWithCancel({
       name: "check",
       type: "text",
       message: "请输入 check 名称（例如：DefaultBrowser，使用大驼峰命名）",
