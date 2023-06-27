@@ -104,14 +104,12 @@ export default function generatePreset({
             break;
         }
       });
+
+      //----------------- check end ------------------
       if (webToolsRes.some((i) => i.doctorLevel === DoctorLevel.ERROR)) {
-        await api.applyPlugins({
-          key: `addDoctor${transformString(command)}CheckEnd`,
-          type: ApplyPluginsType.add,
-        });
         process.exit(1);
       }
-      //----------------- check end ------------------
+
       await api.applyPlugins({
         key: `addDoctor${transformString(command)}CheckEnd`,
         type: ApplyPluginsType.add,
