@@ -1,6 +1,6 @@
 {
   "name": "@doctors/web-tools",
-  "version": "0.0.11",
+  "version": "0.0.22",
   "description": "",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -13,7 +13,7 @@
     "prepublishOnly": "father doctor && npm run build"
   },
   "bin": {
-    "doctor": "./node_modules/@doctors/core/bin/doctor.js"
+    "doctor": "./bin/doctor"
   },
   "repository": "https://github.com/FE-Struggler/doctor",
   "keywords": [],
