@@ -1,6 +1,6 @@
 {
   "name": "@doctors/npm-pkg",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -8,7 +8,12 @@
     "dev": "father dev",
     "build": "father build",
     "build:deps": "father prebundle",
+    "check": "father doctor",
+    "deploy": "pnpm publish",
     "prepublishOnly": "father doctor && npm run build"
+  },
+  "bin": {
+    "doctor": "./node_modules/@doctors/core/bin/doctor.js"
   },
   "repository": "https://github.com/FE-Struggler/doctor",
   "keywords": [],
