@@ -12,27 +12,6 @@ export default (api: IApi) => {
     const absoulePath: string[] = [];
     const warns: DoctorMeta[] = [];
 
-    const noExistTips: DoctorMeta = {
-      label: "checkPkgFilesExist",
-      description: `The output entity \'${path}\` is in the \`files\` field of the package.json file but no exist, please check whether the package is successfully packaged`,
-      doctorLevel:
-        userConfig.npmPkg?.checkPkgFilesExist?.level || DoctorLevel.ERROR,
-    };
-
-    const emptyDirTip: DoctorMeta = {
-      label: "checkPkgFilesExist",
-      description: `The output entity \'${path}\` is in the \`files\` field of the package.json but the directory is empty, please check whether the package is successfully packaged`,
-      doctorLevel:
-        userConfig.npmPkg?.checkPkgFilesExist?.level || DoctorLevel.ERROR,
-    };
-
-    const trueExtFileNoExistTip: DoctorMeta = {
-      label: "checkPkgFilesExist",
-      description: `The output entity \'${path}\` is in the \`files\` field of the package.json but the directory is No file name extension is specified in the folder, please check whether the package is successfully packaged`,
-      doctorLevel:
-        userConfig.npmPkg?.checkPkgFilesExist?.level || DoctorLevel.ERROR,
-    };
-
     api.pkg.files.forEach((file: string) => {
       absoulePath.push(path.join(api.cwd, file));
     });
@@ -43,16 +22,32 @@ export default (api: IApi) => {
         if (stat.isDirectory()) {
           const files = globSync(path + `/*.{${outputFileType.join(",")}}`);
           if (!files.length) {
-            warns.push(emptyDirTip);
+            warns.push({
+              label: "checkPkgFilesExist",
+              description: `The output entity \'${path}\` is in the \`files\` field of the package.json but the directory is empty, please check whether the package is successfully packaged`,
+              doctorLevel:
+                userConfig.npmPkg?.checkPkgFilesExist?.level ||
+                DoctorLevel.ERROR,
+            });
           }
         }
       } else if (/^.*\*\.[a-zA-Z0-9]+$/.test(path)) {
         const files = globSync(path);
         if (!files.length) {
-          warns.push(trueExtFileNoExistTip);
+          warns.push({
+            label: "checkPkgFilesExist",
+            description: `The output entity \'${path}\` is in the \`files\` field of the package.json but the directory is No file name extension is specified in the folder, please check whether the package is successfully packaged`,
+            doctorLevel:
+              userConfig.npmPkg?.checkPkgFilesExist?.level || DoctorLevel.ERROR,
+          });
         }
       } else {
-        warns.push(noExistTips);
+        warns.push({
+          label: "checkPkgFilesExist",
+          description: `The output entity \'${path}\` is in the \`files\` field of the package.json file but no exist, please check whether the package is successfully packaged`,
+          doctorLevel:
+            userConfig.npmPkg?.checkPkgFilesExist?.level || DoctorLevel.ERROR,
+        });
       }
     }
 
