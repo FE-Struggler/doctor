@@ -18,5 +18,8 @@ export interface ConfigSchema {
       level?: DoctorLevel;
       exclude?: string[];
     };
+    checkPkgFilesExist?: {
+      level?: DoctorLevel;
+    };
   };
 }

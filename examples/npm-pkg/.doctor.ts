@@ -7,5 +7,8 @@ export default defineConfig({
       level: DoctorLevel.WARN,
       exclude: ["@doctors/core"],
     },
+    checkPkgFilesExist: {
+      level: DoctorLevel.ERROR,
+    },
   },
 });
