@@ -1,7 +1,23 @@
+import { join } from "path";
 import { IApi, PluginMeta } from "./types";
 
 const fs = require("fs");
 const path = require("path");
+const childProcess = require("child_process");
+
+const notValidPackages = ["@doctors/core", "@doctors/utils"];
+const validPresetNamePrefix = ["@doctors", "doctors"];
+
+// 通过执行 `npm root -g` 命令获取全局 npm 目录
+function getGlobalNodeModulesPath() {
+  const command = /^win/.test(process.platform) ? "npm.cmd" : "npm";
+  const output = childProcess.execSync(`${command} root -g`).toString().trim();
+  const globalNodeModulesPath = output.split("\n")[0];
+  return globalNodeModulesPath;
+}
+
+const globalNodeModulesPath = path.join(getGlobalNodeModulesPath());
+const globalDoctorPath = path.join(globalNodeModulesPath, "@doctors");
 
 export function getDoctorDependencies() {
   // 获取当前项目的根目录
@@ -11,16 +27,20 @@ export function getDoctorDependencies() {
   const packageJson = require(path.join(rootPath, "package.json"));
 
   // 获取所有依赖的名称数组
-  const dependencyNames = Object.keys(packageJson.dependencies);
-
-  // 过滤出以 "@doctors/doctors" 开头的依赖名称数组
-  const validPresetNamePrefix = ["@doctors", "doctors"];
+  const dependencyNames = Object.keys(packageJson?.dependencies || []);
 
   const doctorDependencyNames = dependencyNames.filter(
     (name) =>
       validPresetNamePrefix.some((i) => name.startsWith(i)) &&
-      name !== "@doctors/core"
+      !notValidPackages.includes(name)
   );
+
+  const globalDepWithDoctor = readFilesInDirectory(globalNodeModulesPath)
+    .filter((i) => i.startsWith("doctor"))
+    .map((i) => path.join(globalNodeModulesPath, i));
+  const globalPresets = readFilesInDirectory(globalDoctorPath)
+    .map((i) => join(globalDoctorPath, i))
+    .concat(...globalDepWithDoctor);
 
   // 构造以 "doctor" 开头的依赖信息数组
   const doctorDependencies = doctorDependencyNames.map((name) => {
@@ -35,7 +55,10 @@ export function getDoctorDependencies() {
     };
   }) as PluginMeta[];
 
-  return doctorDependencies;
+  return {
+    localPresets: doctorDependencies,
+    globalPresets,
+  };
 }
 
 export function applyTypeEffect(api: IApi, name: string) {
@@ -46,4 +69,26 @@ export function applyTypeEffect(api: IApi, name: string) {
   ].forEach((name) => {
     api.registerMethod({ name });
   });
+}
+
+function readFilesInDirectory(directoryPath) {
+  const files = fs.readdirSync(directoryPath, { withFileTypes: true });
+  const result: string[] = [];
+
+  files.forEach((file) => {
+    const fileName = file.name;
+    if (file.isDirectory()) {
+      // 递归读取子目录中的文件
+      const subDirectoryPath = path.join(directoryPath, fileName);
+      const subFiles = readFilesInDirectory(subDirectoryPath);
+      result.push(...subFiles);
+    } else {
+      // 添加文件名和扩展名信息
+      const extName = path.extname(fileName);
+      const presetName = path.basename(fileName, extName);
+      result.push(presetName);
+    }
+  });
+
+  return result;
 }

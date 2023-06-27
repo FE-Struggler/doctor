@@ -12,6 +12,9 @@ export class Service extends CoreService {
     if (appRoot) {
       cwd = path.isAbsolute(appRoot) ? appRoot : path.join(cwd, appRoot);
     }
+
+    const { localPresets, globalPresets } = getDoctorDependencies();
+
     super({
       ...opts,
       env: process.env.NODE_ENV,
@@ -19,7 +22,8 @@ export class Service extends CoreService {
       defaultConfigFiles: DEFAULT_CONFIG_FILES,
       frameworkName: FRAMEWORK_NAME,
       presets: [
-        ...getDoctorDependencies().map((i) => i.path + "/dist/index.js"),
+        ...localPresets.map((i) => require.resolve(i.path)),
+        ...globalPresets.map((i) => require.resolve(i)),
       ],
     });
   }
