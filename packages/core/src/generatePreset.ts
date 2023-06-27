@@ -2,7 +2,6 @@ import { ApplyPluginsType } from "@umijs/core/dist/types";
 import { applyConfigFromSchema } from "./config";
 import { DoctorLevel, IApi, RuleResItem } from "./types";
 import { applyTypeEffect } from "./utils";
-import { logger } from "@umijs/utils";
 import { chalk } from "@umijs/utils";
 
 function transformString(str: string) {
@@ -71,7 +70,7 @@ export default function generatePreset({
       //----------------- checking ------------------
       const webToolsRes = (
         await api.applyPlugins({
-          key: `addDoctor ${transformString(command)} Check`,
+          key: `addDoctor${transformString(command)}Check`,
           type: ApplyPluginsType.add,
           args: meta,
         })
@@ -104,15 +103,12 @@ export default function generatePreset({
             break;
         }
       });
+
+      //----------------- check end ------------------
       if (webToolsRes.some((i) => i.doctorLevel === DoctorLevel.ERROR)) {
-        logger.info(`${command} End`);
-        await api.applyPlugins({
-          key: `addDoctor${transformString(command)}CheckEnd`,
-          type: ApplyPluginsType.add,
-        });
         process.exit(1);
       }
-      //----------------- check end ------------------
+
       await api.applyPlugins({
         key: `addDoctor${transformString(command)}CheckEnd`,
         type: ApplyPluginsType.add,

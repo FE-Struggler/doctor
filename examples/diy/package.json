@@ -1,0 +1,24 @@
+{
+  "name": "npm-pkg-example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "doctor:diy": "doctor diy",
+    "test": "npm run doctor:diy"
+  },
+  "dependencies": {
+    "@doctors/diy": "workspace:^",
+    "node-pty": "^1.0.0"
+  },
+  "peerDependencies": {
+    "@doctors/diy": "workspace:^"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "shelljs": "^0.8.5"
+  }
+}
