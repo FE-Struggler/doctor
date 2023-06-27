@@ -10,7 +10,6 @@
     "test": "npm run doctor:webtools"
   },
   "dependencies": {
-    "@doctors/core": "workspace:^",
     "@doctors/web-tools": "workspace:^"
   },
   "keywords": [],

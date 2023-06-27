@@ -1,5 +1,5 @@
 {
-  "name": "@doctors/utils",
+  "name": "@doctors/diy",
   "version": "0.0.10",
   "description": "",
   "main": "./dist/index.js",
@@ -24,7 +24,9 @@
     "access": "public"
   },
   "dependencies": {
-    "@umijs/core": "^4.0.71",
-    "@umijs/utils": "^4.0.71"
+    "@doctors/core": "workspace:^",
+    "@doctors/npm-pkg": "workspace:^",
+    "@doctors/web-tools": "workspace:^",
+    "doctors-yang-author": "^0.0.6"
   }
 }

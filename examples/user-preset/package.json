@@ -9,9 +9,8 @@
     "test": "npm run doctor:web-tools"
   },
   "dependencies": {
-    "@doctors/core": "workspace:^",
     "@doctors/web-tools": "workspace:^",
-    "doctors-yang-author": "latest"
+    "doctors-yang-author": "^0.0.5"
   },
   "keywords": [],
   "author": "",

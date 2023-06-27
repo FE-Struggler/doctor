@@ -23,10 +23,8 @@
   "publishConfig": {
     "access": "public"
   },
-  "peerDependencies": {
-    "@doctors/core": "workspace:^"
-  },
   "dependencies": {
+    "@doctors/core": "workspace:^",
     "@umijs/core": "^4.0.71",
     "@umijs/utils": "^4.0.71"
   }
