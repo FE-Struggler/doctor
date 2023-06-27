@@ -1,4 +1,5 @@
 import { IApi } from "./types";
+const { spawn } = require("node-pty");
 
 interface GenerateDiyProps {
   api: IApi;
@@ -15,7 +16,6 @@ export default function generateDiy({
     name: "diy",
     async fn() {
       let hasError = false;
-      const { spawn } = require("node-pty");
       //npx doctor web-tools -s && npx doctor npm-pkg -s
       async function run() {
         const commands = diyCommands;

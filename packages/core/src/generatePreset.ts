@@ -2,7 +2,6 @@ import { ApplyPluginsType } from "@umijs/core/dist/types";
 import { applyConfigFromSchema } from "./config";
 import { DoctorLevel, IApi, RuleResItem } from "./types";
 import { applyTypeEffect } from "./utils";
-import { logger } from "@umijs/utils";
 import { chalk } from "@umijs/utils";
 
 function transformString(str: string) {
