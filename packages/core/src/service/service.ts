@@ -13,18 +13,13 @@ export class Service extends CoreService {
       cwd = path.isAbsolute(appRoot) ? appRoot : path.join(cwd, appRoot);
     }
 
-    const { localPresets, globalPresets } = getDoctorDependencies();
-
     super({
       ...opts,
       env: process.env.NODE_ENV,
       cwd,
       defaultConfigFiles: DEFAULT_CONFIG_FILES,
       frameworkName: FRAMEWORK_NAME,
-      presets: [
-        ...localPresets.map((i) => require.resolve(i.path)),
-        ...globalPresets.map((i) => require.resolve(i)),
-      ],
+      presets: [...getDoctorDependencies()],
     });
   }
 

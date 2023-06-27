@@ -4,9 +4,9 @@ export type IApi = PluginAPI & IServicePluginAPI;
 
 export interface PluginMeta {
   name: string;
-  version: string;
+  version?: string;
   path: string;
-  hasCommands: boolean;
+  hasCommand: boolean;
 }
 
 export interface DoctorMeta {
