@@ -10,10 +10,10 @@ npm run build:all
 
 ~~目前没有 `example` 目录 ，直接在 `packages/core` 里面新建了 `.doctor.ts` 配置文件，用来调试 `doctor web-tools` 命令~~<br>
 
-已有 `examples/web-tools` 进行调试
+已有 `examples/webtools` 进行调试
 
 ```sh
-cd examples/web-tools
+cd examples/webtools
 npm run doctor:webtools
 ```
 
