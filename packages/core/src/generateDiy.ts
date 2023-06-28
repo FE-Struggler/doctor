@@ -20,6 +20,10 @@ export default function generateDiy({
       let output: string[] = [];
       async function run() {
         const commands = diyCommands;
+
+        // for cancel single default preset animation
+        process.env.IS_DIY_PRESET = "true";
+
         for (const command of commands) {
           const ptyProcess = await spawn(
             "npx",

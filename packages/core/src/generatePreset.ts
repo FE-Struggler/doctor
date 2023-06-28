@@ -71,61 +71,105 @@ export default function generatePreset({
         type: ApplyPluginsType.add,
       });
 
-      //----------------- checking ------------------
-      const checkedResult = (
-        await api.applyPlugins({
-          key: `addDoctor${transformString(command)}Check`,
-          type: ApplyPluginsType.add,
-          args: meta,
-        })
-      ).filter(Boolean);
-      const mergedRes = sort(mergeObjectsByProp(checkedResult.filter(Boolean)));
-      mergedRes.forEach((rule, index) => {
-        console.log(
-          chalk.greenBright(
-            `${chalk.greenBright(
-              `${index++ < 10 ? "0" + index++ : index++}. ${toUpperUnderscore(
-                rule.label
-              )}`
-            )}\n`
-          )
-        );
-        rule.descriptions.forEach((i) => {
-          switch (i?.level) {
-            case DoctorLevel.SUCCESS:
-              console.log(
-                `${chalk.bgGreenBright(" DoctorLevel SUCCESS 🎉🎉 ")}`
-              );
-              console.log(`${chalk.greenBright(" WHY ")}${i.suggestion} \n`);
-              break;
-              break;
-            case DoctorLevel.WARN:
-              console.log(`${chalk.bgYellowBright("DoctorLevel WARN ")}`);
-              console.log(
-                `${chalk.greenBright(" SUGGESTION ")}${i.suggestion} \n`
-              );
-              break;
-            case DoctorLevel.ERROR:
-              console.log(`${chalk.bgRedBright(" DoctorLevel Error ")}`);
-              console.log(
-                `${chalk.greenBright(" SUGGESTION ")}${i.suggestion} \n`
-              );
-              break;
-            default:
-              break;
-          }
+      if (process.env.IS_DIY_PRESET !== "true") {
+        const { spinner: load } = await import("@astrojs/cli-kit");
+        //----------------- checking ------------------
+        await load({
+          start: "Doctor Rule Checking",
+          end: "Check end",
+          while: () => {
+            return new Promise(async (resolve) => {
+              CheckingAndEnd({
+                api,
+                command,
+                meta,
+                resolve,
+                animationFn: () =>
+                  new Promise((res) => {
+                    setTimeout(() => {
+                      res(void 0);
+                    }, 1000);
+                  }),
+                delayFn: () =>
+                  new Promise((res) => {
+                    setTimeout(() => {
+                      res(void 0);
+                    }, 100);
+                  }),
+              });
+            });
+          },
         });
-      });
-
-      //----------------- check end ------------------
-      if (mergedRes.some((i) => i.doctorLevel === DoctorLevel.ERROR)) {
-        process.exit(1);
+      } else {
+        CheckingAndEnd({ api, command, meta });
       }
-
-      await api.applyPlugins({
-        key: `addDoctor${transformString(command)}CheckEnd`,
-        type: ApplyPluginsType.add,
-      });
     },
+  });
+}
+
+async function CheckingAndEnd({
+  api,
+  command,
+  meta,
+  resolve = (res: undefined) => {},
+  animationFn = async () => {},
+  delayFn = async () => {},
+}) {
+  //----------------- checking ------------------
+  const checkedResult = (
+    await api.applyPlugins({
+      key: `addDoctor${transformString(command)}Check`,
+      type: ApplyPluginsType.add,
+      args: meta,
+    })
+  ).filter(Boolean);
+
+  // for cli animation
+  await animationFn();
+  resolve(void 0);
+
+  // for delay output end 100 ms
+  await delayFn();
+
+  const mergedRes = sort(mergeObjectsByProp(checkedResult.filter(Boolean)));
+  mergedRes.forEach((rule, index) => {
+    console.log(
+      chalk.greenBright(
+        `${chalk.greenBright(
+          `${index++ < 10 ? "0" + index++ : index++}. ${toUpperUnderscore(
+            rule.label
+          )}`
+        )}\n`
+      )
+    );
+    rule.descriptions.forEach((i) => {
+      switch (i?.level) {
+        case DoctorLevel.SUCCESS:
+          console.log(`${chalk.bgGreenBright(" DoctorLevel SUCCESS 🎉🎉 ")}`);
+          console.log(`${chalk.greenBright(" WHY ")}${i.suggestion} \n`);
+          break;
+          break;
+        case DoctorLevel.WARN:
+          console.log(`${chalk.bgYellowBright("DoctorLevel WARN ")}`);
+          console.log(`${chalk.greenBright(" SUGGESTION ")}${i.suggestion} \n`);
+          break;
+        case DoctorLevel.ERROR:
+          console.log(`${chalk.bgRedBright(" DoctorLevel Error ")}`);
+          console.log(`${chalk.greenBright(" SUGGESTION ")}${i.suggestion} \n`);
+          break;
+        default:
+          break;
+      }
+    });
+  });
+
+  //----------------- check end ------------------
+  if (mergedRes.some((i) => i.doctorLevel === DoctorLevel.ERROR)) {
+    process.exit(1);
+  }
+
+  await api.applyPlugins({
+    key: `addDoctor${transformString(command)}CheckEnd`,
+    type: ApplyPluginsType.add,
   });
 }
