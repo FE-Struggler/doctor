@@ -6,7 +6,7 @@ import { PRESET_NAME } from "../constants";
 const schema: Nullify<ConfigSchema> = {
   webTools: {
     nodeVersion: null,
-    git: null,
+    gitSshKey: null,
   },
 };
 

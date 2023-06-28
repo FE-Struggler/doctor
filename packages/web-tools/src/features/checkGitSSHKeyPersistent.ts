@@ -17,18 +17,18 @@ export default (api: IApi) => {
     const [isGitPersist] = await Promise.all([checkIsGitPersistent()]);
 
     // 配置默认规则
-    const ruleLevel = (api.userConfig.tools?.git ||
+    const ruleLevel = (api.userConfig.tools?.gitSSHKey ||
       DoctorLevel.WARN) as DoctorLevel;
 
     if (isGitPersist) {
       return {
-        label: "Git ssh key persistent",
+        label: "isGitSshKeyPersistent",
         description: `Git ssh has been persistent config`,
         doctorLevel: DoctorLevel.SUCCESS,
       };
     } else {
       return {
-        label: "Git ssh key persistent",
+        label: "isGitSshKeyPersistent",
         description: `Git ssh has not been persistent configured yet.\n
         Please open your terminal and enter ssh-add`,
         doctorLevel: ruleLevel,

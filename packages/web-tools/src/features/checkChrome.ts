@@ -1,8 +1,8 @@
 import { exec } from "child_process";
 import { IApi } from "../type";
 import { DoctorLevel } from "@doctors/core";
-import os from "os";
 import { execCommand } from "@doctors/utils";
+import os from "os";
 
 export const enum CheckChromeInstalledCommands {
   darwin = "/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome --version",
