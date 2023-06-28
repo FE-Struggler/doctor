@@ -1,6 +1,5 @@
 import { IApi } from "./types";
 const { spawn } = require("node-pty");
-
 interface GenerateDiyProps {
   api: IApi;
   presets: string[];
@@ -15,17 +14,17 @@ export default function generateDiy({
   api.registerCommand({
     name: "diy",
     async fn() {
+      const { spinner: load } = await import("@astrojs/cli-kit");
       let hasError = false;
+      let output: string[] = [];
+
       async function run() {
         const commands = diyCommands;
         for (const command of commands) {
           const ptyProcess = spawn("npx", ["doctor", command, "-s"]);
 
-          let output = "";
-
           ptyProcess.on("data", function (data) {
-            output += data;
-            process.stdout.write(data);
+            output.push(data);
           });
 
           await new Promise((resolve) => {
@@ -38,10 +37,27 @@ export default function generateDiy({
           });
         }
       }
-      await run();
-      if (hasError) {
-        process.exit(1);
+
+      await load({
+        start: "Doctor Rules Checking ",
+        end: "Check end",
+        while: () => {
+          return run();
+        },
+      });
+
+      function printOutput(index) {
+        if (index < output.length) {
+          process.stdout.write(output[index]);
+          setTimeout(() => printOutput(index + 1), 100);
+        } else {
+          if (hasError) {
+            process.exit(1);
+          }
+        }
       }
+
+      printOutput(0);
     },
   });
 
