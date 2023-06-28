@@ -16,6 +16,10 @@ export default (api: IApi) => {
   api.addDoctorWebToolsCheck(async () => {
     const [isGitPersist] = await Promise.all([checkIsGitPersistent()]);
 
+    // 配置默认规则
+    const ruleLevel = (api.userConfig.tools?.gitToolsConfig ||
+      DoctorLevel.WARN) as DoctorLevel;
+
     if (isGitPersist) {
       return {
         label: "Git ssh Persist",
@@ -27,7 +31,7 @@ export default (api: IApi) => {
         label: "Git ssh Persist",
         description: `Git ssh has not been persistent configured yet.\n
         Please open your terminal and enter ssh-add`,
-        doctorLevel: DoctorLevel.WARN,
+        doctorLevel: ruleLevel,
       };
     }
   });
