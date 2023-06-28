@@ -23,7 +23,7 @@ npm run doctor:webtools
 因为 monorepo 的缘故 无需手动 `link`,修改源码后 `examples` 中即可查看效果
 
 ```sh
-cd packages/doctor-webtools
+cd packages/web-tools
 npm run dev
 
 npm run doctor:webtools //记得回到 examples/webtools 中
