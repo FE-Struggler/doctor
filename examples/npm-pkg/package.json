@@ -11,7 +11,7 @@
   "files": [
     "dist1",
     "./bin1",
-    "./noexist",
+    "./noExist",
     "dist2/*.js",
     "bin2/*.js"
   ],

@@ -9,14 +9,14 @@ const outputFileType = ["js", "jsx", "ts", "tsx", "html", "css"];
 export default (api: IApi) => {
   api.addDoctorNpmPkgCheck(() => {
     const userConfig = api.userConfig as ConfigSchema;
-    const absoulePath: string[] = [];
+    const absolutePath: string[] = [];
     const warns: DoctorMeta[] = [];
 
-    api.pkg.files.forEach((file: string) => {
-      absoulePath.push(path.join(api.cwd, file));
+    api.pkg.files?.forEach((file: string) => {
+      absolutePath.push(path.join(api.cwd, file));
     });
 
-    for (let path of absoulePath) {
+    for (let path of absolutePath) {
       if (fs.existsSync(path)) {
         const stat = fs.statSync(path);
         if (stat.isDirectory()) {
