@@ -1,5 +1,6 @@
 import { IApi } from "./types";
-const { spawn } = require("node-pty");
+const { spawn } = require("child_process");
+
 interface GenerateDiyProps {
   api: IApi;
   presets: string[];
@@ -17,27 +18,31 @@ export default function generateDiy({
       const { spinner: load } = await import("@astrojs/cli-kit");
       let hasError = false;
       let output: string[] = [];
-
       async function run() {
         const commands = diyCommands;
         for (const command of commands) {
-          const ptyProcess = spawn("npx", ["doctor", command, "-s"]);
-
-          ptyProcess.on("data", function (data) {
-            output.push(data);
-          });
-
-          await new Promise((resolve) => {
-            ptyProcess.on("exit", (code) => {
-              if (code === 1) {
-                hasError = true;
-              }
-              resolve(void 0);
+          const ptyProcess = await spawn(
+            "npx",
+            ["doctor", command, "-s", "--color"],
+            { stdio: "pipe" }
+          );
+          if (ptyProcess && ptyProcess.stdout) {
+            ptyProcess.stdout.on("data", function (data) {
+              output.push(data);
             });
+          }
+          await new Promise((resolve) => {
+            if (ptyProcess) {
+              ptyProcess.on("exit", (code) => {
+                if (code === 1) {
+                  hasError = true;
+                }
+                resolve(void 0);
+              });
+            }
           });
         }
       }
-
       await load({
         start: "Doctor Rules Checking ",
         end: "Check end",
@@ -45,7 +50,6 @@ export default function generateDiy({
           return run();
         },
       });
-
       function printOutput(index) {
         if (index < output.length) {
           process.stdout.write(output[index]);
