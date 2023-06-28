@@ -17,7 +17,7 @@ export default (api: IApi) => {
     const [isGitPersist] = await Promise.all([checkIsGitPersistent()]);
 
     // 配置默认规则
-    const ruleLevel = (api.userConfig.tools?.gitSSHKey ||
+    const ruleLevel = (api.userConfig.tools?.gitSshKey ||
       DoctorLevel.WARN) as DoctorLevel;
 
     if (isGitPersist) {
