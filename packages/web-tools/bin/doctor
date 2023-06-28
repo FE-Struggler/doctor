@@ -1,3 +1,0 @@
-#!/usr/bin/env sh
-
-npx @doctors/core doctor web-tools "$@"

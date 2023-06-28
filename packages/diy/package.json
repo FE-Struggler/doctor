@@ -1,6 +1,6 @@
 {
   "name": "@doctors/diy",
-  "version": "0.0.22",
+  "version": "0.0.30",
   "description": "",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -10,10 +10,10 @@
     "build:deps": "father prebundle",
     "check": "father doctor",
     "deploy": "pnpm publish",
-    "prepublishOnly": "father doctor && npm run build"
+    "prepublishOnly": "father doctor && npm run build && doctor generateBinFileForCli"
   },
   "bin": {
-    "doctor": "./bin/doctor"
+    "npx": "./bin/npx"
   },
   "repository": "https://github.com/FE-Struggler/doctor",
   "keywords": [],

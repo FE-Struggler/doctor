@@ -9,8 +9,7 @@
     "test": "npm run doctor:diy"
   },
   "dependencies": {
-    "@doctors/diy": "workspace:^",
-    "node-pty": "^1.0.0"
+    "@doctors/diy": "workspace:^"
   },
   "peerDependencies": {
     "@doctors/diy": "workspace:^"

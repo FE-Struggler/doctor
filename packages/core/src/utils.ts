@@ -51,7 +51,7 @@ export function getDoctorDependencies() {
 
   // ------------------- outputRepeatInfo  -------------------
   const allDeps = localPresets.concat(globalPresets, npxCachePresets);
-  const result = allDeps
+  const allPresetsWithoutRepeat = allDeps
     .filter((obj, index, arr) => {
       // 使用 findIndex() 方法查找当前对象在数组中的第一个索引位置
       const firstIndex = arr.findIndex((o) => o.name === obj.name);
@@ -69,7 +69,7 @@ export function getDoctorDependencies() {
       };
     });
 
-  const sortedByHasCommand = result.sort((a, b) => {
+  const sortedByHasCommand = allPresetsWithoutRepeat.sort((a, b) => {
     if (a.hasCommand && !b.hasCommand) {
       return -1; // a 排在前面
     } else if (!a.hasCommand && b.hasCommand) {
