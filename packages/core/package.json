@@ -1,6 +1,6 @@
 {
   "name": "@doctors/core",
-  "version": "0.0.32",
+  "version": "0.0.33",
   "description": "",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -29,10 +29,10 @@
     "access": "public"
   },
   "dependencies": {
+    "@astrojs/cli-kit": "^0.2.3",
     "@umijs/core": "^4.0.71",
     "@umijs/utils": "^4.0.71",
     "umi": "^4.0.71",
-    "v8-compile-cache": "2.3.0",
-    "node-pty": "latest"
+    "v8-compile-cache": "2.3.0"
   }
 }
