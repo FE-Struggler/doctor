@@ -5,7 +5,7 @@
   "packageManager": "pnpm@8.0.0",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "pnpm:devPreinstall": "node ./scripts/preinstall.js",
+    "pnpm:devPreinstall": "node ./scripts/preinstall.js && pnpm recursive exec -- rm -rf node_modules",
     "dev": "father dev",
     "build:all": "pnpm run -r build",
     "test:all": "pnpm run -r test",

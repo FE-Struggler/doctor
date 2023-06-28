@@ -10,10 +10,7 @@
     "build:deps": "father prebundle",
     "check": "father doctor",
     "deploy": "pnpm publish",
-    "prepublishOnly": "father doctor && npm run build && doctor generateBinFileForCli"
-  },
-  "bin": {
-    "npx": "./bin/npx"
+    "prepublishOnly": "father doctor && npm run build"
   },
   "repository": "https://github.com/FE-Struggler/doctor",
   "keywords": [],
