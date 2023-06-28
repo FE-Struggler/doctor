@@ -36,7 +36,11 @@ export function getDoctorDependencies() {
   let globalPresets: PluginMeta[] = [];
 
   for (const key of Object.keys(globalDeps)) {
-    if (validPresetNamePrefix.some((i) => key.startsWith(i))) {
+    if (
+      validPresetNamePrefix.some(
+        (i) => key.startsWith(i) && !notValidPackages.includes(key)
+      )
+    ) {
       const presetPath = join(globalNodeModulesPath, key);
       const hasCommand = fs.existsSync(
         path.join(presetPath, "./dist/commands")
@@ -131,12 +135,10 @@ export function mergeObjectsByProp(arr) {
   for (const obj of arr) {
     const key = obj["label"];
     if (map.has(key)) {
-      map
-        .get(key)
-        .descriptions.push({
-          suggestion: obj.description,
-          level: obj.doctorLevel,
-        });
+      map.get(key).descriptions.push({
+        suggestion: obj.description,
+        level: obj.doctorLevel,
+      });
     } else {
       const realItem = Object.assign({}, obj);
       realItem.descriptions = [
