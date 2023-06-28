@@ -14,7 +14,7 @@ export default function dupInPeerDependences(api: IApi) {
           !userConfig.npmPkg?.peerDepAndDepRepeat?.exclude?.includes(pkg)
         ) {
           warns.push({
-            label: "dupInPeerDependences",
+            label: "depInPeerDependences",
             description: `The package ${pkg} is both a peerDependency and a dependency,Please remove one from the package.json file base on project requirements`,
             doctorLevel:
               userConfig.npmPkg?.peerDepAndDepRepeat?.level ||
@@ -22,6 +22,15 @@ export default function dupInPeerDependences(api: IApi) {
           });
         }
       });
+    }
+
+    if (!warns.length) {
+      return {
+        label: "dupInPeerDependences",
+        description:
+          "Package with duplicate peerDependences and dependences were not detected",
+        doctorLevel: DoctorLevel.SUCCESS,
+      };
     }
 
     return warns;

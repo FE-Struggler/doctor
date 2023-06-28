@@ -1,5 +1,5 @@
 import { join } from "path";
-import { IApi, PluginMeta } from "./types";
+import { IApi, PluginMeta, RuleResItem } from "./types";
 import { logger } from "@umijs/utils";
 
 const fs = require("fs");
@@ -36,7 +36,11 @@ export function getDoctorDependencies() {
   let globalPresets: PluginMeta[] = [];
 
   for (const key of Object.keys(globalDeps)) {
-    if (validPresetNamePrefix.some((i) => key.startsWith(i))) {
+    if (
+      validPresetNamePrefix.some(
+        (i) => key.startsWith(i) && !notValidPackages.includes(key)
+      )
+    ) {
       const presetPath = join(globalNodeModulesPath, key);
       const hasCommand = fs.existsSync(
         path.join(presetPath, "./dist/commands")
@@ -57,7 +61,7 @@ export function getDoctorDependencies() {
       const firstIndex = arr.findIndex((o) => o.name === obj.name);
       if (index !== firstIndex) {
         logger.warn(
-          `there are repeated Plugins named ${obj.name} with ${arr[firstIndex].path} and ${arr[index].path}`
+          `there are repeated Plugins named ${obj.name} with ${arr[firstIndex].path} and ${arr[index].path}\n`
         );
       }
       return index === firstIndex; // 只保留第一个出现的对象
@@ -117,4 +121,32 @@ export function applyTypeEffect(api: IApi, name: string) {
   ].forEach((name) => {
     api.registerMethod({ name });
   });
+}
+
+export function toUpperUnderscore(str) {
+  return str
+    .replace(/([A-Z])/g, "_$1") // 在大写字母前添加下划线
+    .toUpperCase(); // 转换为大写字母
+}
+
+export function mergeObjectsByProp(arr) {
+  const result: RuleResItem[] = [];
+  const map = new Map();
+  for (const obj of arr) {
+    const key = obj["label"];
+    if (map.has(key)) {
+      map.get(key).descriptions.push({
+        suggestion: obj.description,
+        level: obj.doctorLevel,
+      });
+    } else {
+      const realItem = Object.assign({}, obj);
+      realItem.descriptions = [
+        { suggestion: obj.description, level: obj.doctorLevel },
+      ];
+      map.set(key, realItem);
+    }
+  }
+  map.forEach((value) => result.push(value));
+  return result;
 }

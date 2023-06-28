@@ -1,1 +1,4 @@
-export default [require.resolve("./dupInPeerDependences")];
+export default [
+  require.resolve("./dupInPeerDependences"),
+  require.resolve("./checkPkgFilesExist"),
+];

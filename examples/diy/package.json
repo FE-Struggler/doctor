@@ -8,6 +8,11 @@
     "doctor:diy": "doctor diy",
     "test": "npm run doctor:diy"
   },
+  "files": [
+    "dist",
+    "./bin1",
+    "./noExist"
+  ],
   "dependencies": {
     "@doctors/diy": "workspace:^"
   },

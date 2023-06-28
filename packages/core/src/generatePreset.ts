@@ -1,7 +1,11 @@
 import { ApplyPluginsType } from "@umijs/core/dist/types";
 import { applyConfigFromSchema } from "./config";
 import { DoctorLevel, IApi, RuleResItem } from "./types";
-import { applyTypeEffect } from "./utils";
+import {
+  applyTypeEffect,
+  toUpperUnderscore,
+  mergeObjectsByProp,
+} from "./utils";
 import { chalk } from "@umijs/utils";
 
 function transformString(str: string) {
@@ -68,44 +72,53 @@ export default function generatePreset({
       });
 
       //----------------- checking ------------------
-      const webToolsRes = (
+      const checkedResult = (
         await api.applyPlugins({
           key: `addDoctor${transformString(command)}Check`,
           type: ApplyPluginsType.add,
           args: meta,
         })
       ).filter(Boolean);
-
-      sort(webToolsRes.filter(Boolean)).forEach((i, index) => {
-        switch (i?.doctorLevel) {
-          case DoctorLevel.SUCCESS:
-            console.log(
-              `${chalk.green("pass🎉🎉")}  Doctor rules ${index}: ${
-                i.label
-              }\n${chalk.green("Suggestion:")}  ${i.description} \n`
-            );
-            break;
-          case DoctorLevel.WARN:
-            console.log(
-              `${chalk.yellowBright("warn")}  Doctor rules ${index}: ${
-                i.label
-              }\n${chalk.yellowBright("Suggestion:")}  ${i.description} \n`
-            );
-            break;
-          case DoctorLevel.ERROR:
-            console.log(
-              `${chalk.red("error!!")}  Doctor rules ${index}: ${
-                i.label
-              }\n${chalk.red("Suggestion:")}  ${i.description} \n`
-            );
-            break;
-          default:
-            break;
-        }
+      const mergedRes = sort(mergeObjectsByProp(checkedResult.filter(Boolean)));
+      mergedRes.forEach((rule, index) => {
+        console.log(
+          chalk.greenBright(
+            `${chalk.greenBright(
+              `${index++ < 10 ? "0" + index++ : index++}. ${toUpperUnderscore(
+                rule.label
+              )}`
+            )}\n`
+          )
+        );
+        rule.descriptions.forEach((i) => {
+          switch (i?.level) {
+            case DoctorLevel.SUCCESS:
+              console.log(
+                `${chalk.bgGreenBright(" DoctorLevel SUCCESS 🎉🎉 ")}`
+              );
+              console.log(`${chalk.greenBright(" WHY ")}${i.suggestion} \n`);
+              break;
+              break;
+            case DoctorLevel.WARN:
+              console.log(`${chalk.bgYellowBright("DoctorLevel WARN ")}`);
+              console.log(
+                `${chalk.greenBright(" SUGGESTION ")}${i.suggestion} \n`
+              );
+              break;
+            case DoctorLevel.ERROR:
+              console.log(`${chalk.bgRedBright(" DoctorLevel Error ")}`);
+              console.log(
+                `${chalk.greenBright(" SUGGESTION ")}${i.suggestion} \n`
+              );
+              break;
+            default:
+              break;
+          }
+        });
       });
 
       //----------------- check end ------------------
-      if (webToolsRes.some((i) => i.doctorLevel === DoctorLevel.ERROR)) {
+      if (mergedRes.some((i) => i.doctorLevel === DoctorLevel.ERROR)) {
         process.exit(1);
       }
 

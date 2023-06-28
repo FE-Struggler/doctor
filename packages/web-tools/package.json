@@ -1,6 +1,6 @@
 {
   "name": "@doctors/web-tools",
-  "version": "0.0.30",
+  "version": "0.0.32",
   "description": "",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -10,10 +10,7 @@
     "build:deps": "father prebundle",
     "check": "father doctor",
     "deploy": "pnpm publish",
-    "prepublishOnly": "father doctor && npm run build && doctor generateBinFileForCli"
-  },
-  "bin": {
-    "npx": "./bin/npx"
+    "prepublishOnly": "father doctor && npm run build"
   },
   "repository": "https://github.com/FE-Struggler/doctor",
   "keywords": [],

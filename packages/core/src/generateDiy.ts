@@ -16,7 +16,6 @@ export default function generateDiy({
     name: "diy",
     async fn() {
       let hasError = false;
-      //npx doctor web-tools -s && npx doctor npm-pkg -s
       async function run() {
         const commands = diyCommands;
         for (const command of commands) {
