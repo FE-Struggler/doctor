@@ -2,12 +2,20 @@ import { IApi } from "@doctors/core";
 import { globSync } from "glob";
 import path from "path";
 import fs from "fs";
+import lodash from "lodash";
 import sourceParser, { IDoctorSourceParseResult } from "./parser";
+import { DEFAULT_SOURCE_IGNORES } from "./constants";
 
 export interface SourceFile {
   path?: string;
   imports?: IDoctorSourceParseResult["imports"];
   contents?: string;
+}
+
+export function getSourceDirs(entrys: string[]) {
+  const configDirs = lodash.uniq([...entrys.map((c) => path.dirname(c))]);
+
+  return configDirs;
 }
 
 export function getSourceFiles(api: IApi) {
@@ -20,7 +28,7 @@ export function getSourceFiles(api: IApi) {
     entry.forEach((e) => {
       globSync(e, {
         cwd: api.cwd,
-        ignore: ["**/node_modules/**"],
+        ignore: DEFAULT_SOURCE_IGNORES,
         nodir: true,
       }).forEach((file) => {
         files.push(file);
@@ -29,16 +37,31 @@ export function getSourceFiles(api: IApi) {
   } else {
     files = globSync("**/*.{ts,js}", {
       cwd: api.cwd,
-      ignore: ["**/node_modules/**"],
+      ignore: DEFAULT_SOURCE_IGNORES,
       nodir: true,
     });
   }
 
-  return files;
+  const sourceDirs = getSourceDirs(files);
+
+  const allFiles: string[] = sourceDirs.reduce<string[]>(
+    (ret: string[], dir: string) =>
+      ret.concat(
+        globSync(`${dir}/**/*.{ts,js}`, {
+          cwd: api.cwd,
+          ignore: DEFAULT_SOURCE_IGNORES,
+          nodir: true,
+        })
+      ),
+    []
+  );
+
+  return Array.from(new Set(allFiles));
 }
 
 export async function getFilesWithImports(api: IApi) {
   const files: string[] = getSourceFiles(api);
+
   let sourceFiles: SourceFile[];
 
   sourceFiles = await Promise.all(
