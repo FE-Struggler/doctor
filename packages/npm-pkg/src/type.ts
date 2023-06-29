@@ -34,7 +34,7 @@ export interface ConfigSchema {
     preferPackFiles?: {
       level?: DoctorLevel;
     };
-    entry?: string | string[];
+    compileFiles?: string | string[];
     cjs?: {
       open: boolean;
       cjsImportEsm?: {

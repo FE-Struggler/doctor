@@ -20,12 +20,16 @@ export function getSourceDirs(entrys: string[]) {
 
 export function getSourceFiles(api: IApi) {
   let files: string[] = [];
-  const entry: string[] = Array.isArray(api.userConfig?.npmPkg?.entry)
-    ? api.userConfig?.npmPkg?.entry
-    : [api.userConfig?.npmPkg?.entry];
+  let compileFiles: string[] = [];
 
-  if (entry.length) {
-    entry.forEach((e) => {
+  if (api.userConfig?.npmPkg?.compileFIles) {
+    compileFiles = Array.isArray(api.userConfig?.npmPkg?.compileFIles)
+      ? api.userConfig?.npmPkg?.compileFiles
+      : [api.userConfig?.npmPkg?.compileFiles];
+  }
+
+  if (compileFiles.length) {
+    compileFiles.forEach((e) => {
       globSync(e, {
         cwd: api.cwd,
         ignore: DEFAULT_SOURCE_IGNORES,
@@ -56,7 +60,7 @@ export function getSourceFiles(api: IApi) {
     []
   );
 
-  return Array.from(new Set(allFiles));
+  return Array.from(new Set(allFiles)) || [];
 }
 
 export async function getFilesWithImports(api: IApi) {
