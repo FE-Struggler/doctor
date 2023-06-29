@@ -3,4 +3,5 @@ export default [
   require.resolve("./checkChrome"),
   require.resolve("./checkDefaultBrowser"),
   require.resolve("./checkGitSshKeyPersistent"),
+  require.resolve("./checkRegistry"),
 ];
