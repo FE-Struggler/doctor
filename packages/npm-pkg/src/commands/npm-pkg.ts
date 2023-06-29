@@ -17,7 +17,6 @@ const schema: Nullify<ConfigSchema> = {
     preferPackFiles: {
       level: null,
     },
-    // 入口文件，如果不填默认扫描全部
     compileFiles: null,
     // 开启该选项表示项目为cjs规范，会启动cjs相关的检查
     // cjs添加其他字段 TODO

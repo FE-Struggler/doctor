@@ -3,4 +3,6 @@ export const DEFAULT_SOURCE_IGNORES = [
   "**/.*",
   "**/.*/**",
   "**/node_modules/**",
+  "**/dist/**",
+  "**/build/**",
 ];

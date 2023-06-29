@@ -12,8 +12,8 @@ export interface SourceFile {
   contents?: string;
 }
 
-export function getSourceDirs(entrys: string[]) {
-  const configDirs = lodash.uniq([...entrys.map((c) => path.dirname(c))]);
+export function getSourceDirs(files: string[]) {
+  const configDirs = lodash.uniq([...files.map((c) => path.dirname(c))]);
 
   return configDirs;
 }

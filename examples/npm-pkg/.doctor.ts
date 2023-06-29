@@ -13,8 +13,8 @@ export default defineConfig({
     preferPackFiles: {
       level: DoctorLevel.WARN,
     },
-    compileFiles: ["./main.ts", "src/*.ts"],
-    // 开启cjs选项才会进行cjs相关检查,根据 entry 的文件为入口扫描该入口文件路径下的所有js和ts文件
+    compileFiles: ["src/index.ts"],
+    // 开启cjs选项才会进行cjs相关检查,根据 compileFiles 的文件为扫描该文件路径下的所有js和ts文件,没有 compileFiles 字段则对项目全部的ts和js文件进行判断
     cjs: {
       open: true,
       cjsImportEsm: {
