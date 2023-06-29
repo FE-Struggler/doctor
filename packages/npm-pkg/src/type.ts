@@ -1,22 +1,26 @@
 import type { IApi as DoctorApi, DoctorMeta } from "@doctors/core";
 import { DoctorLevel } from "@doctors/core";
+import { SourceFile } from "./commands/utils";
 
 // 元数据
-interface Meta {}
+export interface Meta {
+  sourceFiles?: SourceFile[];
+}
 
-export type IApi = DoctorApi & {
-  addDoctorNpmPkgCheckBefore: (
-    fn: (meta: Meta) => DoctorMeta[] | DoctorMeta | undefined
-  ) => void;
+export type IApi = DoctorApi &
+  Meta & {
+    addDoctorNpmPkgCheckBefore: (
+      fn: (meta: Meta) => DoctorMeta[] | DoctorMeta | undefined
+    ) => void;
 
-  addDoctorNpmPkgCheck: (
-    fn: (meta: Meta) => DoctorMeta[] | DoctorMeta | undefined
-  ) => void;
+    addDoctorNpmPkgCheck: (
+      fn: (meta: Meta) => DoctorMeta[] | DoctorMeta | undefined
+    ) => void;
 
-  addDoctorNpmPkgCheckEnd: (
-    fn: (meta: Meta) => DoctorMeta[] | DoctorMeta | undefined
-  ) => void;
-};
+    addDoctorNpmPkgCheckEnd: (
+      fn: (meta: Meta) => DoctorMeta[] | DoctorMeta | undefined
+    ) => void;
+  };
 
 export interface ConfigSchema {
   npmPkg?: {
@@ -28,6 +32,11 @@ export interface ConfigSchema {
       level?: DoctorLevel;
     };
     preferPackFiles?: {
+      level?: DoctorLevel;
+    };
+    entry?: string | string[];
+    cjs?: {};
+    cjsImportEsm?: {
       level?: DoctorLevel;
     };
   };

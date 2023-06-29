@@ -13,5 +13,8 @@ export default defineConfig({
     preferPackFiles: {
       level: DoctorLevel.WARN,
     },
+    entry: ["./main.ts", "src/**/*.ts"],
+    // 开启cjs选项才会进行cjs相关检查
+    cjs: {},
   },
 });
