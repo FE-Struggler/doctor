@@ -17,7 +17,8 @@
   ],
   "dependencies": {
     "@doctors/core": "workspace:^",
-    "@doctors/npm-pkg": "workspace:^"
+    "@doctors/npm-pkg": "workspace:^",
+    "lodash-es": "^4.17.21"
   },
   "peerDependencies": {
     "@doctors/core": "workspace:^",

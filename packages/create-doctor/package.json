@@ -1,33 +1,28 @@
 {
-  "name": "@doctors/utils",
+  "name": "create-doctor",
   "version": "0.0.34",
-  "description": "",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "description": "the create CLI tool for doctor",
+  "main": "index.js",
+  "bin": {
+    "create-doctor": "./bin/create-doctor.js"
+  },
   "scripts": {
     "dev": "father dev",
     "build": "father build",
     "build:deps": "father prebundle",
-    "check": "father doctor",
-    "deploy": "pnpm publish",
     "prepublishOnly": "father doctor && npm run build"
   },
   "repository": "https://github.com/FE-Struggler/doctor",
   "keywords": [],
   "authors": [
-    "洋"
+    "yixiaojiu"
   ],
   "license": "MIT",
   "files": [
     "./dist",
-    "./bin"
+    "templates"
   ],
-  "publishConfig": {
-    "access": "public"
-  },
   "dependencies": {
-    "@umijs/core": "^4.0.71",
-    "@umijs/utils": "^4.0.71",
-    "file-system-cache": "^2.4.1"
+    "@umijs/utils": "^4.0.71"
   }
 }

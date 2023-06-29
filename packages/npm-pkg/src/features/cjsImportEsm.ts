@@ -16,6 +16,8 @@ export default (api: IApi) => {
       return warns;
     }
 
+    console.log(sourceFiles);
+
     sourceFiles?.forEach((file) => {
       file.imports?.forEach((i) => {
         resolver ??= enhancedResolve.create.sync({});

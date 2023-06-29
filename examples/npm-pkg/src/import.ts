@@ -1,3 +1,3 @@
-import { lodash } from "lodash-es";
+import lodash from "lodash-es";
 
 console.log(lodash);
