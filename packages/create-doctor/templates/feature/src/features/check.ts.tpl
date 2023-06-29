@@ -1,4 +1,5 @@
 import type { IApi } from "../type";
+import { DoctorLevel } from "@doctors/core";
 
 export default (api: IApi) => {
   api.addDoctorCheckBefore(() => {});
@@ -7,7 +8,7 @@ export default (api: IApi) => {
     return {
       label: "Happy Path",
       description: "",
-      doctorLevel: "success",
+      doctorLevel: DoctorLevel.SUCCESS,
     };
   });
 

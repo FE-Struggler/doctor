@@ -23,7 +23,6 @@
     "templates"
   ],
   "dependencies": {
-    "@umijs/utils": "^4.0.71",
-    "typescript": "^5.1.3"
+    "@umijs/utils": "^4.0.71"
   }
 }

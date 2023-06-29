@@ -1,6 +1,6 @@
 import { IApi, generatePreset } from "@doctors/core";
 import { Nullify } from "@doctors/core";
-import { ConfigSchema } from "../type.ts";
+import { ConfigSchema } from "../type";
 import { PRESET_NAME } from "../constants";
 
 const schema: Nullify<ConfigSchema> = {};

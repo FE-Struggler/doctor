@@ -1,15 +1,7 @@
 import { prompts, BaseGenerator, yParser, getGitInfo } from "@umijs/utils";
 import { join } from "path";
 import { rename } from "fs/promises";
-import { existsSync } from "fs";
-import { factory } from "typescript";
-import {
-  isKebabCase,
-  kebabToCamelCase,
-  generateCode,
-  parseFile,
-  promptsWithCancel,
-} from "./utils";
+import { isKebabCase, kebabToCamelCase, promptsWithCancel } from "./utils";
 
 enum ETemplate {
   preset = "preset",
@@ -21,7 +13,7 @@ interface IGeneratorOpts {
   args: yParser.Arguments;
 }
 
-const presetQuestions: prompts.PromptObject[] = [
+const questions: prompts.PromptObject[] = [
   {
     name: "packageName",
     type: "text",
@@ -37,11 +29,6 @@ const presetQuestions: prompts.PromptObject[] = [
 export default async ({ cwd, args }: IGeneratorOpts) => {
   let [name] = args._;
   let template = ETemplate.preset;
-  let target = "";
-  let path = "";
-  let command = "";
-  let commandCamelCased = "";
-  let check = "";
 
   const { username, email } = await getGitInfo();
   const author = email && username ? `${username} <${email}>` : "";
@@ -61,30 +48,18 @@ export default async ({ cwd, args }: IGeneratorOpts) => {
     })
   ).template as ETemplate;
 
-  if (template === ETemplate.preset) {
-    const commandAnswer = await promptsWithCancel({
-      name: "command",
-      type: "text",
-      message: "请输入 doctor 命令（例如：web-tools）",
-    });
-    command = commandAnswer.command;
-    commandCamelCased = isKebabCase(command) ? kebabToCamelCase(command) : "";
-  } else {
-    const ckeckAnswer = await promptsWithCancel({
-      name: "check",
-      type: "text",
-      message: "请输入 check 名称（例如：DefaultBrowser，使用大驼峰命名）",
-    });
-    check = ckeckAnswer.check;
-  }
-
-  if (template === ETemplate.preset) {
-    target = name ? join(cwd, name) : cwd;
-    path = join(__dirname, "../templates/preset/");
-  } else {
-    target = join(cwd, "./src/features");
-    path = join(__dirname, "../templates/feature/");
-  }
+  const commandAnswer = await promptsWithCancel({
+    name: "command",
+    type: "text",
+    message:
+      template === ETemplate.preset
+        ? "请输入 doctor 命令（例如：web-tools）"
+        : "请输入预设名称（例如：web-tools）",
+  });
+  const command = commandAnswer.command;
+  const commandCamelCased = isKebabCase(command)
+    ? kebabToCamelCase(command)
+    : "";
 
   const data =
     template === ETemplate.preset
@@ -93,7 +68,13 @@ export default async ({ cwd, args }: IGeneratorOpts) => {
           commandCamelCased,
           commandFile: command ? command : "command",
         }
-      : {};
+      : { command, commandCamelCased };
+
+  const target = name ? join(cwd, name) : cwd;
+  const path =
+    template === ETemplate.preset
+      ? join(__dirname, "../templates/preset/")
+      : join(__dirname, "../templates/feature/");
 
   const generator = new BaseGenerator({
     path,
@@ -102,7 +83,7 @@ export default async ({ cwd, args }: IGeneratorOpts) => {
       author,
       ...data,
     },
-    questions: template === ETemplate.preset ? presetQuestions : [],
+    questions,
   });
 
   await generator.run();
@@ -112,30 +93,5 @@ export default async ({ cwd, args }: IGeneratorOpts) => {
       join(target, "./src/commands/command.ts"),
       join(target, `./src/commands/${command}.ts`)
     );
-  }
-
-  if (template === ETemplate.feature && check) {
-    await rename(
-      join(target, "./check.ts"),
-      join(target, `./check${check}.ts`)
-    );
-  }
-
-  if (template === ETemplate.feature) {
-    const indexFilePath = join(target, "./index.ts");
-    if (existsSync(indexFilePath)) {
-      const sourceFile = await parseFile("index.ts", indexFilePath);
-      (sourceFile.statements[0] as any).expression.elements.push(
-        factory.createCallExpression(
-          factory.createPropertyAccessExpression(
-            factory.createIdentifier("require"),
-            factory.createIdentifier("resolve")
-          ),
-          undefined,
-          [factory.createStringLiteral(`./check${check ? check : ""}.ts`)]
-        )
-      );
-      generateCode(sourceFile, indexFilePath);
-    }
   }
 };
