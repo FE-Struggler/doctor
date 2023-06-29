@@ -19,9 +19,9 @@ export default async (
   if (cacheRet) return cacheRet;
 
   await build({
-    // 不写入磁盘，扫描文件收集元信息供features使用
+    // 不写入磁盘，扫描文件收集元信息供 features 使用
     write: false,
-    // 触发onResolve hook
+    // 触发 onResolve hook
     bundle: true,
     logLevel: "silent",
     format: "esm",

@@ -1,6 +1,6 @@
 import type { IApi as DoctorApi, DoctorMeta } from "@doctors/core";
 import { DoctorLevel } from "@doctors/core";
-import { SourceFile } from "./commands/utils";
+import { SourceFile } from "./utils";
 
 // 元数据
 export interface Meta {
@@ -35,9 +35,11 @@ export interface ConfigSchema {
       level?: DoctorLevel;
     };
     entry?: string | string[];
-    cjs?: {};
-    cjsImportEsm?: {
-      level?: DoctorLevel;
+    cjs?: {
+      open: boolean;
+      cjsImportEsm?: {
+        level?: DoctorLevel;
+      };
     };
   };
 }

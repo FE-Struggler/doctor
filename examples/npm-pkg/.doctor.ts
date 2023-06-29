@@ -13,8 +13,13 @@ export default defineConfig({
     preferPackFiles: {
       level: DoctorLevel.WARN,
     },
-    entry: ["./main.ts", "src/**/*.ts"],
-    // 开启cjs选项才会进行cjs相关检查
-    cjs: {},
+    entry: ["./main.ts"],
+    // 开启cjs选项才会进行cjs相关检查,根据 entry 的文件为入口分析
+    cjs: {
+      open: true,
+      cjsImportEsm: {
+        level: DoctorLevel.WARN,
+      },
+    },
   },
 });

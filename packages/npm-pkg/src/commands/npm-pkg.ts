@@ -1,9 +1,9 @@
 import { generatePreset } from "@doctors/core";
-import { type IApi, type Meta } from "../type";
 import type { Nullify } from "@doctors/core";
+import { type IApi, type Meta } from "../type";
 import { ConfigSchema } from "../type";
 import { PRESET_NAME } from "../constants";
-import { getFilesWithImports } from "./utils";
+import { getFilesWithImports } from "../utils";
 
 const schema: Nullify<ConfigSchema> = {
   npmPkg: {
@@ -21,9 +21,11 @@ const schema: Nullify<ConfigSchema> = {
     entry: null,
     // 开启该选项表示项目为cjs规范，会启动cjs相关的检查
     // cjs添加其他字段 TODO
-    cjs: null,
-    cjsImportEsm: {
-      level: null,
+    cjs: {
+      open: null,
+      cjsImportEsm: {
+        level: null,
+      },
     },
   },
 };

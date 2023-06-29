@@ -1,8 +1,8 @@
 import { IApi } from "@doctors/core";
 import { globSync } from "glob";
-import sourceParser, { IDoctorSourceParseResult } from "./parser";
 import path from "path";
 import fs from "fs";
+import sourceParser, { IDoctorSourceParseResult } from "./parser";
 
 export interface SourceFile {
   path?: string;
@@ -12,11 +12,9 @@ export interface SourceFile {
 
 export function getSourceFiles(api: IApi) {
   let files: string[] = [];
-  const entry = api.userConfig?.npmPkg?.entry
-    ? Array.isArray(api.userConfig?.npmPkg?.entry)
-      ? api.userConfig?.npmPkg?.entry
-      : [api.userConfig?.npmPkg?.entry]
-    : [];
+  const entry: string[] = Array.isArray(api.userConfig?.npmPkg?.entry)
+    ? api.userConfig?.npmPkg?.entry
+    : [api.userConfig?.npmPkg?.entry];
 
   if (entry.length) {
     entry.forEach((e) => {

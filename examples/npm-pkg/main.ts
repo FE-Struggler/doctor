@@ -1,3 +1,3 @@
-import lodash from "lodash-es";
+const cjsImportEsm = require("./src/cjsImportEsm");
 
-console.log(lodash);
+console.log(cjsImportEsm.filter);

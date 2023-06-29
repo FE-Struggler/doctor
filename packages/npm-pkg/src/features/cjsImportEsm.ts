@@ -1,9 +1,9 @@
 import { chalk, winPath } from "@umijs/utils";
 import enhancedResolve from "enhanced-resolve";
 import vm from "vm";
-import type { ConfigSchema, IApi } from "../type";
 import { DoctorLevel, DoctorMeta } from "@doctors/core";
 import { getPkgNameFromPath } from "@doctors/utils";
+import type { ConfigSchema, IApi } from "../type";
 
 export default (api: IApi) => {
   api.addDoctorNpmPkgCheck(({ sourceFiles }) => {
@@ -12,7 +12,7 @@ export default (api: IApi) => {
     const sandbox = vm.createContext({ require });
     let resolver: ReturnType<(typeof enhancedResolve)["create"]["sync"]>;
 
-    if (!userConfig.npmPkg?.cjs) {
+    if (!userConfig.npmPkg?.cjs?.open) {
       return warns;
     }
 
@@ -39,7 +39,8 @@ export default (api: IApi) => {
                   `at ${file.path}`
                 )}, Please convert import to await import, or find a CommonJS version of the package`,
                 doctorLevel:
-                  userConfig.npmPkg?.cjsImportEsm?.level || DoctorLevel.ERROR,
+                  userConfig.npmPkg?.cjs?.cjsImportEsm?.level ||
+                  DoctorLevel.ERROR,
               });
             }
           }
