@@ -7,3 +7,14 @@ npx create-doctor <directory>
 ```
 
 选择 preset 或 feature，然后根据提示进行输入
+
+#### preset 能力体验：<br>
+
+创建好项目之后
+
+```sh
+npm i
+npm run dev
+npm link // link 到全局
+doctor <command>
+```
