@@ -16,8 +16,6 @@ export default (api: IApi) => {
       return warns;
     }
 
-    console.log(sourceFiles);
-
     sourceFiles?.forEach((file) => {
       file.imports?.forEach((i) => {
         resolver ??= enhancedResolve.create.sync({});
@@ -52,8 +50,7 @@ export default (api: IApi) => {
     if (!warns.length) {
       return {
         label: "cjsImportEsm",
-        description:
-          "The output entity in the files field of the packages.json file is normal",
+        description: "The CommonJS file don not import ES Module",
         doctorLevel: DoctorLevel.SUCCESS,
       };
     }
