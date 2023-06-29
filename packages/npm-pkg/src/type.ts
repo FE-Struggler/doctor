@@ -21,5 +21,8 @@ export interface ConfigSchema {
     checkPkgFilesExist?: {
       level?: DoctorLevel;
     };
+    preferPackFiles?: {
+      level?: DoctorLevel;
+    };
   };
 }

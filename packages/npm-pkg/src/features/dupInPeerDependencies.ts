@@ -2,7 +2,7 @@ import type { ConfigSchema, IApi } from "../type";
 import { DoctorLevel, DoctorMeta } from "@doctors/core";
 
 // Project dependencies and peerDependencies repeat Times warnings
-export default function dupInPeerDependences(api: IApi) {
+export default function depInPeerDependencies(api: IApi) {
   api.addDoctorNpmPkgCheck(() => {
     const userConfig = api.userConfig as ConfigSchema;
     const warns: DoctorMeta[] = [];
@@ -14,7 +14,7 @@ export default function dupInPeerDependences(api: IApi) {
           !userConfig.npmPkg?.peerDepAndDepRepeat?.exclude?.includes(pkg)
         ) {
           warns.push({
-            label: "depInPeerDependences",
+            label: "depInPeerDependencies",
             description: `The package ${pkg} is both a peerDependency and a dependency,Please remove one from the package.json file base on project requirements`,
             doctorLevel:
               userConfig.npmPkg?.peerDepAndDepRepeat?.level ||
@@ -26,9 +26,9 @@ export default function dupInPeerDependences(api: IApi) {
 
     if (!warns.length) {
       return {
-        label: "dupInPeerDependences",
+        label: "depInPeerDependencies",
         description:
-          "Package with duplicate peerDependences and dependences were not detected",
+          "Package with duplicate peerDependencies and dependencies were not detected",
         doctorLevel: DoctorLevel.SUCCESS,
       };
     }
