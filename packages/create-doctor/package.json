@@ -1,0 +1,28 @@
+{
+  "name": "create-doctor",
+  "version": "0.0.1",
+  "description": "the create CLI tool for doctor",
+  "main": "index.js",
+  "bin": {
+    "create-doctor": "./bin/create-doctor.js"
+  },
+  "scripts": {
+    "dev": "father dev",
+    "build": "father build",
+    "build:deps": "father prebundle",
+    "prepublishOnly": "father doctor && npm run build"
+  },
+  "repository": "https://github.com/FE-Struggler/doctor",
+  "keywords": [],
+  "authors": [
+    "yixiaojiu"
+  ],
+  "license": "MIT",
+  "files": [
+    "dist",
+    "templates"
+  ],
+  "dependencies": {
+    "@umijs/utils": "^4.0.71"
+  }
+}
