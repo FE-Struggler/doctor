@@ -16,6 +16,10 @@ export default (api: IApi) => {
       absolutePath.push(path.join(api.cwd, file));
     });
 
+    if (!absolutePath.length) {
+      return;
+    }
+
     for (let path of absolutePath) {
       if (fs.existsSync(path)) {
         const stat = fs.statSync(path);

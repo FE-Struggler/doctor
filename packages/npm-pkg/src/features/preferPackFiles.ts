@@ -3,13 +3,15 @@ import { DoctorLevel, DoctorMeta } from "@doctors/core";
 
 // Project dependencies and peerDependencies repeat Times warnings
 export default function depInPeerDependencies(api: IApi) {
-  api.addDoctorNpmPkgCheckBefore(() => {
+  const userConfig = api.userConfig as ConfigSchema;
+  api.addDoctorNpmPkgCheck(() => {
     if (!api.pkg.files) {
       return {
         label: "preferPackFiles",
         description:
           "No `files` field in the package.json file, all the non-gitignore files will be published",
-        doctorLevel: DoctorLevel.WARN,
+        doctorLevel:
+          userConfig.npmPkg?.preferPackFiles?.level || DoctorLevel.WARN,
       };
     }
 

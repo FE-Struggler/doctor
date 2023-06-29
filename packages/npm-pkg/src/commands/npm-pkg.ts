@@ -12,6 +12,9 @@ const schema: Nullify<ConfigSchema> = {
     checkPkgFilesExist: {
       level: null,
     },
+    preferPackFiles: {
+      level: null,
+    },
   },
 };
 
