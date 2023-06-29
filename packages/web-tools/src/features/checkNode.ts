@@ -16,7 +16,7 @@ export default (api: IApi) => {
 
     return {
       label: "Node Version",
-      description: `Node Version can't bigger than 12.x  ${chalkByDoctorLevel(
+      description: `Node Version should be greater than 12.x  ${chalkByDoctorLevel(
         doctorLevel,
         `Now: ${process.version}`
       )}`,

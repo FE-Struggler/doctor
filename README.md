@@ -12,11 +12,16 @@ npm run build:all
 
 ~~目前没有 `example` 目录 ，直接在 `packages/core` 里面新建了 `.doctor.ts` 配置文件，用来调试 `doctor web-tools` 命令~~<br>
 
-已有 `examples/web-tools` 进行调试
+已有 `examples/web-tools` 进行调试 <br>
 
 ```sh
 cd examples/web-tools
-npm run doctor:webtools
+npm run test
+```
+`examples/diy` 整合了目前已有的绝大部分 rules
+```sh
+cd examples/diy
+npm run test
 ```
 
 如果想要 编写新的 `feature`<br>
@@ -28,7 +33,7 @@ npm run doctor:webtools
 cd packages/web-tools
 npm run dev
 
-npm run doctor:webtools //记得回到 examples/web-tools 中
+npm run test //记得回到 examples/web-tools 中
 ```
 
 #### 文档贡献指南:
