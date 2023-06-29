@@ -5,11 +5,17 @@ import { DoctorLevel } from "@doctors/core";
 interface Meta {}
 
 export type IApi = DoctorApi & {
-  addDoctorNpmPkgCheckBefore: (fn: () => void) => void;
+  addDoctorNpmPkgCheckBefore: (
+    fn: (meta: Meta) => DoctorMeta[] | DoctorMeta | undefined
+  ) => void;
 
-  addDoctorNpmPkgCheck: (fn: (meta: Meta) => DoctorMeta[] | DoctorMeta) => void;
+  addDoctorNpmPkgCheck: (
+    fn: (meta: Meta) => DoctorMeta[] | DoctorMeta | undefined
+  ) => void;
 
-  addDoctorNpmPkgCheckEnd: (fn: () => void) => void;
+  addDoctorNpmPkgCheckEnd: (
+    fn: (meta: Meta) => DoctorMeta[] | DoctorMeta | undefined
+  ) => void;
 };
 
 export interface ConfigSchema {
@@ -19,6 +25,9 @@ export interface ConfigSchema {
       exclude?: string[];
     };
     checkPkgFilesExist?: {
+      level?: DoctorLevel;
+    };
+    preferPackFiles?: {
       level?: DoctorLevel;
     };
   };

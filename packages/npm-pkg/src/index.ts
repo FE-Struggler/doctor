@@ -4,7 +4,9 @@ import { PRESET_NAME } from "./constants";
 
 export * from "./type";
 export { default as defineConfig } from "./defineConfig";
-export { default as dupInPeerDependences } from "./features/dupInPeerDependences";
+export { default as dupInPeerDependencies } from "./features/dupInPeerDependencies";
+export { default as checkPkgFilesExist } from "./features/checkPkgFilesExist";
+export { default as preferPackFiles } from "./features/preferPackFiles";
 
 export default (api: IApi) => {
   api.describe({

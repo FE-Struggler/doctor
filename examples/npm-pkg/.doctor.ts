@@ -10,5 +10,8 @@ export default defineConfig({
     checkPkgFilesExist: {
       level: DoctorLevel.ERROR,
     },
+    preferPackFiles: {
+      level: DoctorLevel.WARN,
+    },
   },
 });
