@@ -13,6 +13,8 @@ npx create-doctor <directory>
 创建好项目之后
 
 ```sh
+npm i
+npm run dev
 npm link // link 到全局
 doctor <command>
 ```
