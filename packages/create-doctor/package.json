@@ -1,6 +1,6 @@
 {
   "name": "create-doctor",
-  "version": "0.0.1",
+  "version": "0.0.33",
   "description": "the create CLI tool for doctor",
   "main": "index.js",
   "bin": {
@@ -19,7 +19,7 @@
   ],
   "license": "MIT",
   "files": [
-    "dist",
+    "./dist",
     "templates"
   ],
   "dependencies": {
