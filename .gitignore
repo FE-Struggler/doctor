@@ -7,3 +7,4 @@ dist
 server
 .pnpm-debug.log
 pnpm-lock.yaml
+.idea
