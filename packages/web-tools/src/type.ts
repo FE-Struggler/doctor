@@ -7,6 +7,7 @@ import type { Awaitable } from "@doctors/utils";
 export interface ConfigSchema {
   webTools: {
     nodeVersion: DoctorLevel;
+    gitSshKey: DoctorLevel;
   };
 }
 

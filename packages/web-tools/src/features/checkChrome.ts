@@ -1,6 +1,7 @@
 import { exec } from "child_process";
 import { IApi } from "../type";
 import { DoctorLevel } from "@doctors/core";
+import { execCommand } from "@doctors/utils";
 import os from "os";
 
 export const enum CheckChromeInstalledCommands {
@@ -26,22 +27,6 @@ async function isChromeInstalled(): Promise<boolean> {
     console.error(error);
     return false;
   }
-}
-
-function execCommand(command: string): Promise<string> {
-  return new Promise((resolve, reject) => {
-    const child = exec(command, (error, stdout, stderr) => {
-      if (error) {
-        reject(error);
-      } else {
-        resolve(stdout.trim());
-      }
-    });
-
-    child.on("close", () => {
-      child.kill();
-    });
-  });
 }
 
 export default (api: IApi) => {

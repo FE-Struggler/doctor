@@ -28,7 +28,7 @@ npm run doctor:webtools
 cd packages/web-tools
 npm run dev
 
-npm run doctor:webtools //记得回到 examples/webtools 中
+npm run doctor:webtools //记得回到 examples/web-tools 中
 ```
 
 #### 文档贡献指南:
