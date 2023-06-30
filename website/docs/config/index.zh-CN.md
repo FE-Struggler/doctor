@@ -1,8 +1,11 @@
 ---
-title: 官方预设
+title: core
 nav:
-  title: 预设
-  order: 4
+  title: 研发
+  order: 2
+group:
+  title: 框架内核
+  order: -1
 ---
 
 # 主题配置
