@@ -25,4 +25,7 @@ export interface DoctorLifeCycleApi {
   addDoctorWebToolsCheckEnd: (fn: () => Awaitable<void>) => void;
 }
 
-export type IApi = DoctorApi & DoctorLifeCycleApi;
+export type IApi = DoctorApi &
+  DoctorLifeCycleApi & {
+    userConfig: ConfigSchema;
+  };
