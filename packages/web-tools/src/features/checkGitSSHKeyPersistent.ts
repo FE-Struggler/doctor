@@ -29,8 +29,7 @@ export default (api: IApi) => {
     } else {
       return {
         label: "isGitSshKeyPersistent",
-        description: `Git ssh has not been persistent configured yet.\n
-        Please open your terminal and enter ssh-add`,
+        description: `Git ssh has not been persistent configured yet. Please open your terminal and enter ssh-add`,
         doctorLevel: ruleLevel,
       };
     }

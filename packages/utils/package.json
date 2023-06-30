@@ -1,6 +1,6 @@
 {
   "name": "@doctors/utils",
-  "version": "0.0.33",
+  "version": "0.0.34",
   "description": "",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "@umijs/core": "^4.0.71",
-    "@umijs/utils": "^4.0.71"
+    "@umijs/utils": "^4.0.71",
+    "file-system-cache": "^2.4.1"
   }
 }
