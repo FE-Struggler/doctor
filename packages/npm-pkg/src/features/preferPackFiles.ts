@@ -1,7 +1,6 @@
 import type { ConfigSchema, IApi } from "../type";
 import { DoctorLevel, DoctorMeta } from "@doctors/core";
 
-// Project dependencies and peerDependencies repeat Times warnings
 export default function depInPeerDependencies(api: IApi) {
   const userConfig = api.userConfig as ConfigSchema;
   api.addDoctorNpmPkgCheck(() => {

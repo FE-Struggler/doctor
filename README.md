@@ -23,7 +23,13 @@ npm run build:all
 
 # 使用示例
 cd examples/web-tools
-npm run doctor:webtools
+npm run test
+```
+
+`examples/diy` 整合了目前已有的绝大部分 rules
+```sh
+cd examples/diy
+npm run test
 ```
 
 <br>
