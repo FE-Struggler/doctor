@@ -17,7 +17,8 @@ const questions: prompts.PromptObject[] = [
   {
     name: "packageName",
     type: "text",
-    message: "请输入 npm 包名（请以 doctors 或@doctors开头）",
+    message: "请输入 npm 包名（例如：doctor-xxx）",
+    initial: "",
   },
   {
     name: "description",
@@ -57,6 +58,11 @@ export default async ({ cwd, args }: IGeneratorOpts) => {
         : "请输入预设名称（例如：web-tools）",
   });
   const command = commandAnswer.command;
+  questions.forEach((item) => {
+    if (item.name === "packageName") {
+      item.initial = "doctor-" + template + "-" + command;
+    }
+  });
   const commandCamelCased = isKebabCase(command)
     ? kebabToCamelCase(command)
     : "";
