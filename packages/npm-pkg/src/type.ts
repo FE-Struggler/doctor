@@ -20,6 +20,8 @@ export type IApi = DoctorApi &
     addDoctorNpmPkgCheckEnd: (
       fn: (meta: Meta) => DoctorMeta[] | DoctorMeta | undefined
     ) => void;
+  } & {
+    userConfig: ConfigSchema;
   };
 
 export interface ConfigSchema {
