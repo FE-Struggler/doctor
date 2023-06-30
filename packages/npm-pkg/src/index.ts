@@ -7,6 +7,7 @@ export { default as defineConfig } from "./defineConfig";
 export { default as dupInPeerDependencies } from "./features/dupInPeerDependencies";
 export { default as checkPkgFilesExist } from "./features/checkPkgFilesExist";
 export { default as preferPackFiles } from "./features/preferPackFiles";
+export { default as cjsImportEsm } from "./features/cjsImportEsm";
 
 export default (api: IApi) => {
   api.describe({

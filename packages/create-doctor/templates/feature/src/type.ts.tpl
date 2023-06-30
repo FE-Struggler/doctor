@@ -19,4 +19,6 @@ export type IApi = DoctorApi & {
   };
 
   addDoctor{{{ commandCamelCased }}}CheckEnd: (fn: () => void) => void;
+} & {
+  userConfig: ConfigSchema;
 };

@@ -9,7 +9,7 @@ import { featuresZh } from "./config/features";
 const isProd = process.env.NODE_ENV === "production";
 
 const themeConfig: SiteThemeConfig = {
-  name: "Doctors for Web developments",
+  name: "Doctor",
   logo: "https://gw.alipayobjects.com/zos/hitu-asset/c88e3678-6900-4289-8538-31367c2d30f2/hitu-1609235995955-image.png",
 
   hero: {
@@ -50,7 +50,7 @@ const themeConfig: SiteThemeConfig = {
     sourceUrl: `{github}/tree/master/src/components/{atomId}/index.tsx`,
     docUrl: `{github}/tree/master/example/docs/components/{atomId}.{locale}.md`,
   },
-  footer: "Made with ❤️ by every Fe Strugglers",
+  footer: "Made with ❤️ by every FE Struggler",
 };
 
 export default defineConfig({

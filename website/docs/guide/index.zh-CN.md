@@ -5,17 +5,39 @@ nav:
   order: 1
 group:
   title: 介绍
-  order: -1
+  order: 1
 ---
 
 # 这是什么?
 
-在开发 [**Ant Design Style**](https://github.com/ant-design/antd-style) 过程中为了测试与验证的自定义主题、动态主题算法等能力，在 antd 基础组件基础上，特意尝试了诸多风格化样式，例如渐变、毛玻璃模糊等。由于不少同学对此表达了喜爱，因此单独抽取为 [**dumi2**](https://github.com/umijs/dumi) 主题包，以供复用。
+### `Doctor` 是一套开源的 `Web 研发质量` 的工具链 🎉🎉<br>
 
-## 特性
+- 基于 `@umijs/core` 封装出专属于 `Web doctor` 场景下的应用内核 `@doctors/core`<br>
+- 高自由度、也可高度定制化、继承 `微内核` 可插拔能力、可拓展、可随意组合 local、global、npx cache 下的 doctor 插件
+- 覆盖 `Web 研发工具`、`npm 包开发质量检测`、`Web 应用开发最佳实践检测`、`构建工具质量检测`、`接入企业级应用框架` 等多种应用场景
+- 适用于 `个人开发者、中小型企业` 的 `通用开发场景` 质量检测预设、适用于 `复杂应用框架` 场景的定制需求
 
-<Features></Features>
+## 开源生态
 
-## 问题反馈
+```jsx
+/**
+ * inline: true
+ */
+import {
+  DumiSiteProvider,
+  Features,
+} from "../../node_modules/dumi-theme-antd-style";
+import { featuresZhForGuide } from "../../config/features";
 
-如果在使用过程中发现任何问题、或者有改善建议，欢迎在 [**GitHub Issues**](https://github.com/arvinxx/dumi-theme-antd-style/issues) 进行反馈
+export default () => (
+  <DumiSiteProvider>
+    <Features items={featuresZhForGuide} />
+  </DumiSiteProvider>
+);
+```
+
+## 开源共建 💗
+
+欢迎各位开源爱好者～ 无论技术 无论年龄 只要你充满热情 享受开源 😄 <br>👏 欢迎联系我 加入社区共建～
+
+![a48181b6530ca2c6392a47a6408adb82_0](https://github.com/FE-Struggler/doctor/assets/94534613/29a56fd3-69b1-4462-bfa2-28474b7cba8e)
