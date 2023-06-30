@@ -33,6 +33,10 @@ npm i @doctors/npm-pkg
 doctor web-tools
 ```
 
+## 配置文件 `.doctor.[ts|js]`
+
+[详细配置见](/config/npm-pkg)
+
 ## 最佳实践
 
 publish 操作之前进行 doctor 质量检测

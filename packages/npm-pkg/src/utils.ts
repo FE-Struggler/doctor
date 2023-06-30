@@ -1,10 +1,10 @@
-import { IApi } from "@doctors/core";
 import { globSync } from "glob";
 import path from "path";
 import fs from "fs";
 import lodash from "lodash";
 import sourceParser, { IDoctorSourceParseResult } from "./parser";
 import { DEFAULT_SOURCE_IGNORES } from "./constants";
+import { IApi } from "./type";
 
 export interface SourceFile {
   path?: string;
@@ -22,8 +22,8 @@ export function getSourceFiles(api: IApi) {
   let files: string[] = [];
   let compileFiles: string[] = [];
 
-  if (api.userConfig?.npmPkg?.compileFIles) {
-    compileFiles = Array.isArray(api.userConfig?.npmPkg?.compileFIles)
+  if (api.userConfig.npmPkg?.compileFiles) {
+    compileFiles = Array.isArray(api.userConfig?.npmPkg?.compileFiles)
       ? api.userConfig?.npmPkg?.compileFiles
       : [api.userConfig?.npmPkg?.compileFiles];
   }
@@ -48,7 +48,7 @@ export function getSourceFiles(api: IApi) {
 
   const sourceDirs = getSourceDirs(files);
 
-  const allFiles: string[] = sourceDirs.reduce<string[]>(
+  let allFiles: string[] = sourceDirs.reduce<string[]>(
     (ret: string[], dir: string) =>
       ret.concat(
         globSync(`${dir}/**/*.{ts,js}`, {
@@ -60,7 +60,9 @@ export function getSourceFiles(api: IApi) {
     []
   );
 
-  return Array.from(new Set(allFiles)) || [];
+  allFiles = [...new Set(allFiles)];
+
+  return allFiles;
 }
 
 export async function getFilesWithImports(api: IApi) {
