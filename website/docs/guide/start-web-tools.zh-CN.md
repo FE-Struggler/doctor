@@ -36,3 +36,7 @@ npm i @doctors/web-tools@latest -g
 ```sh
 doctor web-tools
 ```
+
+## 配置文件 `.doctor.[ts|js]`
+
+[详细配置见](/config/web-tools)
