@@ -8,7 +8,7 @@
 
 <br>
 <p align="center">
-<a href="https://doctor-delta.vercel.app/">📚 Documentation</a>
+<a href="https://doctor-delta.vercel.app/">📚 官方文档</a>
 </p>
 <br>
 
