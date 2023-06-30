@@ -17,7 +17,7 @@ const questions: prompts.PromptObject[] = [
   {
     name: "packageName",
     type: "text",
-    message: "请输入 npm 包名（例如：doctor-xxx）",
+    message: "请输入 npm 包名（请以 doctors 或@doctors开头）",
     initial: "",
   },
   {
