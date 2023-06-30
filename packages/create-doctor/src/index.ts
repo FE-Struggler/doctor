@@ -59,7 +59,7 @@ export default async ({ cwd, args }: IGeneratorOpts) => {
   });
   const command = commandAnswer.command;
   questions.forEach((item) => {
-    if (item.name == "packageName") {
+    if (item.name === "packageName") {
       item.initial = "doctor-" + template + "-" + command;
     }
   });
