@@ -1,6 +1,6 @@
 {
   "name": "doctors-all",
-  "version": "0.0.34",
+  "version": "0.0.35",
   "private": true,
   "packageManager": "pnpm@8.0.0",
   "scripts": {
@@ -32,6 +32,9 @@
   "lint-staged": {
     "*.{ts,tsx,md,mdx}": [
       "prettier --write --ignore-unknown"
+    ],
+    "*.{ts,tsx}": [
+      "tsc noEmit"
     ]
   },
   "keywords": [],
