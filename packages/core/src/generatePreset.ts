@@ -148,7 +148,6 @@ async function CheckingAndEnd({
           console.log(`${chalk.bgGreenBright(" DoctorLevel SUCCESS 🎉🎉 ")}`);
           console.log(`${chalk.greenBright(" WHY ")}${i.suggestion} \n`);
           break;
-          break;
         case DoctorLevel.WARN:
           console.log(`${chalk.bgYellowBright("DoctorLevel WARN ")}`);
           console.log(`${chalk.greenBright(" SUGGESTION ")}${i.suggestion} \n`);
