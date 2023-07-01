@@ -2,21 +2,15 @@ import { globSync } from "glob";
 import path from "path";
 import fs from "fs";
 import lodash from "lodash";
-import sourceParser, {
-  type IDoctorSourceParseResult,
-} from "./features/scanningParser";
+import sourceParser from "./features/scanningParser";
 import { DEFAULT_SOURCE_IGNORES } from "./constants";
-
-export interface SourceFile {
-  path?: string;
-  imports?: IDoctorSourceParseResult["imports"];
-  contents?: string;
-}
+import { SourceFile } from "./types";
 
 export function getPkgNameFromPath(p: string) {
   return p.match(/^(?:@[a-z\d][\w-.]*\/)?[a-z\d][\w-.]*/i)?.[0];
 }
 
+//----------------------------- Source ---------------------------------
 export function getSourceDirs(files: string[]) {
   const configDirs = lodash.uniq([...files.map((c) => path.dirname(c))]);
 
