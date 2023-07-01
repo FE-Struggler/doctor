@@ -8,7 +8,7 @@
 
 <br>
 <p align="center">
-<a href="https://doctor-delta.vercel.app/">📚 Documentation</a>
+<a href="https://doctor-delta.vercel.app/">📚 官方文档</a>
 </p>
 <br>
 
@@ -27,6 +27,7 @@ npm run test
 ```
 
 `examples/diy` 整合了目前已有的绝大部分 rules
+
 ```sh
 cd examples/diy
 npm run test

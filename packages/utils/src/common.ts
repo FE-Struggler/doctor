@@ -2,7 +2,9 @@ import { globSync } from "glob";
 import path from "path";
 import fs from "fs";
 import lodash from "lodash";
-import sourceParser, { type IDoctorSourceParseResult } from "./parser";
+import sourceParser, {
+  type IDoctorSourceParseResult,
+} from "./features/scanningParser";
 import { DEFAULT_SOURCE_IGNORES } from "./constants";
 
 export interface SourceFile {

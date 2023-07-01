@@ -1,24 +1,13 @@
 import { DoctorLevel } from "@doctors/core";
 import { IApi } from "../type";
-import { execCommand } from "@doctors/utils";
-
-/** 如果此处有 error :没有正确配置上 ssh ,导致每次 git 操作都需要输入密码 */
-export async function checkIsGitPersistent() {
-  try {
-    await execCommand("ssh-add -L");
-    return true;
-  } catch (error) {
-    return false;
-  }
-}
+import { IsGitPersistent } from "@doctors/utils";
 
 export default (api: IApi) => {
   api.addDoctorWebToolsCheck(async () => {
-    const [isGitPersist] = await Promise.all([checkIsGitPersistent()]);
+    const isGitPersist = await IsGitPersistent();
 
     // 配置默认规则
-    const ruleLevel = (api.userConfig.tools?.gitSshKey ||
-      DoctorLevel.WARN) as DoctorLevel;
+    const ruleLevel = api.userConfig.webTools.gitSshKey || DoctorLevel.WARN;
 
     if (isGitPersist) {
       return {
