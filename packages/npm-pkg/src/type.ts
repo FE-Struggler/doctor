@@ -1,6 +1,6 @@
 import type { IApi as DoctorApi, DoctorMeta } from "@doctors/core";
 import { DoctorLevel } from "@doctors/core";
-import { SourceFile } from "./utils";
+import { SourceFile } from "@doctors/utils";
 
 // 元数据
 export interface Meta {
