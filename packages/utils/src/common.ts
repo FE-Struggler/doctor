@@ -78,6 +78,7 @@ export async function getFilesWithImports(
   return sourceFiles;
 }
 
+//----------------------------- MonoRepo ---------------------------------
 export function getMonorepoSonPackages(workSpaces: string[], cwd: string) {
   const packAgeJsonFiles: string[] = [];
   workSpaces.forEach((workSpace) => {
