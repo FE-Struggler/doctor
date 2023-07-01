@@ -9,3 +9,10 @@ export const DEFAULT_BUNDLESS_IGNORES = [
   "**/*.{test,e2e,spec}.{js,jsx,ts,tsx}",
   "**/tsconfig.json",
 ];
+export const DEFAULT_SOURCE_IGNORES = [
+  "**/.*",
+  "**/.*/**",
+  "**/node_modules/**",
+  "**/dist/**",
+  "**/build/**",
+];

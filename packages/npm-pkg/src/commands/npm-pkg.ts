@@ -1,9 +1,9 @@
 import { generatePreset } from "@doctors/core";
 import type { Nullify } from "@doctors/core";
+import { getFilesWithImports, getMonorepoSonPackages } from "@doctors/utils";
 import { type IApi, type Meta } from "../type";
 import { ConfigSchema } from "../type";
 import { PRESET_NAME } from "../constants";
-import { getFilesWithImports } from "../utils";
 
 const schema: Nullify<ConfigSchema> = {
   npmPkg: {
@@ -33,7 +33,15 @@ export default async (api: IApi) => {
   // meta 元数据 将会作为所有 feature 插件的实参传入 供使用
   const meta: Meta = {};
 
-  const sourceFiles = await getFilesWithImports(api);
+  let compileFiles: string[] = [];
+
+  if (api.userConfig.npmPkg?.compileFiles) {
+    compileFiles = Array.isArray(api.userConfig?.npmPkg?.compileFiles)
+      ? api.userConfig?.npmPkg?.compileFiles
+      : [api.userConfig?.npmPkg?.compileFiles];
+  }
+
+  const sourceFiles = await getFilesWithImports(compileFiles, api.cwd);
 
   meta.sourceFiles = sourceFiles;
 

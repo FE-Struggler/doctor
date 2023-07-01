@@ -28,6 +28,9 @@
   "dependencies": {
     "@umijs/core": "^4.0.71",
     "@umijs/utils": "^4.0.71",
-    "file-system-cache": "^2.4.1"
+    "esbuild": "^0.18.10",
+    "file-system-cache": "^2.4.1",
+    "glob": "^10.3.0",
+    "lodash": "^4.17.21"
   }
 }
