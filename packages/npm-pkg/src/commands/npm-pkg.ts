@@ -1,6 +1,6 @@
 import { generatePreset } from "@doctors/core";
 import type { Nullify } from "@doctors/core";
-import { getFilesWithImports, getMonorepoSonPackages } from "@doctors/utils";
+import { getFilesWithImports } from "@doctors/utils";
 import { type IApi, type Meta } from "../type";
 import { ConfigSchema } from "../type";
 import { PRESET_NAME } from "../constants";
