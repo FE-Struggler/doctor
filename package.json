@@ -1,6 +1,6 @@
 {
   "name": "doctors-all",
-  "version": "0.0.35",
+  "version": "0.0.37",
   "private": true,
   "packageManager": "pnpm@8.0.0",
   "scripts": {
@@ -34,7 +34,7 @@
       "prettier --write --ignore-unknown"
     ],
     "*.{ts,tsx}": [
-      "tsc noEmit"
+      "tsc --noEmit --skipLibCheck --esModuleInterop --downlevelIteration"
     ]
   },
   "keywords": [],
