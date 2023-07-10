@@ -15,12 +15,14 @@
     "test": "vitest"
   },
   "devDependencies": {
+    "@commitlint/cli": "^17.6.6",
+    "@commitlint/config-conventional": "^17.6.6",
+    "@doctors/core": "workspace:*",
+    "@doctors/npm-pkg": "workspace:*",
+    "@doctors/utils": "workspace:*",
+    "@doctors/web-tools": "workspace:*",
     "@types/node": "^20.3.1",
     "@types/prettier": "^2.7.3",
-    "@doctors/core": "workspace:*",
-    "@doctors/utils": "workspace:*",
-    "@doctors/npm-pkg": "workspace:*",
-    "@doctors/web-tools": "workspace:*",
     "bumpp": "^9.1.1",
     "father": "^4.1.8",
     "husky": "^8.0.3",
