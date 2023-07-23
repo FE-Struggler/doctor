@@ -13,8 +13,7 @@ const validPresetNamePrefix = ["@doctors", "doctors"];
 function getGlobalNodeModulesPath() {
   const command = /^win/.test(process.platform) ? "npm.cmd" : "npm";
   const output = childProcess.execSync(`${command} root -g`).toString().trim();
-  const globalNodeModulesPath = output.split("\n")[0];
-  return globalNodeModulesPath;
+  return output.split("\n")[0];
 }
 
 const globalNodeModulesPath = path.join(getGlobalNodeModulesPath());

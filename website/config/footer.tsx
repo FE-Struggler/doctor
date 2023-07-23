@@ -47,13 +47,13 @@ export const footer = [
       {
         icon: <MediumOutlined />,
         title: "Medium",
-        url: "http://medium.com/ant-design/",
+        url: "https://medium.com/ant-design/",
         openExternal: true,
       },
       {
         icon: <TwitterOutlined style={{ color: "#1DA1F2" }} />,
         title: "Twitter",
-        url: "http://twitter.com/antdesignui",
+        url: "https://twitter.com/antdesignui",
         openExternal: true,
       },
       {
@@ -76,7 +76,7 @@ export const footer = [
       {
         icon: <ZhihuOutlined style={{ color: "#056de8" }} />,
         title: "体验科技专栏",
-        url: "http://zhuanlan.zhihu.com/xtech",
+        url: "https://zhuanlan.zhihu.com/xtech",
         openExternal: true,
       },
       {
